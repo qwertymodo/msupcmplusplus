@@ -13,6 +13,7 @@ namespace msu
 		bool init(std::string in, std::string out);
 		bool trim(unsigned start, unsigned end = 0);
 		bool fade(unsigned in, unsigned out = 0, char type = 't');
+		bool pad(unsigned start, unsigned end = 0);
 		bool finalize();
 		bool clear();
 

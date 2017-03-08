@@ -141,6 +141,48 @@ bool SoxWrapper::fade(unsigned in, unsigned out, char type)
 }
 
 
+bool SoxWrapper::pad(unsigned start, unsigned end)
+{
+	char* args[2];
+	bool ret;
+
+	if (!m_initialized || m_finalized)
+		return false;
+
+	if (start > 0 || end > 0)
+	{
+		args[0] = new char[32];
+		args[1] = new char[32];
+
+		if (start > 0)
+		{
+			strncpy(args[0], std::to_string(start).append("s").c_str(), 32);
+		}
+		else
+		{
+			strncpy(args[0], "0s", 32);
+		}
+
+		if (end > 0)
+		{
+			strncpy(args[1], std::to_string(end).append("s").c_str(), 32);
+			ret = addEffect("pad", 2, (char**)args);
+		}
+		else
+		{
+			ret = addEffect("pad", 1, (char**)args);
+		}
+
+		delete(args[0]);
+		delete(args[1]);
+
+		return ret;
+	}
+
+	return false;
+}
+
+
 bool SoxWrapper::finalize()
 {
 	char* args[1];

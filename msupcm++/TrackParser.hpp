@@ -32,7 +32,9 @@ namespace msu {
 			{ "trim_end", a.trimEnd() },
 			{ "fade_in", a.fadeIn() },
 			{ "fade_out", a.fadeIn() },
-			{ "cross_fade", a.fadeIn() }
+			{ "cross_fade", a.fadeIn() },
+			{ "pad_start", a.padStart() },
+			{ "pad_end", a.padEnd() }
 		};
 	}
 
@@ -136,6 +138,12 @@ namespace msu {
 
 		if (key_exists(j, "cross_fade"))
 			a.crossFade() = j["cross_fade"].get<int>();
+
+		if (key_exists(j, "pad_start"))
+			a.padStart() = j["pad_start"].get<int>();
+
+		if (key_exists(j, "pad_end"))
+			a.padEnd() = j["pad_end"].get<int>();
 	}
 
 

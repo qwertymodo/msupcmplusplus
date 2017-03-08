@@ -7,7 +7,8 @@ using namespace msu;
 AudioBase::AudioBase():
 	m_id(""), m_infile(""), m_outfile(""),
 	m_trim_start(0), m_trim_end(0),
-	m_fade_in(0), m_fade_out(0), m_cross_fade(0)
+	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
+	m_pad_start(0), m_pad_end(0)
 {
 
 }
@@ -125,6 +126,29 @@ int& AudioBase::crossFade()
 	return m_cross_fade;
 }
 
+int AudioBase::padStart() const
+{
+	return m_pad_start;
+}
+
+
+int& AudioBase::padStart()
+{
+	return m_pad_start;
+}
+
+
+int AudioBase::padEnd() const
+{
+	return m_pad_end;
+}
+
+
+int& AudioBase::padEnd()
+{
+	return m_pad_end;
+}
+
 
 void AudioBase::render()
 {
@@ -133,5 +157,6 @@ void AudioBase::render()
 	sox->init(m_infile, m_outfile);
 	sox->trim(m_trim_start, m_trim_end);
 	sox->fade(m_fade_in, m_fade_out);
+	sox->pad(m_pad_start, m_pad_end);
 	sox->finalize();
 }

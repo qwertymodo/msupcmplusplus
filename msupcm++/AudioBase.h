@@ -37,6 +37,12 @@ namespace msu
 		int crossFade() const;
 		int& crossFade();
 
+		int padStart() const;
+		int& padStart();
+
+		int padEnd() const;
+		int& padEnd();
+
 	private:
 		std::string m_id;
 		std::string m_infile;
@@ -46,5 +52,7 @@ namespace msu
 		int m_fade_in;
 		int m_fade_out;
 		int m_cross_fade;
+		int m_pad_start;
+		int m_pad_end;
 	};
 }
