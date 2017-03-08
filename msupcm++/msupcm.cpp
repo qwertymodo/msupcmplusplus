@@ -1,10 +1,4 @@
-#include "sox.h"
 #include "AudioTrackListBuilder.h"
-#include <iostream>
-#include <string>
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
 
 using namespace msu;
 
@@ -23,10 +17,10 @@ int main(int argc, char * argv[])
 	}
 
 	/* All libSoX applications must start by initialising the SoX library */
-	assert(sox_init() == SOX_SUCCESS);
+	
 
 	AudioTrackListBuilder(conf).get().render();
 
-	sox_quit();
+	
 	return 0;
 }

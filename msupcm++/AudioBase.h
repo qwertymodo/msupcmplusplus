@@ -1,5 +1,4 @@
 #pragma once
-#include "sox.h"
 #include <string>
 
 namespace msu
