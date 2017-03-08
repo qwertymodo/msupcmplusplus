@@ -6,7 +6,8 @@ using namespace msu;
 
 AudioBase::AudioBase():
 	m_id(""), m_infile(""), m_outfile(""),
-	m_trim_start(0), m_trim_end(0)
+	m_trim_start(0), m_trim_end(0),
+	m_fade_in(0), m_fade_out(0), m_cross_fade(0)
 {
 
 }
@@ -86,6 +87,42 @@ int AudioBase::trimEnd() const
 int& AudioBase::trimEnd()
 {
 	return m_trim_end;
+}
+
+
+int AudioBase::fadeIn() const
+{
+	return m_fade_in;
+}
+
+
+int& AudioBase::fadeIn()
+{
+	return m_fade_in;
+}
+
+
+int AudioBase::fadeOut() const
+{
+	return m_fade_out;
+}
+
+
+int& AudioBase::fadeOut()
+{
+	return m_fade_out;
+}
+
+
+int AudioBase::crossFade() const
+{
+	return m_cross_fade;
+}
+
+
+int& AudioBase::crossFade()
+{
+	return m_cross_fade;
 }
 
 

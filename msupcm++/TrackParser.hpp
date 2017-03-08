@@ -29,7 +29,10 @@ namespace msu {
 			{ "file", a.inFile() },
 			{ "output", a.outFile() },
 			{ "trim_start", a.trimStart() },
-			{ "trim_end", a.trimEnd() }
+			{ "trim_end", a.trimEnd() },
+			{ "fade_in", a.fadeIn() },
+			{ "fade_out", a.fadeIn() },
+			{ "cross_fade", a.fadeIn() }
 		};
 	}
 
@@ -38,7 +41,7 @@ namespace msu {
 	{
 		to_json(j, dynamic_cast<const AudioBase&>(a));
 		
-		for (int i = 0; i < a.numSubtracks(); ++i)
+		for (auto i = 0; i < a.numSubtracks(); ++i)
 		{
 			json subtrack;
 			to_json(subtrack, a.subtracks()[i]);
@@ -52,7 +55,7 @@ namespace msu {
 	{
 		to_json(j, dynamic_cast<const AudioBase&>(a));
 
-		for (int i = 0; i < a.numChannels(); ++i)
+		for (auto i = 0; i < a.numChannels(); ++i)
 		{
 			json channel;
 			to_json(channel, a.channels()[i]);
@@ -124,6 +127,15 @@ namespace msu {
 
 		if (key_exists(j, "trim_end"))
 			a.trimEnd() = j["trim_end"].get<int>();
+
+		if (key_exists(j, "fade_in"))
+			a.fadeIn() = j["fade_in"].get<int>();
+
+		if (key_exists(j, "fade_out"))
+			a.fadeOut() = j["fade_out"].get<int>();
+
+		if (key_exists(j, "cross_fade"))
+			a.crossFade() = j["cross_fade"].get<int>();
 	}
 
 

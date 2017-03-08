@@ -28,11 +28,23 @@ namespace msu
 		int trimEnd() const;
 		int& trimEnd();
 
+		int fadeIn() const;
+		int& fadeIn();
+
+		int fadeOut() const;
+		int& fadeOut();
+
+		int crossFade() const;
+		int& crossFade();
+
 	private:
 		std::string m_id;
 		std::string m_infile;
 		std::string m_outfile;
 		int m_trim_start;
 		int m_trim_end;
+		int m_fade_in;
+		int m_fade_out;
+		int m_cross_fade;
 	};
 }
