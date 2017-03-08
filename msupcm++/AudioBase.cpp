@@ -8,7 +8,8 @@ AudioBase::AudioBase():
 	m_id(""), m_infile(""), m_outfile(""),
 	m_trim_start(0), m_trim_end(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
-	m_pad_start(0), m_pad_end(0)
+	m_pad_start(0), m_pad_end(0),
+	m_tempo(-1.0)
 {
 
 }
@@ -29,6 +30,19 @@ AudioBase::AudioBase(const char *in, const char *out) : AudioBase()
 
 AudioBase::~AudioBase()
 {
+}
+
+
+void AudioBase::render()
+{
+	SoxWrapper* sox = SoxWrapperFactory::getInstance();
+
+	sox->init(m_infile, m_outfile);
+	sox->trim(m_trim_start, m_trim_end);
+	sox->fade(m_fade_in, m_fade_out);
+	sox->pad(m_pad_start, m_pad_end);
+	sox->tempo(m_tempo);
+	sox->finalize();
 }
 
 
@@ -150,13 +164,13 @@ int& AudioBase::padEnd()
 }
 
 
-void AudioBase::render()
+double AudioBase::tempo() const
 {
-	SoxWrapper* sox = SoxWrapperFactory::getInstance();
+	return m_tempo;
+}
 
-	sox->init(m_infile, m_outfile);
-	sox->trim(m_trim_start, m_trim_end);
-	sox->fade(m_fade_in, m_fade_out);
-	sox->pad(m_pad_start, m_pad_end);
-	sox->finalize();
+
+double& AudioBase::tempo()
+{
+	return m_tempo;
 }

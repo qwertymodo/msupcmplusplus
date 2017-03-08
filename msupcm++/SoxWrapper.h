@@ -14,6 +14,7 @@ namespace msu
 		bool trim(unsigned start, unsigned end = 0);
 		bool fade(unsigned in, unsigned out = 0, char type = 't');
 		bool pad(unsigned start, unsigned end = 0);
+		bool tempo(double tempo);
 		bool finalize();
 		bool clear();
 

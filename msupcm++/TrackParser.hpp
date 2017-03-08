@@ -34,7 +34,8 @@ namespace msu {
 			{ "fade_out", a.fadeIn() },
 			{ "cross_fade", a.fadeIn() },
 			{ "pad_start", a.padStart() },
-			{ "pad_end", a.padEnd() }
+			{ "pad_end", a.padEnd() },
+			{ "tempo", a.tempo() }
 		};
 	}
 
@@ -144,6 +145,9 @@ namespace msu {
 
 		if (key_exists(j, "pad_end"))
 			a.padEnd() = j["pad_end"].get<int>();
+
+		if (key_exists(j, "tempo"))
+			a.tempo() = j["tempo"].get<double>();
 	}
 
 

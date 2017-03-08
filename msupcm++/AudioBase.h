@@ -43,6 +43,9 @@ namespace msu
 		int padEnd() const;
 		int& padEnd();
 
+		double tempo() const;
+		double& tempo();
+
 	private:
 		std::string m_id;
 		std::string m_infile;
@@ -54,5 +57,6 @@ namespace msu
 		int m_cross_fade;
 		int m_pad_start;
 		int m_pad_end;
+		double m_tempo;
 	};
 }

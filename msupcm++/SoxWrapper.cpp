@@ -183,6 +183,30 @@ bool SoxWrapper::pad(unsigned start, unsigned end)
 }
 
 
+bool SoxWrapper::tempo(double tempo)
+{
+	char* args[2];
+	bool ret;
+
+	if (!m_initialized || m_finalized)
+		return false;
+
+	if (tempo < 0)
+		return false;
+
+	args[0] = new char[3]{ '-', 'm', '\0' };
+	args[1] = new char[32];
+	
+	strncpy(args[1], std::to_string(tempo).c_str(), 32);
+	ret = addEffect("tempo", 2, (char**)args);
+
+	delete(args[0]);
+	delete(args[1]);
+
+	return ret;
+}
+
+
 bool SoxWrapper::finalize()
 {
 	char* args[1];
