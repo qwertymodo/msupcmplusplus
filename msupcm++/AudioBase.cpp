@@ -5,7 +5,7 @@
 using namespace msu;
 
 AudioBase::AudioBase():
-	m_id(""), m_infile(""), m_outfile(""),
+	m_infile(""), m_outfile(""),
 	m_trim_start(0), m_trim_end(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
@@ -43,18 +43,6 @@ void AudioBase::render()
 	sox->pad(m_pad_start, m_pad_end);
 	sox->tempo(m_tempo);
 	sox->finalize();
-}
-
-
-const std::string& AudioBase::id() const
-{
-	return m_id;
-}
-
-
-std::string& AudioBase::id()
-{
-	return m_id;
 }
 
 

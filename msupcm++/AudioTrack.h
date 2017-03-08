@@ -22,10 +22,14 @@ namespace msu
 
 		virtual void render() final;
 
+		int trackNumber() const;
+		int& trackNumber();
+
 		const std::string& title() const;
 		std::string& title();
 
 	private:
+		int m_track_number;
 		std::string m_title;
 	};
 }

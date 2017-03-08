@@ -13,9 +13,6 @@ namespace msu
 
 		virtual void render();
 
-		const std::string& id() const;
-		std::string& id();
-
 		const std::string& inFile() const;
 		std::string& inFile();
 
@@ -47,7 +44,6 @@ namespace msu
 		double& tempo();
 
 	private:
-		std::string m_id;
 		std::string m_infile;
 		std::string m_outfile;
 		int m_trim_start;

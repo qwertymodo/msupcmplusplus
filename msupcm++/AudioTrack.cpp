@@ -3,24 +3,24 @@
 
 using namespace msu;
 
-AudioTrack::AudioTrack():
-	AudioBase()
+AudioTrack::AudioTrack(): AudioBase()
 {
-	int x = 0;
+	m_track_number = 0;
+	m_title = "";
 }
 
 
-AudioTrack::AudioTrack(const char *in):
-	AudioBase(in)
+AudioTrack::AudioTrack(const char *in): AudioBase(in)
 {
-
+	m_track_number = 0;
+	m_title = "";
 }
 
 
-AudioTrack::AudioTrack(const char *in, const char *out):
-	AudioBase(in, out)
+AudioTrack::AudioTrack(const char *in, const char *out): AudioBase(in, out)
 {
-
+	m_track_number = 0;
+	m_title = "";
 }
 
 
@@ -34,6 +34,18 @@ void AudioTrack::render()
 {
 	assert(m_subtracks == 0 || m_channels == 0);
 	AudioBase::render();
+}
+
+
+int AudioTrack::trackNumber() const
+{
+	return m_track_number;
+}
+
+
+int& AudioTrack::trackNumber()
+{
+	return m_track_number;
 }
 
 

@@ -25,7 +25,6 @@ namespace msu {
 	void to_json(json& j, const AudioBase& a)
 	{
 		j = json{
-			{ "id", a.id() },
 			{ "file", a.inFile() },
 			{ "output", a.outFile() },
 			{ "trim_start", a.trimStart() },
@@ -83,6 +82,7 @@ namespace msu {
 			to_json(j, dynamic_cast<const AudioBase&>(a));
 		}
 
+		j["track_number"] = a.trackNumber();
 		j["title"] = a.title();
 	}
 
@@ -110,20 +110,11 @@ namespace msu {
 
 	void from_json(const json& j, AudioBase& a)
 	{
-		if(key_exists(j, "id"))
-			a.id() = j["id"].get<int>();
-
 		if (key_exists(j, "file"))
 			a.inFile() = j["file"].get<std::string>();
 
 		if (key_exists(j, "output"))
-		{
 			a.outFile() = j["output"].get<std::string>();
-		}
-		else
-		{
-			a.outFile() = config.output_prefix().append("-").append(a.id()).append(".wav");
-		}
 
 		if (key_exists(j, "trim_start"))
 			a.trimStart() = j["trim_start"].get<int>();
@@ -196,8 +187,14 @@ namespace msu {
 			from_json(j, dynamic_cast<AudioBase&>(a));
 		}
 
+		if (key_exists(j, "track_number"))
+			a.trackNumber() = j["track_number"].get<int>();
+
 		if (key_exists(j, "title"))
 			a.title() = j["title"].get<std::string>();
+
+		if (a.outFile().empty())
+			a.outFile() = GlobalConfig::output_prefix() + "-" + std::to_string(a.trackNumber()) + ".wav";
 	}
 
 
@@ -216,7 +213,13 @@ namespace msu {
 			config.url() = j["url"].get<std::string>();
 
 		if (key_exists(j, "output_prefix"))
+		{
 			config.output_prefix() = j["output_prefix"].get<std::string>();
+		}
+		else
+		{
+			config.output_prefix() = "track";
+		}
 
 		if (key_exists(j, "normalization"))
 			config.normalization() = j["normalization"].get<int>();
