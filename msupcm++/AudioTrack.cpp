@@ -1,5 +1,7 @@
 #include "AudioTrack.h"
+#include "GlobalConfig.h"
 #include <assert.h>
+#include <iostream>
 
 using namespace msu;
 
@@ -32,6 +34,15 @@ AudioTrack::~AudioTrack()
 
 void AudioTrack::render()
 {
+	if (GlobalConfig::verbosity() > 0)
+	{
+		std::cout << "Track " << m_track_number;
+
+		if (!m_title.empty())
+			std::cout << ": " << m_title;
+
+		std::cout << std::endl;
+	}
 	assert(m_subtracks == 0 || m_channels == 0);
 	AudioBase::render();
 }

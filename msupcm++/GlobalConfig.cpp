@@ -8,7 +8,7 @@ std::string GlobalConfig::m_artist = "";
 std::string GlobalConfig::m_url = "";
 std::string GlobalConfig::m_output_prefix = "";
 int GlobalConfig::m_normalization = 0;
-unsigned int GlobalConfig::m_verbosity = 0;
+unsigned int GlobalConfig::m_verbosity = 1;
 
 std::string& GlobalConfig::game()
 {
