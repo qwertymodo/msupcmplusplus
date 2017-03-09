@@ -9,6 +9,7 @@ std::string GlobalConfig::m_url = "";
 std::string GlobalConfig::m_output_prefix = "";
 int GlobalConfig::m_normalization = 0;
 unsigned int GlobalConfig::m_verbosity = 1;
+bool GlobalConfig::m_keep_temps = false;
 
 std::string& GlobalConfig::game()
 {
@@ -49,4 +50,10 @@ int& GlobalConfig::normalization()
 unsigned int& GlobalConfig::verbosity()
 {
 	return m_verbosity;
+}
+
+
+bool& GlobalConfig::keep_temps()
+{
+	return m_keep_temps;
 }

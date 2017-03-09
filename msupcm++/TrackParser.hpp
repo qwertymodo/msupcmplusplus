@@ -97,7 +97,8 @@ namespace msu {
 			{ "url", config.url() },
 			{ "output_prefix", config.output_prefix() },
 			{ "normalization", config.normalization() },
-			{ "verbosity", config.verbosity() }
+			{ "verbosity", config.verbosity() },
+			{ "keep_temps", config.keep_temps() }
 		};
 
 		for (auto i = a.tracks().begin(); i != a.tracks().end(); ++i)
@@ -230,6 +231,9 @@ namespace msu {
 
 		if (key_exists(j, "verbosity"))
 			config.verbosity() = j["verbosity"].get<unsigned int>();
+
+		if (key_exists(j, "keep_temps"))
+			config.keep_temps() = j["keep_temps"].get<bool>();
 
 		if(key_exists(j, "tracks"))
 		{

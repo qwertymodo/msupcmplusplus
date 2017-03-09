@@ -1,13 +1,14 @@
 #include "SoxWrapper.h"
 #include "GlobalConfig.h"
 #include <assert.h>
+#include <stdio.h>
 
 using namespace msu;
 
 SoxWrapper* SoxWrapperFactory::m_instance(0);
 
-SoxWrapper::SoxWrapper():
-	m_initialized(false), m_finalized(false),
+SoxWrapper::SoxWrapper() :
+	m_initialized(false), m_finalized(false), m_temp_counter(0),
 	m_in(0), m_num_in(0), m_out(0), m_chain(0),
 	m_out_signal({ 44100, 2, 16, 0, NULL }),
 	m_out_encoding({ SOX_ENCODING_SIGN2, 16, NULL, sox_option_no, sox_option_no, sox_option_no, sox_false })
@@ -29,6 +30,7 @@ bool SoxWrapper::init(std::string in, std::string out)
 		return false;
 
 	m_in = new sox_format_t*[1];
+	m_in_name = in;
 	
 	m_in[0] = sox_open_read(in.c_str(), NULL, NULL, NULL);
 	m_num_in = 1;
@@ -36,12 +38,14 @@ bool SoxWrapper::init(std::string in, std::string out)
 	m_in_signal = m_in[0]->signal;
 
 	m_out = sox_open_write(out.c_str(), &m_out_signal, &m_out_encoding, "wav", NULL, NULL);
+	m_out_name = out;
 
 	m_chain = sox_create_effects_chain(&m_in[0]->encoding, &m_out_encoding);
 
 	if (addEffect("input", 1, (char**)m_in))
 	{
 		m_in_signal.length = m_in[0]->signal.length;
+		m_delete_input = false;
 		m_initialized = true;
 	}
 
@@ -254,10 +258,23 @@ bool SoxWrapper::clear()
 		m_chain = 0;
 	}
 
+	if (m_delete_input)
+	{
+		if (remove(m_in_name.c_str()) == 0)
+			m_in_name.clear();
+	}
+
 	m_initialized = false;
 	m_finalized = false;
 
 	return true;
+}
+
+
+bool SoxWrapper::deleteInput(bool in)
+{
+	m_delete_input = in;
+	return m_delete_input;
 }
 
 
@@ -274,4 +291,10 @@ bool SoxWrapper::addEffect(std::string name, int argc, char** argv, int in_id)
 	free(e);
 
 	return true;
+}
+
+
+std::string SoxWrapper::getTempFile(std::string ext)
+{
+	return std::string("__sox_wrapper_temp__").append(std::to_string(m_temp_counter++)).append(".").append(ext);
 }

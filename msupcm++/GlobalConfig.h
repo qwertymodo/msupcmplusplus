@@ -13,6 +13,7 @@ namespace msu
 		static std::string& output_prefix();
 		static int& normalization();
 		static unsigned int& verbosity();
+		static bool& keep_temps();
 
 	private:
 		static std::string m_game;
@@ -22,5 +23,6 @@ namespace msu
 		static std::string m_output_prefix;
 		static int m_normalization;
 		static unsigned int m_verbosity;
+		static bool m_keep_temps;
 	} config;
 }
