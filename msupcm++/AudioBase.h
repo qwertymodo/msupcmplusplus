@@ -19,6 +19,9 @@ namespace msu
 		const std::string& outFile() const;
 		std::string& outFile();
 
+		int loop() const;
+		int& loop();
+
 		int trimStart() const;
 		int& trimStart();
 
@@ -46,6 +49,7 @@ namespace msu
 	private:
 		std::string m_infile;
 		std::string m_outfile;
+		int m_loop;
 		int m_trim_start;
 		int m_trim_end;
 		int m_fade_in;

@@ -29,6 +29,7 @@ namespace msu {
 			{ "output", a.outFile() },
 			{ "trim_start", a.trimStart() },
 			{ "trim_end", a.trimEnd() },
+			{ "loop", a.loop() },
 			{ "fade_in", a.fadeIn() },
 			{ "fade_out", a.fadeIn() },
 			{ "cross_fade", a.fadeIn() },
@@ -121,6 +122,9 @@ namespace msu {
 
 		if (key_exists(j, "trim_end"))
 			a.trimEnd() = j["trim_end"].get<int>();
+
+		if (key_exists(j, "loop"))
+			a.loop() = j["loop"].get<int>();
 
 		if (key_exists(j, "fade_in"))
 			a.fadeIn() = j["fade_in"].get<int>();

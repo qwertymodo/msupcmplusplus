@@ -4,9 +4,9 @@
 
 using namespace msu;
 
-AudioBase::AudioBase():
+AudioBase::AudioBase() :
 	m_infile(""), m_outfile(""),
-	m_trim_start(0), m_trim_end(0),
+	m_trim_start(0), m_trim_end(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
 	m_tempo(-1.0)
@@ -68,6 +68,19 @@ std::string& AudioBase::outFile()
 {
 	return m_outfile;
 }
+
+
+int AudioBase::loop() const
+{
+	return m_loop;
+}
+
+
+int& AudioBase::loop()
+{
+	return m_loop;
+}
+
 
 int AudioBase::trimStart() const
 {
