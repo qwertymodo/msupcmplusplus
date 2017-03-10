@@ -37,6 +37,7 @@
   FORMAT(lu)
   FORMAT(maud)
   FORMAT(nul)
+  FORMAT(pcm)
   FORMAT(prc)
   FORMAT(raw)
   FORMAT(s1)

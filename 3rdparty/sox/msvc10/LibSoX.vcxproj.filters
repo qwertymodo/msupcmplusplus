@@ -597,5 +597,8 @@
     <ClCompile Include="..\src\downsample.c">
       <Filter>Effect Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\msupcm-fmt.c">
+      <Filter>Format Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
