@@ -1,5 +1,6 @@
 #include "SoxWrapper.h"
 #include "GlobalConfig.h"
+#include "util.h"
 #include <assert.h>
 #include <stdio.h>
 
@@ -8,13 +9,11 @@ using namespace msu;
 SoxWrapper* SoxWrapperFactory::m_instance(0);
 
 SoxWrapper::SoxWrapper() :
-	m_initialized(false), m_finalized(false), m_temp_counter(0),
-	m_in(0), m_num_in(0), m_out(0), m_chain(0),
-	m_out_signal({ 44100, 2, 16, 0, NULL }),
-	m_out_encoding({ SOX_ENCODING_SIGN2, 16, NULL, sox_option_no, sox_option_no, sox_option_no, sox_false })
+	m_initialized(false), m_finalized(false), m_temp_counter(0), m_loop(0)
 {
-	sox_init();
+	assert(sox_init() == SOX_SUCCESS);
 	sox_get_globals()->verbosity = GlobalConfig::verbosity();
+	atexit(atexit_cleanup);
 }
 
 
@@ -29,27 +28,42 @@ bool SoxWrapper::init(std::string in, std::string out)
 	if (!clear())
 		return false;
 
-	m_in = new sox_format_t*[1];
-	m_in_name = in;
-	
-	m_in[0] = sox_open_read(in.c_str(), NULL, NULL, NULL);
-	m_num_in = 1;
+	addInput(in);
 
-	m_in_signal = m_in[0]->signal;
+	m_output = out;
 
-	m_out = sox_open_write(out.c_str(), &m_out_signal, &m_out_encoding, "wav", NULL, NULL);
-	m_out_name = out;
+	// DO NOT CALL add_eff_chain()!!
+	// Since we need to manually reallocate the arrays any time
+	// we add an effect, mixing lsx_revalloc's with C++ allocations
+	// causes heap corruption and all kinds of random headaches
+	// so just handle these arrays manually in our code
+	user_effargs = new user_effargs_t*[1];
+	user_effargs[0] = new user_effargs_t;
 
-	m_chain = sox_create_effects_chain(&m_in[0]->encoding, &m_out_encoding);
+	user_effargs_size = new size_t[1];
+	user_effargs_size[0] = 0;
+	nuser_effects = new size_t[1];
+	nuser_effects[0] = 0;
+	eff_chain_count = 1;
 
-	if (addEffect("input", 1, (char**)m_in))
-	{
-		m_in_signal.length = m_in[0]->signal.length;
-		m_delete_input = false;
-		m_initialized = true;
-	}
+	m_initialized = true;
+}
 
-	return m_initialized;
+
+bool SoxWrapper::addInput(std::string name)
+{
+	file_t opts;
+	init_file(&opts);
+	add_file(&opts, name.c_str());
+	++input_count;
+	return true;
+}
+
+
+bool SoxWrapper::setCombine(sox_combine_method method)
+{
+	combine_method = method;
+	return true;
 }
 
 
@@ -211,84 +225,207 @@ bool SoxWrapper::tempo(double tempo)
 }
 
 
+bool SoxWrapper::setLoop(size_t loop)
+{
+	m_loop = loop;
+	return true;
+}
+
+
 bool SoxWrapper::finalize()
 {
-	char* args[1];
-	args[0] = (char*)m_out;
+	addOutput(m_output);
 
-	if (!addEffect("output", 1, args))
-		return false;
+	sox_format_handler_t const * handler =
+		sox_write_handler(ofile->filename, ofile->filetype, NULL);
 
-	if (!sox_flow_effects(m_chain, NULL, NULL) == SOX_SUCCESS)
-		return false;
+	if (combine_method == sox_default)
+		combine_method = sox_concatenate;
 
+	/* Allow e.g. known length processing in this case */
+	if (combine_method == sox_sequence && input_count == 1)
+		combine_method = sox_concatenate;
+
+	/* Make sure we got at least the required # of input filenames */
+	if (input_count < (size_t)(is_serial(combine_method) ? 1 : 2))
+		usage("Not enough input files specified");
+
+
+	// ====Combine input files
+	for (auto i = 0; i < input_count; i++) {
+		size_t j = input_count - 1 - i; /* Open in reverse order 'cos of rec (below) */
+		file_t * f = files[j];
+
+		/* When mixing audio, default to input side volume adjustments that will
+		* make sure no clipping will occur.  Users probably won't be happy with
+		* this, and will override it, possibly causing clipping to occur. */
+		if (combine_method == sox_mix && !uservolume)
+			f->volume = 1.0 / input_count;
+		else if (combine_method == sox_mix_power && !uservolume)
+			f->volume = 1.0 / sqrt((double)input_count);
+
+		files[j]->ft = sox_open_read(f->filename, &f->signal, &f->encoding, f->filetype);
+		if (!files[j]->ft)
+			/* sox_open_read() will call lsx_warn for most errors.
+			* Rely on that printing something. */
+			exit(2);
+		if (show_progress == sox_option_default &&
+			(files[j]->ft->handler.flags & SOX_FILE_DEVICE) != 0 &&
+			(files[j]->ft->handler.flags & SOX_FILE_PHONY) == 0)
+			show_progress = sox_option_yes;
+	}
+
+	/* Not the best way for users to do this; now deprecated in favour of soxi. */
+	if (!show_progress && !nuser_effects[current_eff_chain] &&
+		ofile->filetype && !strcmp(ofile->filetype, "null")) {
+		for (auto i = 0; i < input_count; i++)
+			report_file_info(files[i]);
+		exit(0);
+	}
+
+	if (!sox_globals.repeatable) {/* Re-seed PRNG? */
+		struct timeval now;
+		gettimeofday(&now, NULL);
+		sox_globals.ranqd1 = (int32_t)(now.tv_sec - now.tv_usec);
+	}
+
+	/* Save things that sox_sequence needs to be reinitialised for each segued
+	* block of input files.*/
+	ofile_signal_options = ofile->signal;
+	ofile_encoding_options = ofile->encoding;
+
+	/* Private data for PCM file */
+	typedef struct {
+		size_t loop_point;
+		size_t remaining_samples;
+	} priv_t;
+
+	// ====Finalize
+	while (process() != SOX_EOF && !user_abort && current_input < input_count)
+	{
+		if (advance_eff_chain() == SOX_EOF)
+		{
+			((priv_t*)ofile->ft->priv)->loop_point = m_loop;
+			break;
+		}
+
+		if (!save_output_eff)
+		{
+			sox_close(ofile->ft);
+			ofile->ft = NULL;
+		}
+	}
+
+	return 0;
 	clear();
+	m_finalized = true;
 	return true;
 }
 
 
 bool SoxWrapper::clear()
 {
-	for (auto i = 0; i < m_num_in; ++i)
-	{
-		if (m_in[i])
-		{
-			sox_close(m_in[i]);
-			m_in[i] = 0;
-		}
+	if (!m_initialized && !m_finalized)
+		return true;
 
-		m_num_in = 0;
+	for (auto i = 0; i < eff_chain_count; ++i)
+	{
+		delete(user_effargs[i]);
+	}
+	delete(user_effargs);
+	delete(user_effargs_size);
+	delete(nuser_effects);
+	eff_chain_count = 0;
+
+	sox_delete_effects_chain(effects_chain);
+	delete_eff_chains();
+
+	for (auto i = 0; i < file_count; ++i)
+		if (files[i]->ft->clips != 0)
+			lsx_warn(i < input_count ? "`%s' input clipped %" PRIu64 " samples" :
+				"`%s' output clipped %" PRIu64 " samples; decrease volume?",
+				(files[i]->ft->handler.flags & SOX_FILE_DEVICE) ?
+				files[i]->ft->handler.names[0] : files[i]->ft->filename,
+				files[i]->ft->clips);
+
+	if (mixing_clips > 0)
+		lsx_warn("mix-combining clipped %" PRIu64 " samples; decrease volume?", mixing_clips);
+
+	for (auto i = 0; i < file_count; i++)
+		if (files[i]->volume_clips > 0)
+			lsx_warn("`%s' balancing clipped %" PRIu64 " samples; decrease volume?",
+				files[i]->filename, files[i]->volume_clips);
+
+	if (show_progress) {
+		if (user_abort)
+			fprintf(stderr, "Aborted.\n");
+		else if (user_skip && sox_mode != sox_rec)
+			fprintf(stderr, "Skipped.\n");
+		else
+			fprintf(stderr, "Done.\n");
 	}
 
-	if (m_in)
-	{
-		delete(m_in);
-		m_in = 0;
-	}
+	success = 1; /* Signal success to cleanup so the output file isn't removed. */
 
-	if (m_out)
-	{
-		sox_close(m_out);
-		m_out = 0;
-	}
+	cleanup();
 
-	if (m_chain)
-	{
-		sox_delete_effects_chain(m_chain);
-		m_chain = 0;
-	}
-
-	if (m_delete_input)
-	{
-		if (remove(m_in_name.c_str()) == 0)
-			m_in_name.clear();
-	}
-
+	input_count = 0;
+	m_output.clear();
+	m_loop = 0;
 	m_initialized = false;
 	m_finalized = false;
-
 	return true;
 }
 
 
-bool SoxWrapper::deleteInput(bool in)
+bool SoxWrapper::addOutput(std::string name)
 {
-	m_delete_input = in;
-	return m_delete_input;
+	file_t opts;
+	init_file(&opts);
+
+	add_file(&opts, name.c_str());
+	return true;
 }
 
 
-bool SoxWrapper::addEffect(std::string name, int argc, char** argv, int in_id)
+bool SoxWrapper::addEffect(std::string name, int argc, char** argv)
 {
-	sox_effect_t* e = sox_create_effect(sox_find_effect(name.c_str()));
+	size_t eff_offset;
+	size_t last_chain = eff_chain_count - 1;
 
-	if (!(sox_effect_options(e, argc, argv) == SOX_SUCCESS))
-		return false;
+	eff_offset = nuser_effects[last_chain];
+	if (eff_offset == user_effargs_size[last_chain]) {
+		user_effargs_size[last_chain] += EFFARGS_STEP;
+		user_effargs_t* ef = user_effargs[last_chain];
+		user_effargs[last_chain] = new user_effargs_t[user_effargs_size[last_chain]];
+		for (auto i = 0; i < EFFARGS_STEP; ++i)
+		{
+			if (i < eff_offset)
+			{
+				user_effargs[last_chain][i] = ef[i];
+			}
+			else
+			{
+				user_effargs[last_chain][i].argv = NULL;
+				user_effargs[last_chain][i].argv_size = 0;
+			}
+		}
+		delete(ef);
+	}
 
-	if (!(sox_add_effect(m_chain, e, &m_in_signal, &m_out_signal) == SOX_SUCCESS))
-		return false;
+	/* Name should always be correct! */
+	user_effargs[last_chain][eff_offset].name = lsx_strdup(name.c_str());
+	while (user_effargs[last_chain][eff_offset].argv_size < argc)
+		user_effargs[last_chain][eff_offset].argv_size += EFFARGS_STEP;
 
-	free(e);
+	user_effargs[last_chain][eff_offset].argv = new char*[user_effargs[last_chain][eff_offset].argv_size];
+
+	for (auto i = 0; i < argc; ++i)
+	{
+		user_effargs[last_chain][eff_offset].argv[i] = lsx_strdup(argv[i]);
+	}
+	user_effargs[last_chain][eff_offset].argc = argc;
+	nuser_effects[last_chain]++;
 
 	return true;
 }

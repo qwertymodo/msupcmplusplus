@@ -1,5 +1,5 @@
 #pragma once
-#include "sox.h"
+#include "sox_main.h"
 #include <string>
 
 namespace msu
@@ -11,32 +11,27 @@ namespace msu
 		~SoxWrapper();
 
 		bool init(std::string in, std::string out);
+		bool addInput(std::string name);
+		bool setCombine(sox_combine_method method);
 		bool trim(unsigned start, unsigned end = 0);
 		bool fade(unsigned in, unsigned out = 0, char type = 't');
 		bool pad(unsigned start, unsigned end = 0);
 		bool tempo(double tempo);
+		bool setLoop(size_t loop);
 		bool finalize();
 		bool clear();
-		bool deleteInput(bool in = true);
 
 	private:
-		bool addEffect(std::string name, int argc, char** argv, int in_id = 0);
+		bool addOutput(std::string name);
+		bool addEffect(std::string name, int argc, char** argv);
 		std::string getTempFile(std::string ext);
 
 		bool m_initialized;
 		bool m_finalized;
 		int m_temp_counter;
-		bool m_delete_input;
+		size_t m_loop;
 
-		sox_format_t** m_in;
-		std::string m_in_name;
-		int m_num_in;
-		sox_format_t* m_out;
-		std::string m_out_name;
-		sox_effects_chain_t* m_chain;
-		sox_signalinfo_t m_in_signal;
-		sox_signalinfo_t m_out_signal;
-		sox_encodinginfo_t m_out_encoding;
+		std::string m_output;
 	};
 
 	class SoxWrapperFactory
