@@ -234,6 +234,41 @@ bool SoxWrapper::setLoop(size_t loop)
 }
 
 
+bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
+{
+	if (length <= 0)
+		return false;
+
+	std::string temp1, temp2, temp3;
+	std::string final_output = m_output;
+	m_output = temp1 = getTempFile("wav");
+
+	finalize();
+
+	// Hacky workaround to keep temp1 for 2 separate passes
+	bool keep_temps = GlobalConfig::keep_temps();
+	GlobalConfig::keep_temps() = true;
+
+	init(temp1, temp2 = getTempFile("wav"));
+	fade(0, length * ratio);
+	finalize();
+
+	GlobalConfig::keep_temps() = keep_temps;
+
+	init(temp1, temp3 = getTempFile("wav"));
+	trim(loop > length ? loop - length : 0, loop);
+	fade(loop > length ? length : loop);
+	pad(loop > length ? end - length : end - loop);
+	finalize();
+
+	init(temp2, final_output);
+	addInput(temp3);
+	combine_method = sox_mix;
+
+	return true;
+}
+
+
 bool SoxWrapper::finalize()
 {
 	addOutput(m_output);

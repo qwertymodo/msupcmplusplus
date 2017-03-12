@@ -18,6 +18,7 @@ namespace msu
 		bool pad(size_t start, size_t end = 0);
 		bool tempo(double tempo);
 		bool setLoop(size_t loop);
+		bool crossFade(size_t loop, size_t end, size_t length, double ratio = 0.5);
 		bool finalize();
 		bool clear();
 
