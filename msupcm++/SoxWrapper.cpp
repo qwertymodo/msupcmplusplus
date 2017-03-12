@@ -4,6 +4,8 @@
 #include <assert.h>
 #include <stdio.h>
 
+#define TEMP_FILE_PREFIX "__sox_wrapper_temp__"
+
 using namespace msu;
 
 SoxWrapper* SoxWrapperFactory::m_instance(0);
@@ -433,5 +435,5 @@ bool SoxWrapper::addEffect(std::string name, int argc, char** argv)
 
 std::string SoxWrapper::getTempFile(std::string ext)
 {
-	return std::string("__sox_wrapper_temp__").append(std::to_string(m_temp_counter++)).append(".").append(ext);
+	return std::string(TEMP_FILE_PREFIX).append(std::to_string(m_temp_counter++)).append(".").append(ext);
 }
