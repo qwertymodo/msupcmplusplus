@@ -251,6 +251,7 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	GlobalConfig::keep_temps() = true;
 
 	init(temp1, temp2 = getTempFile("wav"));
+	trim(0, end);
 	fade(0, length * ratio);
 	finalize();
 
@@ -339,19 +340,18 @@ bool SoxWrapper::finalize()
 	while (process() != SOX_EOF && !user_abort && current_input < input_count)
 	{
 		if (advance_eff_chain() == SOX_EOF)
-		{
-			if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
-			{
-				((priv_t*)ofile->ft->priv)->loop_point = m_loop;
-			}
 			break;
-		}
 
 		if (!save_output_eff)
 		{
 			sox_close(ofile->ft);
 			ofile->ft = NULL;
 		}
+	}
+
+	if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
+	{
+		((priv_t*)ofile->ft->priv)->loop_point = m_loop;
 	}
 
 	m_finalized = true;;
