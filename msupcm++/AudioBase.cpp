@@ -42,6 +42,7 @@ void AudioBase::render()
 	sox->fade(m_fade_in, m_fade_out);
 	sox->pad(m_pad_start, m_pad_end);
 	sox->tempo(m_tempo);
+	sox->setLoop(m_loop);
 	sox->finalize();
 }
 
