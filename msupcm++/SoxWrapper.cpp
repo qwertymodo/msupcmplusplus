@@ -67,7 +67,7 @@ bool SoxWrapper::setCombine(sox_combine_method method)
 }
 
 
-bool SoxWrapper::trim(unsigned start, unsigned end)
+bool SoxWrapper::trim(size_t start, size_t end)
 {
 	char* args[2];
 	bool ret;
@@ -109,7 +109,7 @@ bool SoxWrapper::trim(unsigned start, unsigned end)
 }
 
 
-bool SoxWrapper::fade(unsigned in, unsigned out, char type)
+bool SoxWrapper::fade(size_t in, size_t out, char type)
 {
 	char* args[4];
 	bool ret;
@@ -159,7 +159,7 @@ bool SoxWrapper::fade(unsigned in, unsigned out, char type)
 }
 
 
-bool SoxWrapper::pad(unsigned start, unsigned end)
+bool SoxWrapper::pad(size_t start, size_t end)
 {
 	char* args[2];
 	bool ret;

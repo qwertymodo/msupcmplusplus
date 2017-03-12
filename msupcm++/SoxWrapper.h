@@ -13,9 +13,9 @@ namespace msu
 		bool init(std::string in, std::string out);
 		bool addInput(std::string name);
 		bool setCombine(sox_combine_method method);
-		bool trim(unsigned start, unsigned end = 0);
-		bool fade(unsigned in, unsigned out = 0, char type = 't');
-		bool pad(unsigned start, unsigned end = 0);
+		bool trim(size_t start, size_t end = 0);
+		bool fade(size_t in, size_t out = 0, char type = 't');
+		bool pad(size_t start, size_t end = 0);
 		bool tempo(double tempo);
 		bool setLoop(size_t loop);
 		bool finalize();

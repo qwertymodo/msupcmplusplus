@@ -38,6 +38,7 @@ void AudioBase::render()
 	SoxWrapper* sox = SoxWrapperFactory::getInstance();
 
 	sox->init(m_infile, m_outfile);
+	sox->crossFade(m_loop, m_trim_end, m_cross_fade);
 	sox->trim(m_trim_start, m_trim_end);
 	sox->fade(m_fade_in, m_fade_out);
 	sox->pad(m_pad_start, m_pad_end);
