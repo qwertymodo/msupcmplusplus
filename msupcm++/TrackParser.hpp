@@ -199,7 +199,7 @@ namespace msu {
 			a.title() = j["title"].get<std::string>();
 
 		if (a.outFile().empty())
-			a.outFile() = GlobalConfig::output_prefix() + "-" + std::to_string(a.trackNumber()) + ".wav";
+			a.outFile() = GlobalConfig::output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
 	}
 
 
