@@ -22,7 +22,6 @@ SoxWrapper::SoxWrapper() :
 SoxWrapper::~SoxWrapper()
 {
 	clear();
-	sox_quit();
 }
 
 bool SoxWrapper::init(std::string in, std::string out)
@@ -33,12 +32,14 @@ bool SoxWrapper::init(std::string in, std::string out)
 	addInput(in);
 
 	m_output = out;
+	combine_method = sox_default;
 
 	// DO NOT CALL add_eff_chain()!!
 	// Since we need to manually reallocate the arrays any time
 	// we add an effect, mixing lsx_revalloc's with C++ allocations
 	// causes heap corruption and all kinds of random headaches
 	// so just handle these arrays manually in our code
+	//add_eff_chain();
 	user_effargs = new user_effargs_t*[1];
 	user_effargs[0] = new user_effargs_t;
 
@@ -48,7 +49,7 @@ bool SoxWrapper::init(std::string in, std::string out)
 	nuser_effects[0] = 0;
 	eff_chain_count = 1;
 
-	m_initialized = true;
+	return m_initialized = true;
 }
 
 
@@ -287,8 +288,6 @@ bool SoxWrapper::finalize()
 	if (input_count < (size_t)(is_serial(combine_method) ? 1 : 2))
 		usage("Not enough input files specified");
 
-
-	// ====Combine input files
 	for (auto i = 0; i < input_count; i++) {
 		size_t j = input_count - 1 - i; /* Open in reverse order 'cos of rec (below) */
 		file_t * f = files[j];
@@ -337,12 +336,14 @@ bool SoxWrapper::finalize()
 		size_t remaining_samples;
 	} priv_t;
 
-	// ====Finalize
 	while (process() != SOX_EOF && !user_abort && current_input < input_count)
 	{
 		if (advance_eff_chain() == SOX_EOF)
 		{
-			((priv_t*)ofile->ft->priv)->loop_point = m_loop;
+			if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
+			{
+				((priv_t*)ofile->ft->priv)->loop_point = m_loop;
+			}
 			break;
 		}
 
@@ -353,10 +354,8 @@ bool SoxWrapper::finalize()
 		}
 	}
 
-	return 0;
-	clear();
-	m_finalized = true;
-	return true;
+	m_finalized = true;;
+	return clear();
 }
 
 
@@ -365,6 +364,12 @@ bool SoxWrapper::clear()
 	if (!m_initialized && !m_finalized)
 		return true;
 
+	sox_delete_effects_chain(effects_chain);
+	effects_chain = NULL;
+
+	// DO NOT CALL delete_eff_chains()!!
+	// for the same reason we don't call add_eff_chain()
+	//delete_eff_chains();
 	for (auto i = 0; i < eff_chain_count; ++i)
 	{
 		delete(user_effargs[i]);
@@ -373,9 +378,12 @@ bool SoxWrapper::clear()
 	delete(user_effargs_size);
 	delete(nuser_effects);
 	eff_chain_count = 0;
-
-	sox_delete_effects_chain(effects_chain);
-	delete_eff_chains();
+	current_eff_chain = 0;
+	user_effargs = NULL;
+	user_effargs_size = NULL;
+	nuser_effects = NULL;
+	user_efftab = NULL;
+	user_efftab_size = 0;
 
 	for (auto i = 0; i < file_count; ++i)
 		if (files[i]->ft->clips != 0)
@@ -404,9 +412,44 @@ bool SoxWrapper::clear()
 
 	success = 1; /* Signal success to cleanup so the output file isn't removed. */
 
-	cleanup();
+	/* Close the input and output files before exiting. */
+	for (auto i = 0; i < input_count; i++) {
+		if (files[i]->ft) {
+			sox_close(files[i]->ft);
+		}
+
+		if (!GlobalConfig::keep_temps())
+		{
+			if (strlen(files[i]->filename) > strlen(TEMP_FILE_PREFIX) &&
+				strncmp(files[i]->filename, TEMP_FILE_PREFIX,
+				strlen(TEMP_FILE_PREFIX)) == 0)
+				remove(files[i]->filename);
+		}
+
+		free(files[i]->filename);
+		free(files[i]);
+	}
+
+	if (file_count) {
+		if (ofile->ft) {
+			if (!success && ofile->ft->io_type == lsx_io_file) {   /* If we failed part way through */
+				struct stat st;                  /* writing a normal file, remove it. */
+				if (!stat(ofile->ft->filename, &st) &&
+					(st.st_mode & S_IFMT) == S_IFREG)
+					unlink(ofile->ft->filename);
+			}
+			sox_close(ofile->ft); /* Assume we can unlink a file before closing it. */
+		}
+		free(ofile->filename);
+		free(ofile);
+	}
+
+	free(files);
 
 	input_count = 0;
+	current_input = 0;
+	file_count = 0;
+	files = NULL;
 	m_output.clear();
 	m_loop = 0;
 	m_initialized = false;
