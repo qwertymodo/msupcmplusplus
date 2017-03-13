@@ -46,6 +46,9 @@ namespace msu
 		double tempo() const;
 		double& tempo();
 
+		double normalization() const;
+		double& normalization();
+
 	private:
 		std::string m_infile;
 		std::string m_outfile;
@@ -58,5 +61,6 @@ namespace msu
 		int m_pad_start;
 		int m_pad_end;
 		double m_tempo;
+		double m_normalization;
 	};
 }

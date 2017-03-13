@@ -271,6 +271,28 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 }
 
 
+bool SoxWrapper::normalize(double level)
+{
+	char* args[1];
+	bool ret;
+
+	if (!m_initialized || m_finalized)
+		return false;
+
+	if (level == 0.0)
+		return false;
+
+	args[0] = new char[32];
+
+	snprintf(args[0], 32, "%.2f", level);
+	ret = addEffect("nongnunormalize", 1, (char**)args);
+
+	delete(args[0]);
+
+	return ret;
+}
+
+
 bool SoxWrapper::finalize()
 {
 	addOutput(m_output);

@@ -43,6 +43,7 @@ void AudioBase::render()
 	sox->fade(m_fade_in, m_fade_out);
 	sox->pad(m_pad_start, m_pad_end);
 	sox->tempo(m_tempo);
+	sox->normalize(m_normalization);
 	sox->setLoop(m_loop - m_trim_start);
 	sox->finalize();
 }
@@ -176,4 +177,16 @@ double AudioBase::tempo() const
 double& AudioBase::tempo()
 {
 	return m_tempo;
+}
+
+
+double AudioBase::normalization() const
+{
+	return m_normalization;
+}
+
+
+double& AudioBase::normalization()
+{
+	return m_normalization;
 }
