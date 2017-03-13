@@ -1,6 +1,6 @@
 #pragma once
 #include "AudioBase.h"
-#include "AudioChannel.h"
+#include "AudioSubChannel.h"
 #include "AudioSubTrack.h"
 
 /**
@@ -12,7 +12,7 @@
 
 namespace msu
 {
-	class AudioTrack : public AudioChannel, public AudioSubTrack
+	class AudioTrack : public AudioSubChannel, public AudioSubTrack
 	{
 	public:
 		AudioTrack();

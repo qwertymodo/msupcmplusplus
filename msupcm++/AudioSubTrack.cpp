@@ -5,56 +5,56 @@ using namespace msu;
 AudioSubTrack::AudioSubTrack() :
 	AudioBase()
 {
-	m_channels = 0;
-	m_num_channels = 0;
+	m_sub_channels = 0;
+	m_num_sub_channels = 0;
 }
 
 
 AudioSubTrack::AudioSubTrack(const char *in) :
 	AudioBase(in)
 {
-	m_channels = 0;
-	m_num_channels = 0;
+	m_sub_channels = 0;
+	m_num_sub_channels = 0;
 }
 
 
 AudioSubTrack::AudioSubTrack(const char *in, const char *out) :
 	AudioBase(in, out)
 {
-	m_channels = 0;
-	m_num_channels = 0;
+	m_sub_channels = 0;
+	m_num_sub_channels = 0;
 }
 
 
 AudioSubTrack::~AudioSubTrack()
 {
-	if (m_channels)
-		delete(m_channels);
+	if (m_sub_channels)
+		delete(m_sub_channels);
 
-	m_channels = 0;
-	m_num_channels = 0;
+	m_sub_channels = 0;
+	m_num_sub_channels = 0;
 }
 
 
-AudioBase* AudioSubTrack::channels() const
+AudioBase* AudioSubTrack::subChannels() const
 {
-	return m_channels;
+	return m_sub_channels;
 }
 
 
-int AudioSubTrack::numChannels() const
+int AudioSubTrack::numSubChannels() const
 {
-	return m_num_channels;
+	return m_num_sub_channels;
 }
 
 
-void AudioSubTrack::addChannel(const AudioBase& a)
+void AudioSubTrack::addSubChannel(const AudioBase& a)
 {
 
 }
 
 
-void AudioSubTrack::removeChannel(int idx)
+void AudioSubTrack::removeSubChannel(int idx)
 {
 
 }

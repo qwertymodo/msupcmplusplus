@@ -26,7 +26,7 @@ namespace msu {
 	}
 
 
-	void to_json(json& j, const AudioChannel& a)
+	void to_json(json& j, const AudioSubChannel& a)
 	{
 		to_json(j, dynamic_cast<const AudioBase&>(a));
 		
@@ -44,10 +44,10 @@ namespace msu {
 	{
 		to_json(j, dynamic_cast<const AudioBase&>(a));
 
-		for (auto i = 0; i < a.numChannels(); ++i)
+		for (auto i = 0; i < a.numSubChannels(); ++i)
 		{
 			json channel;
-			to_json(channel, a.channels()[i]);
+			to_json(channel, a.subChannels()[i]);
 
 			j["sub_channels"].push_back(channel);
 		}
@@ -56,13 +56,13 @@ namespace msu {
 
 	void to_json(json &j, const AudioTrack& a)
 	{
-		if (a.numChannels() > 0)
+		if (a.numSubChannels() > 0)
 		{
 			to_json(j, dynamic_cast<const AudioSubTrack&>(a));
 		}
 		else if (a.numSubtracks() > 0)
 		{
-			to_json(j, dynamic_cast<const AudioChannel&>(a));
+			to_json(j, dynamic_cast<const AudioSubChannel&>(a));
 		}
 		else
 		{
@@ -142,7 +142,7 @@ namespace msu {
 	}
 
 
-	void from_json(const json& j, AudioChannel& a)
+	void from_json(const json& j, AudioSubChannel& a)
 	{
 		from_json(j, dynamic_cast<AudioBase&>(a));
 
@@ -165,8 +165,8 @@ namespace msu {
 		{
 			for (auto i = j["sub_channels"].begin(); i != j["sub_channels"].end(); ++i)
 			{
-				AudioChannel c = *i;
-				a.addChannel(dynamic_cast<const AudioBase &>(c));
+				AudioSubChannel c = *i;
+				a.addSubChannel(dynamic_cast<const AudioBase &>(c));
 			}
 		}
 	}
@@ -180,7 +180,7 @@ namespace msu {
 		}
 		else if (j.find("sub_tracks") != j.end())
 		{
-			from_json(j, dynamic_cast<AudioChannel&>(a));
+			from_json(j, dynamic_cast<AudioSubChannel&>(a));
 		}
 		else
 		{

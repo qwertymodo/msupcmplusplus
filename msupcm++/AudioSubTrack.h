@@ -19,14 +19,14 @@ namespace msu
 
 		virtual void render() override;
 
-		AudioBase* channels() const;
-		int numChannels() const;
+		AudioBase* subChannels() const;
+		int numSubChannels() const;
 
-		void addChannel(const AudioBase& a);
-		void removeChannel(int idx);
+		void addSubChannel(const AudioBase& a);
+		void removeSubChannel(int idx);
 
 	protected:
-		AudioBase* m_channels;
-		int m_num_channels;
+		AudioBase* m_sub_channels;
+		int m_num_sub_channels;
 	};
 }

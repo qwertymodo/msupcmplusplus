@@ -27,9 +27,6 @@
     <ClCompile Include="AudioSubTrack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AudioChannel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AudioTrackList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,6 +42,9 @@
     <ClCompile Include="sox_main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AudioSubChannel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioTrack.h">
@@ -54,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioSubTrack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AudioChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioBase.h">
@@ -78,6 +75,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sox_main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSubChannel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

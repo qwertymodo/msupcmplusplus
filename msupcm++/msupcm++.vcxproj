@@ -151,7 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AudioBase.cpp" />
-    <ClCompile Include="AudioChannel.cpp" />
+    <ClCompile Include="AudioSubChannel.cpp" />
     <ClCompile Include="AudioSubTrack.cpp" />
     <ClCompile Include="AudioTrack.cpp" />
     <ClCompile Include="AudioTrackList.cpp" />
@@ -168,7 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdparty\json\src\json.hpp" />
-    <ClInclude Include="AudioChannel.h" />
+    <ClInclude Include="AudioSubChannel.h" />
     <ClInclude Include="AudioBase.h" />
     <ClInclude Include="AudioSubTrack.h" />
     <ClInclude Include="AudioTrack.h" />
