@@ -113,7 +113,9 @@
 #endif
 
 #define ftime _ftime
+#ifndef __cplusplus
 #define inline __inline
+#endif
 #define isatty _isatty
 #define kbhit _kbhit
 #define mktemp _mktemp
