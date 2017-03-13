@@ -15,13 +15,14 @@ SoxWrapper::SoxWrapper() :
 {
 	assert(sox_init() == SOX_SUCCESS);
 	sox_get_globals()->verbosity = GlobalConfig::verbosity();
-	atexit(atexit_cleanup);
 }
 
 
 SoxWrapper::~SoxWrapper()
 {
 	clear();
+	if (!cleanup_called)
+		cleanup();
 }
 
 bool SoxWrapper::init(std::string in, std::string out)
