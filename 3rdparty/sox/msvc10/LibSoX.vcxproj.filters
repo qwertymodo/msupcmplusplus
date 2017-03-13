@@ -600,5 +600,8 @@
     <ClCompile Include="..\src\msupcm-fmt.c">
       <Filter>Format Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\nongnunormalize.c">
+      <Filter>Effect Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

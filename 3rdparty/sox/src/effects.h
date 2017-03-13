@@ -53,6 +53,7 @@
   EFFECT(mcompand)
   EFFECT(noiseprof)
   EFFECT(noisered)
+  EFFECT(nongnunormalize)
   EFFECT(norm)
   EFFECT(oops)
   EFFECT(output)
