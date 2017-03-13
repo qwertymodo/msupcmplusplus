@@ -7,21 +7,6 @@
 using nlohmann::json;
 
 namespace msu {
-	bool key_exists(const json& j, const std::string& s)
-	{
-		try
-		{
-			j.at(s);
-		}
-		catch (std::out_of_range)
-		{
-			return false;
-		}
-
-		return true;
-	}
-
-
 	void to_json(json& j, const AudioBase& a)
 	{
 		j = json{
@@ -50,7 +35,7 @@ namespace msu {
 			json subtrack;
 			to_json(subtrack, a.subtracks()[i]);
 
-			j["subtracks"].push_back(subtrack);
+			j["sub_tracks"].push_back(subtrack);
 		}
 	}
 
@@ -64,7 +49,7 @@ namespace msu {
 			json channel;
 			to_json(channel, a.channels()[i]);
 
-			j["channels"].push_back(channel);
+			j["sub_channels"].push_back(channel);
 		}
 	}
 
@@ -113,40 +98,40 @@ namespace msu {
 
 	void from_json(const json& j, AudioBase& a)
 	{
-		if (key_exists(j, "file"))
+		if (j.find("file") != j.end())
 			a.inFile() = j["file"].get<std::string>();
 
-		if (key_exists(j, "output"))
+		if (j.find("output") != j.end())
 			a.outFile() = j["output"].get<std::string>();
 
-		if (key_exists(j, "trim_start"))
+		if (j.find("trim_start") != j.end())
 			a.trimStart() = j["trim_start"].get<int>();
 
-		if (key_exists(j, "trim_end"))
+		if (j.find("trim_end") != j.end())
 			a.trimEnd() = j["trim_end"].get<int>();
 
-		if (key_exists(j, "loop"))
+		if (j.find("loop") != j.end())
 			a.loop() = j["loop"].get<int>();
 
-		if (key_exists(j, "fade_in"))
+		if (j.find("fade_in") != j.end())
 			a.fadeIn() = j["fade_in"].get<int>();
 
-		if (key_exists(j, "fade_out"))
+		if (j.find("fade_out") != j.end())
 			a.fadeOut() = j["fade_out"].get<int>();
 
-		if (key_exists(j, "cross_fade"))
+		if (j.find("cross_fade") != j.end())
 			a.crossFade() = j["cross_fade"].get<int>();
 
-		if (key_exists(j, "pad_start"))
+		if (j.find("pad_start") != j.end())
 			a.padStart() = j["pad_start"].get<int>();
 
-		if (key_exists(j, "pad_end"))
+		if (j.find("pad_end") != j.end())
 			a.padEnd() = j["pad_end"].get<int>();
 
-		if (key_exists(j, "tempo"))
+		if (j.find("tempo") != j.end())
 			a.tempo() = j["tempo"].get<double>();
 
-		if (key_exists(j, "normalization"))
+		if (j.find("normalization") != j.end())
 		{
 			a.normalization() = j["normalization"].get<double>();
 		}
@@ -161,9 +146,9 @@ namespace msu {
 	{
 		from_json(j, dynamic_cast<AudioBase&>(a));
 
-		if (key_exists(j, "subchannels"))
+		if (j.find("sub_tracks") != j.end())
 		{
-			for (auto i = j["subtracks"].begin(); i != j["subtracks"].end(); ++i)
+			for (auto i = j["sub_tracks"].begin(); i != j["sub_tracks"].end(); ++i)
 			{
 				AudioSubTrack s = *i;
 				a.addSubtrack(dynamic_cast<const AudioBase &>(s));
@@ -176,9 +161,9 @@ namespace msu {
 	{
 		from_json(j, dynamic_cast<AudioBase&>(a));
 
-		if(key_exists(j, "channels"))
+		if (j.find("sub_channels") != j.end())
 		{
-			for (auto i = j["channels"].begin(); i != j["channels"].end(); ++i)
+			for (auto i = j["sub_channels"].begin(); i != j["sub_channels"].end(); ++i)
 			{
 				AudioChannel c = *i;
 				a.addChannel(dynamic_cast<const AudioBase &>(c));
@@ -189,11 +174,11 @@ namespace msu {
 
 	void from_json(const json& j, AudioTrack& a)
 	{
-		if(key_exists(j, "channels"))
+		if (j.find("sub_channels") != j.end())
 		{
 			from_json(j, dynamic_cast<AudioSubTrack&>(a));
 		}
-		else if(key_exists(j, "subtracks"))
+		else if (j.find("sub_tracks") != j.end())
 		{
 			from_json(j, dynamic_cast<AudioChannel&>(a));
 		}
@@ -202,10 +187,10 @@ namespace msu {
 			from_json(j, dynamic_cast<AudioBase&>(a));
 		}
 
-		if (key_exists(j, "track_number"))
+		if (j.find("track_number") != j.end())
 			a.trackNumber() = j["track_number"].get<int>();
 
-		if (key_exists(j, "title"))
+		if (j.find("title") != j.end())
 			a.title() = j["title"].get<std::string>();
 
 		if (a.outFile().empty())
@@ -215,19 +200,19 @@ namespace msu {
 
 	void from_json(const json& j, AudioTrackList& a)
 	{
-		if (key_exists(j, "game"))
+		if (j.find("game") != j.end())
 			config.game() = j["game"].get<std::string>();
 
-		if (key_exists(j, "pack"))
+		if (j.find("pack") != j.end())
 			config.pack() = j["pack"].get<std::string>();
 
-		if (key_exists(j, "artist"))
+		if (j.find("artist") != j.end())
 			config.artist() = j["artist"].get<std::string>();
 
-		if (key_exists(j, "url"))
+		if (j.find("url") != j.end())
 			config.url() = j["url"].get<std::string>();
 
-		if (key_exists(j, "output_prefix"))
+		if (j.find("output_prefix") != j.end())
 		{
 			config.output_prefix() = j["output_prefix"].get<std::string>();
 		}
@@ -236,16 +221,16 @@ namespace msu {
 			config.output_prefix() = "track";
 		}
 
-		if (key_exists(j, "normalization"))
+		if (j.find("normalization") != j.end())
 			config.normalization() = j["normalization"].get<int>();
 
-		if (key_exists(j, "verbosity"))
+		if (j.find("verbosity") != j.end())
 			config.verbosity() = j["verbosity"].get<unsigned int>();
 
-		if (key_exists(j, "keep_temps"))
+		if (j.find("keep_temps") != j.end())
 			config.keep_temps() = j["keep_temps"].get<bool>();
 
-		if(key_exists(j, "tracks"))
+		if (j.find("tracks") != j.end())
 		{
 			for (auto i = j["tracks"].begin(); i != j["tracks"].end(); ++i)
 			{
