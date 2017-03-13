@@ -1,6 +1,7 @@
 #include "AudioBase.h"
 #include "GlobalConfig.h"
 #include "SoxWrapper.h"
+#include <iostream>
 
 using namespace msu;
 
@@ -35,17 +36,26 @@ AudioBase::~AudioBase()
 
 void AudioBase::render()
 {
-	SoxWrapper* sox = SoxWrapperFactory::getInstance();
+	if (!m_infile.empty())
+	{
+		SoxWrapper* sox = SoxWrapperFactory::getInstance();
 
-	sox->init(m_infile, m_outfile);
-	sox->crossFade(m_loop, m_trim_end, m_cross_fade);
-	sox->trim(m_trim_start, m_trim_end);
-	sox->fade(m_fade_in, m_fade_out);
-	sox->pad(m_pad_start, m_pad_end);
-	sox->tempo(m_tempo);
-	sox->normalize(m_normalization);
-	sox->setLoop(m_loop - m_trim_start);
-	sox->finalize();
+		if(sox->init(m_infile, m_outfile))
+		{
+			sox->crossFade(m_loop, m_trim_end, m_cross_fade);
+			sox->trim(m_trim_start, m_trim_end);
+			sox->fade(m_fade_in, m_fade_out);
+			sox->pad(m_pad_start, m_pad_end);
+			sox->tempo(m_tempo);
+			sox->normalize(m_normalization);
+			sox->setLoop(m_loop - m_trim_start);
+			sox->finalize();
+		}
+		else if (GlobalConfig::verbosity() > 0)
+		{
+			std::cout << "Error opening input file " << m_infile << std::endl;
+		}
+	}
 }
 
 

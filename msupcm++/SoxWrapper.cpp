@@ -3,6 +3,7 @@
 #include "util.h"
 #include <assert.h>
 #include <stdio.h>
+#include <sys/stat.h>
 
 #define TEMP_FILE_PREFIX "__sox_wrapper_temp__"
 
@@ -28,9 +29,10 @@ SoxWrapper::~SoxWrapper()
 bool SoxWrapper::init(std::string in, std::string out)
 {
 	if (!clear())
-		return false;
+		return m_initialized = false;
 
-	addInput(in);
+	if (!addInput(in))
+		return m_initialized = false;
 
 	m_output = out;
 	combine_method = sox_default;
@@ -57,6 +59,12 @@ bool SoxWrapper::init(std::string in, std::string out)
 bool SoxWrapper::addInput(std::string name)
 {
 	file_t opts;
+
+	// Check if file exists
+	struct stat file;
+	if (!stat(name.c_str(), &file) == 0)
+		return false;
+
 	init_file(&opts);
 	add_file(&opts, name.c_str());
 	++input_count;
