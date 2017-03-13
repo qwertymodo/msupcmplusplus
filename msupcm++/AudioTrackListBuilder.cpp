@@ -1,5 +1,7 @@
 #include "AudioTrackListBuilder.h"
+#include "GlobalConfig.h"
 #include "TrackParser.hpp"
+#include <exception>
 #include <fstream>
 #include <iostream>
 
@@ -11,7 +13,15 @@ AudioTrackListBuilder::AudioTrackListBuilder(std::string config)
 	if (ifs.is_open())
 	{
 		json j;
-		ifs >> j;
+		try
+		{
+			ifs >> j;
+		}
+		catch (const std::exception& e)
+		{
+			std::cout << e.what() << std::endl;
+			exit(1);
+		}
 
 		m_list = j;
 	}
