@@ -7,7 +7,7 @@ std::string GlobalConfig::m_pack = "";
 std::string GlobalConfig::m_artist = "";
 std::string GlobalConfig::m_url = "";
 std::string GlobalConfig::m_output_prefix = "";
-int GlobalConfig::m_normalization = 0;
+double GlobalConfig::m_normalization = 0.0;
 unsigned int GlobalConfig::m_verbosity = 1;
 bool GlobalConfig::m_keep_temps = false;
 
@@ -41,7 +41,7 @@ std::string& GlobalConfig::output_prefix()
 }
 
 
-int& GlobalConfig::normalization()
+double& GlobalConfig::normalization()
 {
 	return m_normalization;
 }

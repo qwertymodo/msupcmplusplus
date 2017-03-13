@@ -35,7 +35,8 @@ namespace msu {
 			{ "cross_fade", a.fadeIn() },
 			{ "pad_start", a.padStart() },
 			{ "pad_end", a.padEnd() },
-			{ "tempo", a.tempo() }
+			{ "tempo", a.tempo() },
+			{ "normalization", a.normalization() }
 		};
 	}
 
@@ -144,6 +145,15 @@ namespace msu {
 
 		if (key_exists(j, "tempo"))
 			a.tempo() = j["tempo"].get<double>();
+
+		if (key_exists(j, "normalization"))
+		{
+			a.normalization() = j["normalization"].get<double>();
+		}
+		else
+		{
+			a.normalization() = config.normalization();
+		}
 	}
 
 

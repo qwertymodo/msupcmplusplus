@@ -11,7 +11,7 @@ namespace msu
 		static std::string& artist();
 		static std::string& url();
 		static std::string& output_prefix();
-		static int& normalization();
+		static double& normalization();
 		static unsigned int& verbosity();
 		static bool& keep_temps();
 
@@ -21,7 +21,7 @@ namespace msu
 		static std::string m_artist;
 		static std::string m_url;
 		static std::string m_output_prefix;
-		static int m_normalization;
+		static double m_normalization;
 		static unsigned int m_verbosity;
 		static bool m_keep_temps;
 	} config;
