@@ -369,11 +369,6 @@ bool SoxWrapper::finalize()
 		sox_globals.ranqd1 = (int32_t)(now.tv_sec - now.tv_usec);
 	}
 
-	/* Set output file options */
-	ofile->signal.channels = 2;
-	ofile->signal.rate = 44100;
-	ofile->encoding.bits_per_sample = 16;
-
 	/* Save things that sox_sequence needs to be reinitialised for each segued
 	* block of input files.*/
 	ofile_signal_options = ofile->signal;
@@ -522,6 +517,17 @@ bool SoxWrapper::addOutput(std::string name)
 	init_file(&opts);
 
 	add_file(&opts, name.c_str());
+
+	/* Set output file options */
+	size_t pos = name.find_last_of(".");
+	if (pos != std::string::npos &&
+		name.substr(pos).compare(".pcm") == 0)
+	{
+		ofile->signal.channels = 2;
+		ofile->signal.rate = 44100;
+		ofile->encoding.bits_per_sample = 16;
+	}
+
 	return true;
 }
 
