@@ -125,10 +125,22 @@ void AudioSubChannel::render()
 
 	if (m_num_sub_tracks)
 	{
+		size_t sub_loop = 0;
 		for (auto i = 0; i < m_num_sub_tracks; ++i)
 		{
 			dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_str").append(std::to_string(i)).append(".wav");
 			dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].render();
+			if (!m_loop)
+			{
+				if (size_t loop = dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].loop())
+				{
+					m_loop = sub_loop + loop - dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].trimStart();
+				}
+				else
+				{
+					sub_loop += sox->length();
+				}
+			}
 		}
 
 		if (sox->init(dynamic_cast<AudioSubTrack*>(m_sub_tracks)[0].outFile(), m_outfile))
@@ -148,12 +160,10 @@ void AudioSubChannel::render()
 			sox->finalize();
 		}
 
-		if (!GlobalConfig::keep_temps())
+		for (auto i = 0; i < m_num_sub_tracks; ++i)
 		{
-			for (auto i = 0; i < m_num_sub_tracks; ++i)
-			{
+			if (!GlobalConfig::keep_temps())
 				remove(dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].outFile().c_str());
-			}
 		}
 	}
 	else
