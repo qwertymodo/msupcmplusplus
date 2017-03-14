@@ -45,6 +45,9 @@
     <ClCompile Include="AudioSubChannel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\3rdparty\sox\src\win32-glob.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioTrack.h">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AudioSubChannel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\3rdparty\sox\src\win32-glob.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

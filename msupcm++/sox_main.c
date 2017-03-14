@@ -2555,6 +2555,34 @@ int add_file(file_t const * const opts, char const * const filename)
 	return 0;
 }
 
+#if HAVE_GLOB_H
+#ifndef GLOB_BRACE
+#define GLOB_BRACE 0
+#endif
+#ifndef GLOB_TILDE
+#define GLOB_TILDE 0
+#endif
+int add_glob_file(file_t const * const opts, char const * const filename)
+{
+	glob_t globbuf;
+	size_t i;
+
+	if (opts->no_glob)
+		return add_file(opts, filename);
+
+	if (glob(filename, GLOB_BRACE | GLOB_TILDE | GLOB_NOCHECK, NULL, &globbuf)) {
+		lsx_fail("glob: %s", strerror(errno));
+		exit(1);
+	}
+	for (i = 0; i < globbuf.gl_pathc; ++i)
+		add_file(opts, globbuf.gl_pathv[i]);
+	globfree(&globbuf);
+	return 0;
+}
+#else
+#define add_glob_file add_file
+#endif
+
 void init_file(file_t * f)
 {
 	memset(f, 0, sizeof(*f));
@@ -2607,8 +2635,8 @@ void parse_options_and_filenames(int argc, char **argv)
 		}
 		else if (optstate.ind >= argc || sox_find_effect(argv[optstate.ind]))
 			break;
-//		else if (!sox_is_playlist(argv[optstate.ind]))
-//			add_glob_file(&opts, argv[optstate.ind++]);
+		else if (!sox_is_playlist(argv[optstate.ind]))
+			add_glob_file(&opts, argv[optstate.ind++]);
 		else if (sox_parse_playlist((sox_playlist_callback_t)add_file, &opts, argv[optstate.ind++]) != SOX_SUCCESS)
 			exit(1);
 	}

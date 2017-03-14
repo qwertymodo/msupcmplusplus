@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\3rdparty\sox\src\win32-glob.c" />
     <ClCompile Include="AudioBase.cpp" />
     <ClCompile Include="AudioSubChannel.cpp" />
     <ClCompile Include="AudioSubTrack.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdparty\json\src\json.hpp" />
+    <ClInclude Include="..\3rdparty\sox\src\win32-glob.h" />
     <ClInclude Include="AudioSubChannel.h" />
     <ClInclude Include="AudioBase.h" />
     <ClInclude Include="AudioSubTrack.h" />
