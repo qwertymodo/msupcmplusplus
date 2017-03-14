@@ -359,6 +359,11 @@ bool SoxWrapper::finalize()
 		sox_globals.ranqd1 = (int32_t)(now.tv_sec - now.tv_usec);
 	}
 
+	/* Set output file options */
+	ofile->signal.channels = 2;
+	ofile->signal.rate = 44100;
+	ofile->encoding.bits_per_sample = 16;
+
 	/* Save things that sox_sequence needs to be reinitialised for each segued
 	* block of input files.*/
 	ofile_signal_options = ofile->signal;
