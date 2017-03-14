@@ -1,7 +1,6 @@
 #include "SoxWrapper.h"
 #include "GlobalConfig.h"
 #include "util.h"
-#include <assert.h>
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -14,7 +13,7 @@ SoxWrapper* SoxWrapperFactory::m_instance(0);
 SoxWrapper::SoxWrapper() :
 	m_initialized(false), m_finalized(false), m_temp_counter(0), m_loop(0)
 {
-	assert(sox_init() == SOX_SUCCESS);
+	sox_init();
 	sox_get_globals()->verbosity = GlobalConfig::verbosity();
 }
 
