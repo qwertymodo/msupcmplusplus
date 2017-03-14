@@ -10,7 +10,7 @@ AudioBase::AudioBase() :
 	m_trim_start(0), m_trim_end(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
-	m_tempo(-1.0)
+	m_tempo(-1.0), m_normalization(0.0)
 {
 
 }
@@ -29,8 +29,49 @@ AudioBase::AudioBase(const char *in, const char *out) : AudioBase()
 }
 
 
+AudioBase::AudioBase(const AudioBase& a) : AudioBase()
+{
+	*this = a;
+}
+
+
 AudioBase::~AudioBase()
 {
+}
+
+
+AudioBase& AudioBase::operator=(const AudioBase& a)
+{
+	m_infile = a.m_infile;
+	m_outfile = a.m_outfile;
+	m_trim_start = a.m_trim_start;
+	m_trim_end = a.m_trim_end;
+	m_loop = a.m_loop;
+	m_fade_in = a.m_fade_in;
+	m_fade_out = a.m_fade_out;
+	m_cross_fade = a.m_cross_fade;
+	m_pad_start = a.m_pad_start;
+	m_pad_end = a.m_pad_end;
+	m_tempo = a.m_tempo;
+	m_normalization = a.m_normalization;
+	return *this;
+}
+
+
+void AudioBase::clear()
+{
+	m_infile.clear();
+	m_outfile.clear();
+	m_trim_start = 0;
+	m_trim_end = 0;
+	m_loop = 0;
+	m_fade_in = 0;
+	m_fade_out = 0;
+	m_cross_fade = 0;
+	m_pad_start = 0;
+	m_pad_end = 0;
+	m_tempo = 1.0;
+	m_normalization = 0.0;
 }
 
 
