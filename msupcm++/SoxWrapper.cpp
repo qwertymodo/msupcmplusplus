@@ -52,6 +52,9 @@ bool SoxWrapper::init(std::string in, std::string out)
 	nuser_effects[0] = 0;
 	eff_chain_count = 1;
 
+	m_loop = 0;
+	m_length = 0;
+
 	return m_initialized = true;
 }
 
@@ -375,10 +378,14 @@ bool SoxWrapper::finalize()
 
 		if (!save_output_eff)
 		{
+			m_length = ofile->ft->olength / 2;
 			sox_close(ofile->ft);
 			ofile->ft = NULL;
 		}
 	}
+
+	if(ofile->ft != NULL)
+		m_length = ofile->ft->olength / 2;
 
 	if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
 	{
@@ -486,6 +493,12 @@ bool SoxWrapper::clear()
 	m_initialized = false;
 	m_finalized = false;
 	return true;
+}
+
+
+size_t SoxWrapper::length()
+{
+	return m_length;
 }
 
 

@@ -128,6 +128,13 @@ void AudioSubTrack::render()
 		{
 			dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_str").append(std::to_string(i)).append(".wav");
 			dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].render();
+			if (!m_loop)
+			{
+				if (size_t loop = dynamic_cast<AudioSubTrack*>(m_sub_channels)[i].loop())
+				{
+					m_loop = loop - dynamic_cast<AudioSubTrack*>(m_sub_channels)[i].trimStart();
+				}
+			}
 		}
 
 		if (sox->init(dynamic_cast<AudioSubChannel*>(m_sub_channels)[0].outFile(), m_outfile))

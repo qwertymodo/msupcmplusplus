@@ -23,6 +23,8 @@ namespace msu
 		bool finalize();
 		bool clear();
 
+		size_t length();
+
 	private:
 		bool addOutput(std::string name);
 		bool addEffect(std::string name, int argc, char** argv);
@@ -32,6 +34,7 @@ namespace msu
 		bool m_finalized;
 		int m_temp_counter;
 		size_t m_loop;
+		size_t m_length;
 
 		std::string m_output;
 	};

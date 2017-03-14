@@ -14,10 +14,7 @@ int main(int argc, char * argv[])
 	else
 	{
 		conf = "tracks.json";
-	}
-
-	/* All libSoX applications must start by initialising the SoX library */
-	
+	}	
 
 	AudioTrackListBuilder(conf).get().render();
 
