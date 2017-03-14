@@ -39,7 +39,7 @@ namespace msu
 	class SoxWrapperFactory
 	{
 	public:
-		~SoxWrapperFactory() { delete(m_instance); }
+		~SoxWrapperFactory() { delete m_instance; }
 		static SoxWrapper* getInstance()
 		{
 			if (!m_instance)

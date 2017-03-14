@@ -111,8 +111,8 @@ bool SoxWrapper::trim(size_t start, size_t end)
 			ret = addEffect("trim", 1, (char**)args);
 		}
 
-		delete(args[0]);
-		delete(args[1]);
+		delete args[0];
+		delete args[1];
 
 		return ret;
 	}
@@ -159,10 +159,10 @@ bool SoxWrapper::fade(size_t in, size_t out, char type)
 			ret = addEffect("fade", 2, (char**)args);
 		}
 
-		delete(args[0]);
-		delete(args[1]);
-		delete(args[2]);
-		delete(args[3]);
+		delete args[0];
+		delete args[1];
+		delete args[2];
+		delete args[3];
 
 		return ret;
 	}
@@ -203,8 +203,8 @@ bool SoxWrapper::pad(size_t start, size_t end)
 			ret = addEffect("pad", 1, (char**)args);
 		}
 
-		delete(args[0]);
-		delete(args[1]);
+		delete args[0];
+		delete args[1];
 
 		return ret;
 	}
@@ -230,8 +230,8 @@ bool SoxWrapper::tempo(double tempo)
 	strncpy(args[1], std::to_string(tempo).c_str(), 32);
 	ret = addEffect("tempo", 2, (char**)args);
 
-	delete(args[0]);
-	delete(args[1]);
+	delete args[0];
+	delete args[1];
 
 	return ret;
 }
@@ -296,7 +296,7 @@ bool SoxWrapper::normalize(double level)
 	snprintf(args[0], 32, "%.2f", level);
 	ret = addEffect("nongnunormalize", 1, (char**)args);
 
-	delete(args[0]);
+	delete args[0];
 
 	return ret;
 }
@@ -403,11 +403,11 @@ bool SoxWrapper::clear()
 	//delete_eff_chains();
 	for (auto i = 0; i < eff_chain_count; ++i)
 	{
-		delete(user_effargs[i]);
+		delete[] user_effargs[i];
 	}
-	delete(user_effargs);
-	delete(user_effargs_size);
-	delete(nuser_effects);
+	delete[] user_effargs;
+	delete[] user_effargs_size;
+	delete[] nuser_effects;
 	eff_chain_count = 0;
 	current_eff_chain = 0;
 	user_effargs = NULL;
@@ -521,7 +521,7 @@ bool SoxWrapper::addEffect(std::string name, int argc, char** argv)
 				user_effargs[last_chain][i].argv_size = 0;
 			}
 		}
-		delete(ef);
+		delete[] ef;
 	}
 
 	/* Name should always be correct! */
