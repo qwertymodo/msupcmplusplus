@@ -21,7 +21,7 @@ namespace msu {
 			{ "pad_start", a.padStart() },
 			{ "pad_end", a.padEnd() },
 			{ "tempo", a.tempo() },
-			{ "normalization", a.normalization() }
+			{ "normalization", a.normalization() },
 		};
 	}
 
@@ -83,6 +83,7 @@ namespace msu {
 			{ "url", config.url() },
 			{ "output_prefix", config.output_prefix() },
 			{ "normalization", config.normalization() },
+			{ "dither", config.dither() },
 			{ "verbosity", config.verbosity() },
 			{ "keep_temps", config.keep_temps() }
 		};
@@ -223,6 +224,9 @@ namespace msu {
 
 		if (j.find("normalization") != j.end())
 			config.normalization() = j["normalization"].get<int>();
+
+		if (j.find("dither") != j.end())
+			config.dither() = j["dither"].get<bool>();
 
 		if (j.find("verbosity") != j.end())
 			config.verbosity() = j["verbosity"].get<unsigned int>();
