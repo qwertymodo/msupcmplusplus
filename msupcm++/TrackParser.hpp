@@ -28,12 +28,12 @@ namespace msu {
 
 	void to_json(json& j, const AudioSubChannel& a)
 	{
-		to_json(j, dynamic_cast<const AudioBase&>(a));
+		to_json(j, (const AudioBase&)(a));
 		
-		for (auto i = 0; i < a.numSubtracks(); ++i)
+		for (auto i = 0; i < a.numSubTracks(); ++i)
 		{
 			json subtrack;
-			to_json(subtrack, a.subtracks()[i]);
+			to_json(subtrack, a.subTracks()[i]);
 
 			j["sub_tracks"].push_back(subtrack);
 		}
@@ -42,7 +42,7 @@ namespace msu {
 
 	void to_json(json &j, const AudioSubTrack& a)
 	{
-		to_json(j, dynamic_cast<const AudioBase&>(a));
+		to_json(j, (const AudioBase&)(a));
 
 		for (auto i = 0; i < a.numSubChannels(); ++i)
 		{
@@ -58,15 +58,15 @@ namespace msu {
 	{
 		if (a.numSubChannels() > 0)
 		{
-			to_json(j, dynamic_cast<const AudioSubTrack&>(a));
+			to_json(j, (const AudioSubTrack&)(a));
 		}
-		else if (a.numSubtracks() > 0)
+		else if (a.numSubTracks() > 0)
 		{
-			to_json(j, dynamic_cast<const AudioSubChannel&>(a));
+			to_json(j, (const AudioSubChannel&)(a));
 		}
 		else
 		{
-			to_json(j, dynamic_cast<const AudioBase&>(a));
+			to_json(j, (const AudioBase&)(a));
 		}
 
 		j["track_number"] = a.trackNumber();
@@ -144,14 +144,14 @@ namespace msu {
 
 	void from_json(const json& j, AudioSubChannel& a)
 	{
-		from_json(j, dynamic_cast<AudioBase&>(a));
+		from_json(j, (AudioBase&)(a));
 
 		if (j.find("sub_tracks") != j.end())
 		{
 			for (auto i = j["sub_tracks"].begin(); i != j["sub_tracks"].end(); ++i)
 			{
 				AudioSubTrack s = *i;
-				a.addSubtrack(dynamic_cast<const AudioBase &>(s));
+				a.addSubTrack(&s);
 			}
 		}
 	}
@@ -159,14 +159,14 @@ namespace msu {
 
 	void from_json(const json& j, AudioSubTrack& a)
 	{
-		from_json(j, dynamic_cast<AudioBase&>(a));
+		from_json(j, (AudioBase&)(a));
 
 		if (j.find("sub_channels") != j.end())
 		{
 			for (auto i = j["sub_channels"].begin(); i != j["sub_channels"].end(); ++i)
 			{
-				AudioSubChannel c = *i;
-				a.addSubChannel(dynamic_cast<const AudioBase &>(c));
+				AudioSubChannel s = *i;
+				a.addSubChannel(&s);
 			}
 		}
 	}
@@ -176,15 +176,15 @@ namespace msu {
 	{
 		if (j.find("sub_channels") != j.end())
 		{
-			from_json(j, dynamic_cast<AudioSubTrack&>(a));
+			from_json(j, (AudioSubTrack&)(a));
 		}
 		else if (j.find("sub_tracks") != j.end())
 		{
-			from_json(j, dynamic_cast<AudioSubChannel&>(a));
+			from_json(j, (AudioSubChannel&)(a));
 		}
 		else
 		{
-			from_json(j, dynamic_cast<AudioBase&>(a));
+			from_json(j, (AudioBase&)(a));
 		}
 
 		if (j.find("track_number") != j.end())
