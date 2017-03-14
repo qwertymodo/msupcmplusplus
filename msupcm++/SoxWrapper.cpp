@@ -306,6 +306,16 @@ bool SoxWrapper::normalize(double level)
 
 bool SoxWrapper::finalize()
 {
+	if (GlobalConfig::dither())
+	{
+		char* dither_args[1];
+
+		dither_args[0] = new char[3]{ '-','s','\0' };
+		addEffect("dither", 1, (char**)dither_args);
+
+		delete dither_args[0];
+	}
+
 	addOutput(m_output);
 
 	sox_format_handler_t const * handler =
