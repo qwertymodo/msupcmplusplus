@@ -403,7 +403,7 @@ bool SoxWrapper::finalize()
 
 	if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
 	{
-		((priv_t*)ofile->ft->priv)->loop_point = m_loop;
+		((priv_t*)ofile->ft->priv)->loop_point = m_loop * ofile->ft->signal.rate / files[0]->ft->signal.rate;
 	}
 
 	m_finalized = true;;
