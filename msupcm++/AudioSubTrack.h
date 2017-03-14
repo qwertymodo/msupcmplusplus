@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioBase.h"
+#include "AudioSubChannel.h"
 
 /**
 * An AudioSubTrack is a type of AudioBase which will be concatenated with
@@ -15,15 +16,20 @@ namespace msu
 		AudioSubTrack();
 		AudioSubTrack(const char *in);
 		AudioSubTrack(const char *in, const char *out);
+		AudioSubTrack(const AudioSubTrack& a);
 		~AudioSubTrack();
+
+		AudioSubTrack& operator=(const AudioSubTrack& a);
+		AudioSubTrack& operator=(const AudioBase& a);
+
+		virtual void clear() override;
 
 		virtual void render() override;
 
 		AudioBase* subChannels() const;
 		int numSubChannels() const;
 
-		void addSubChannel(const AudioBase& a);
-		void removeSubChannel(int idx);
+		void addSubChannel(AudioBase* a);
 
 	protected:
 		AudioBase* m_sub_channels;

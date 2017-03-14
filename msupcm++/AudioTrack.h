@@ -18,7 +18,15 @@ namespace msu
 		AudioTrack();
 		AudioTrack(const char *in);
 		AudioTrack(const char *in, const char *out);
+		AudioTrack(const AudioTrack& a);
 		~AudioTrack();
+
+		AudioTrack& operator=(const AudioTrack& a);
+		AudioTrack& operator=(const AudioSubChannel& a);
+		AudioTrack& operator=(const AudioSubTrack& a);
+		AudioTrack& operator=(const AudioBase& a);
+
+		virtual void clear();
 
 		virtual void render() final;
 
@@ -28,7 +36,7 @@ namespace msu
 		const std::string& title() const;
 		std::string& title();
 
-	private:
+	protected:
 		int m_track_number;
 		std::string m_title;
 	};

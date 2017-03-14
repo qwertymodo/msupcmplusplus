@@ -9,7 +9,12 @@ namespace msu
 		AudioBase();
 		AudioBase(const char *in);
 		AudioBase(const char *in, const char *out);
+		AudioBase(const AudioBase& a);
 		~AudioBase();
+
+		AudioBase& operator=(const AudioBase& a);
+
+		virtual void clear();
 
 		virtual void render();
 
@@ -49,7 +54,7 @@ namespace msu
 		double normalization() const;
 		double& normalization();
 
-	private:
+	protected:
 		std::string m_infile;
 		std::string m_outfile;
 		int m_loop;
