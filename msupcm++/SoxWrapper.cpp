@@ -275,6 +275,11 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 
 	finalize();
 
+	if (end == 0)
+	{
+		end = m_length;
+	}
+
 	if (m_input_rate != 44100.0)
 	{
 		loop = loop * 44100.0 / m_input_rate;
