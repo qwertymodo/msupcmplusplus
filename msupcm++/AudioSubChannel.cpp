@@ -128,13 +128,14 @@ void AudioSubChannel::render()
 		size_t sub_loop = 0;
 		for (auto i = 0; i < m_num_sub_tracks; ++i)
 		{
-			dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_str").append(std::to_string(i)).append(".wav");
-			dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].render();
+			AudioSubTrack* p = &dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i];
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_str").append(std::to_string(i)).append(".wav");
+			p->render();
 			if (!m_loop)
 			{
-				if (size_t loop = dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].loop())
+				if (size_t loop = p->loop())
 				{
-					m_loop = sub_loop + loop - dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].trimStart();
+					m_loop = sub_loop + loop - p->trimStart();
 				}
 				else
 				{
