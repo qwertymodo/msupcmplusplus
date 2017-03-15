@@ -271,8 +271,16 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	std::string temp1, temp2, temp3;
 	std::string final_output = m_output;
 	m_output = temp1 = getTempFile("wav");
+	sox_rate_t input_rate = m_input_rate;
 
 	finalize();
+
+	if (m_input_rate != 44100.0)
+	{
+		loop = loop * 44100.0 / m_input_rate;
+		end = end * 44100.0 / m_input_rate;
+		length = length * 44100.0 / m_input_rate;
+	}
 
 	// Hacky workaround to keep temp1 for 2 separate passes
 	bool keep_temps = GlobalConfig::keep_temps();
@@ -294,6 +302,8 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	init(temp2, final_output);
 	addInput(temp3);
 	combine_method = sox_mix;
+
+	m_input_rate = input_rate;
 
 	return true;
 }
@@ -420,7 +430,7 @@ bool SoxWrapper::finalize()
 
 	if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
 	{
-		((priv_t*)ofile->ft->priv)->loop_point = m_loop * ofile->ft->signal.rate / files[0]->ft->signal.rate;
+		((priv_t*)ofile->ft->priv)->loop_point = m_loop * ofile->ft->signal.rate / m_input_rate;
 	}
 
 	m_finalized = true;;
