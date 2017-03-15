@@ -33,6 +33,10 @@ bool SoxWrapper::init(std::string in, std::string out)
 	if (!addInput(in))
 		return m_initialized = false;
 
+	files[0]->ft = sox_open_read(files[0]->filename, &files[0]->signal, &files[0]->encoding, files[0]->filetype);
+	m_input_rate = files[0]->ft->signal.rate;
+	sox_close(files[0]->ft);
+
 	m_output = out;
 	combine_method = sox_default;
 
@@ -134,6 +138,12 @@ bool SoxWrapper::fade(size_t in, size_t out, char type)
 	if (std::string("qhtlp").find(type) == std::string::npos)
 		return false;
 
+	if (m_input_rate != 44100.0)
+	{
+		in = in * 44100.0 / m_input_rate;
+		out = out * 44100.0 / m_input_rate;
+	}
+
 	if (in > 0 || out > 0)
 	{
 		args[0] = new char[2] { type, '\0' };
@@ -180,6 +190,12 @@ bool SoxWrapper::pad(size_t start, size_t end)
 
 	if (!m_initialized || m_finalized)
 		return false;
+
+	if (m_input_rate != 44100.0)
+	{
+		start = start * 44100.0 / m_input_rate;
+		end = end * 44100.0 / m_input_rate;
+	}
 
 	if (start > 0 || end > 0)
 	{
@@ -242,6 +258,7 @@ bool SoxWrapper::tempo(double tempo)
 bool SoxWrapper::setLoop(size_t loop)
 {
 	m_loop = loop;
+
 	return true;
 }
 
@@ -368,6 +385,11 @@ bool SoxWrapper::finalize()
 		gettimeofday(&now, NULL);
 		sox_globals.ranqd1 = (int32_t)(now.tv_sec - now.tv_usec);
 	}
+
+	/* Set output file options */
+	ofile->signal.channels = 2;
+	ofile->signal.rate = 44100.0;
+	ofile->encoding.bits_per_sample = 16;
 
 	/* Save things that sox_sequence needs to be reinitialised for each segued
 	* block of input files.*/
@@ -511,22 +533,18 @@ size_t SoxWrapper::length()
 }
 
 
+sox_rate_t SoxWrapper::inputRate()
+{
+	return m_input_rate;
+}
+
+
 bool SoxWrapper::addOutput(std::string name)
 {
 	file_t opts;
 	init_file(&opts);
 
 	add_file(&opts, name.c_str());
-
-	/* Set output file options */
-	size_t pos = name.find_last_of(".");
-	if (pos != std::string::npos &&
-		name.substr(pos).compare(".pcm") == 0)
-	{
-		ofile->signal.channels = 2;
-		ofile->signal.rate = 44100;
-		ofile->encoding.bits_per_sample = 16;
-	}
 
 	return true;
 }

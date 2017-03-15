@@ -24,6 +24,7 @@ namespace msu
 		bool clear();
 
 		size_t length();
+		sox_rate_t inputRate();
 
 	private:
 		bool addOutput(std::string name);
@@ -35,6 +36,7 @@ namespace msu
 		int m_temp_counter;
 		size_t m_loop;
 		size_t m_length;
+		sox_rate_t m_input_rate;
 
 		std::string m_output;
 	};
