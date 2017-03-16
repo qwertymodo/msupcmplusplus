@@ -23,6 +23,7 @@ namespace msu
 		bool finalize();
 		bool clear();
 
+		double tempo();
 		size_t length();
 		sox_rate_t inputRate();
 
@@ -34,6 +35,7 @@ namespace msu
 		bool m_initialized;
 		bool m_finalized;
 		int m_temp_counter;
+		double m_tempo;
 		size_t m_loop;
 		size_t m_length;
 		sox_rate_t m_input_rate;

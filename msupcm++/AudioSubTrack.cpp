@@ -133,7 +133,7 @@ void AudioSubTrack::render()
 			{
 				if (size_t loop = p->loop())
 				{
-					m_loop = ((loop - p->trimStart()) * 44100.0 / sox->inputRate());
+					m_loop = ((loop - p->trimStart()) * 44100.0 / sox->inputRate() / sox->tempo());
 				}
 			}
 		}

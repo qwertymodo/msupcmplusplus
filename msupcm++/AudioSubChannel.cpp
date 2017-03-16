@@ -135,7 +135,7 @@ void AudioSubChannel::render()
 			{
 				if (size_t loop = p->loop())
 				{
-					m_loop = sub_loop + ((loop - p->trimStart()) * 44100.0 / sox->inputRate());
+					m_loop = sub_loop + ((loop - p->trimStart()) * 44100.0 / sox->inputRate() / sox->tempo());
 				}
 				else
 				{

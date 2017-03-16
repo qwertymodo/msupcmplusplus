@@ -55,6 +55,7 @@ bool SoxWrapper::init(std::string in, std::string out)
 	nuser_effects[0] = 0;
 	eff_chain_count = 1;
 
+	m_tempo = 1.0;
 	m_loop = 0;
 	m_length = 0;
 
@@ -241,6 +242,8 @@ bool SoxWrapper::tempo(double tempo)
 
 	if (tempo < 0)
 		return false;
+
+	m_tempo = tempo;
 
 	args[0] = new char[3]{ '-', 'm', '\0' };
 	args[1] = new char[32];
@@ -435,7 +438,7 @@ bool SoxWrapper::finalize()
 
 	if (strncmp(ofile->ft->filetype, "pcm", 3) == 0)
 	{
-		((priv_t*)ofile->ft->priv)->loop_point = m_loop * ofile->ft->signal.rate / m_input_rate;
+		((priv_t*)ofile->ft->priv)->loop_point = m_loop * ofile->ft->signal.rate / m_input_rate / m_tempo;
 	}
 
 	m_finalized = true;;
@@ -539,6 +542,12 @@ bool SoxWrapper::clear()
 	m_initialized = false;
 	m_finalized = false;
 	return true;
+}
+
+
+double SoxWrapper::tempo()
+{
+	return m_tempo;
 }
 
 
