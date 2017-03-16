@@ -127,7 +127,7 @@ void AudioSubTrack::render()
 		for (auto i = 0; i < m_num_sub_channels; ++i)
 		{
 			AudioSubChannel* p = &dynamic_cast<AudioSubChannel*>(m_sub_channels)[i];
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_str").append(std::to_string(i)).append(".wav");
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_sch").append(std::to_string(i)).append(".wav");
 			p->render();
 			if (!m_loop)
 			{
