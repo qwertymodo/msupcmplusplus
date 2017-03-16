@@ -65,7 +65,7 @@
 #define STATIC_LPC10 1
 
 #define HAVE_MAD_H 1
-#define DL_MAD 1
+#define STATIC_MAD 1
 
 #define HAVE_MP3 1
 #define STATIC_MP3 1
