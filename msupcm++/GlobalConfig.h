@@ -15,6 +15,8 @@ namespace msu
 		static bool& dither();
 		static unsigned int& verbosity();
 		static bool& keep_temps();
+		static int& first_track();
+		static int& last_track();
 
 	private:
 		static std::string m_game;
@@ -26,5 +28,7 @@ namespace msu
 		static bool m_dither;
 		static unsigned int m_verbosity;
 		static bool m_keep_temps;
+		static int m_first_track;
+		static int m_last_track;
 	} config;
 }

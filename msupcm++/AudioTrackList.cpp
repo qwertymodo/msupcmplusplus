@@ -1,4 +1,5 @@
 #include "AudioTrackList.h"
+#include "GlobalConfig.h"
 #include <iostream>
 
 using namespace msu;
@@ -38,7 +39,11 @@ void AudioTrackList::render()
 
 	for each (AudioTrack track in m_tracks)
 	{
-		track.render();
+		if ((track.trackNumber() >= config.first_track()) &&
+			(config.last_track() < 0 || track.trackNumber() <= config.last_track()))
+		{
+			track.render();
+		}
 	}
 }
 

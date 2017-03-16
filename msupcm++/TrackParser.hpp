@@ -85,7 +85,9 @@ namespace msu {
 			{ "normalization", config.normalization() },
 			{ "dither", config.dither() },
 			{ "verbosity", config.verbosity() },
-			{ "keep_temps", config.keep_temps() }
+			{ "keep_temps", config.keep_temps() },
+			{ "first_track", config.first_track() },
+			{ "last_track", config.last_track() }
 		};
 
 		for (auto i = a.tracks().begin(); i != a.tracks().end(); ++i)
@@ -233,6 +235,12 @@ namespace msu {
 
 		if (j.find("keep_temps") != j.end())
 			config.keep_temps() = j["keep_temps"].get<bool>();
+
+		if (j.find("first_track") != j.end())
+			config.first_track() = j["first_track"].get<int>();
+
+		if (j.find("last_track") != j.end())
+			config.last_track() = j["last_track"].get<int>();
 
 		if (j.find("tracks") != j.end())
 		{

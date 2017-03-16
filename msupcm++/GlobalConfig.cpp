@@ -11,6 +11,8 @@ double GlobalConfig::m_normalization = 0.0;
 bool GlobalConfig::m_dither = true;
 unsigned int GlobalConfig::m_verbosity = 1;
 bool GlobalConfig::m_keep_temps = false;
+int GlobalConfig::m_first_track = -1;
+int GlobalConfig::m_last_track = -1;
 
 std::string& GlobalConfig::game()
 {
@@ -63,4 +65,17 @@ unsigned int& GlobalConfig::verbosity()
 bool& GlobalConfig::keep_temps()
 {
 	return m_keep_temps;
+}
+
+
+int& GlobalConfig::first_track()
+{
+	return m_first_track;
+}
+
+
+
+int& GlobalConfig::last_track()
+{
+	return m_last_track;
 }
