@@ -604,5 +604,8 @@
       <Filter>Format Sources</Filter>
     </ClCompile>
     <ClCompile Include="..\src\sox.c" />
+    <ClCompile Include="..\src\nongnunormalize.c">
+      <Filter>Effect Sources</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

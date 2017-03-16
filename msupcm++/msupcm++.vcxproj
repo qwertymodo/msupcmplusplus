@@ -163,11 +163,6 @@
     <ClCompile Include="SoxWrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\3rdparty\sox\msvc10\LibSoX.vcxproj">
-      <Project>{f17be535-c7e8-4930-a6fd-32498d73a533}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\3rdparty\json\src\json.hpp" />
     <ClInclude Include="..\3rdparty\sox\src\win32-glob.h" />
     <ClInclude Include="AudioSubChannel.h" />
@@ -180,6 +175,11 @@
     <ClInclude Include="SoxWrapper.h" />
     <ClInclude Include="sox_main.h" />
     <ClInclude Include="TrackParser.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\3rdparty\sox\msvc14\LibSoX.vcxproj">
+      <Project>{f17be535-c7e8-4930-a6fd-32498d73a533}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
