@@ -104,7 +104,7 @@ void AudioTrack::clear()
 
 void AudioTrack::render()
 {
-	if (GlobalConfig::verbosity() > 0 && (!inFile().empty() || m_num_sub_channels > 0 || m_num_sub_tracks > 0))
+	if (config.verbosity() > 0 && (!inFile().empty() || m_num_sub_channels > 0 || m_num_sub_tracks > 0))
 	{
 		std::cout << "Track " << m_track_number;
 

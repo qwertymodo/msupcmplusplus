@@ -14,7 +14,7 @@ SoxWrapper::SoxWrapper() :
 	m_initialized(false), m_finalized(false), m_temp_counter(0), m_loop(0)
 {
 	sox_init();
-	sox_get_globals()->verbosity = GlobalConfig::verbosity();
+	sox_get_globals()->verbosity = config.verbosity();
 }
 
 
@@ -288,15 +288,15 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	}
 
 	// Hacky workaround to keep temp1 for 2 separate passes
-	bool keep_temps = GlobalConfig::keep_temps();
-	GlobalConfig::keep_temps() = true;
+	bool keep_temps = config.keep_temps();
+	config.keep_temps() = true;
 
 	init(temp1, temp2 = getTempFile("wav"));
 	trim(0, end);
 	fade(0, length * ratio);
 	finalize();
 
-	GlobalConfig::keep_temps() = keep_temps;
+	config.keep_temps() = keep_temps;
 
 	init(temp1, temp3 = getTempFile("wav"));
 	trim(loop > length ? loop - length : 0, loop);
@@ -338,7 +338,7 @@ bool SoxWrapper::normalize(double level)
 
 bool SoxWrapper::finalize()
 {
-	if (GlobalConfig::dither())
+	if (config.dither())
 	{
 		char* dither_args[1];
 
@@ -502,7 +502,7 @@ bool SoxWrapper::clear()
 			sox_close(files[i]->ft);
 		}
 
-		if (!GlobalConfig::keep_temps())
+		if (!config.keep_temps())
 		{
 			if (strlen(files[i]->filename) > strlen(TEMP_FILE_PREFIX) &&
 				strncmp(files[i]->filename, TEMP_FILE_PREFIX,

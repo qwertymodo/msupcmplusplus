@@ -17,21 +17,21 @@ AudioTrackList::~AudioTrackList()
 
 void AudioTrackList::render()
 {
-	if (GlobalConfig::verbosity() > 0)
+	if (config.verbosity() > 0)
 	{
 		std::cout << "MSU-1 Audio Conversion Tool" << std::endl;
 
-		if (!GlobalConfig::game().empty())
-			std::cout << "Game: " << GlobalConfig::game() << std::endl;
+		if (!config.game().empty())
+			std::cout << "Game: " << config.game() << std::endl;
 
-		if (!GlobalConfig::pack().empty())
-			std::cout << "Pack: " << GlobalConfig::pack() << std::endl;
+		if (!config.pack().empty())
+			std::cout << "Pack: " << config.pack() << std::endl;
 
-		if (!GlobalConfig::artist().empty())
-			std::cout << "Artist: " << GlobalConfig::artist() << std::endl;
+		if (!config.artist().empty())
+			std::cout << "Artist: " << config.artist() << std::endl;
 
-		if (!GlobalConfig::url().empty())
-			std::cout << GlobalConfig::url() << std::endl;
+		if (!config.url().empty())
+			std::cout << config.url() << std::endl;
 
 		std::cout << std::endl;
 	}

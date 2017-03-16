@@ -155,7 +155,7 @@ void AudioSubTrack::render()
 			sox->finalize();
 		}
 
-		if (!GlobalConfig::keep_temps())
+		if (!config.keep_temps())
 		{
 			for (auto i = 0; i < m_num_sub_channels; ++i)
 			{

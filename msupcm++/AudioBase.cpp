@@ -92,7 +92,7 @@ void AudioBase::render()
 			sox->setLoop(m_loop - m_trim_start);
 			sox->finalize();
 		}
-		else if (GlobalConfig::verbosity() > 0)
+		else if (config.verbosity() > 0)
 		{
 			std::cout << "Error opening input file " << m_infile << std::endl;
 		}

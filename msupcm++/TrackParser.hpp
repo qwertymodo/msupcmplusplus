@@ -195,7 +195,7 @@ namespace msu {
 			a.title() = j["title"].get<std::string>();
 
 		if (a.outFile().empty())
-			a.outFile() = GlobalConfig::output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
+			a.outFile() = config.output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
 	}
 
 

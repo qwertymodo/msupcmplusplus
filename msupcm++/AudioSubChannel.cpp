@@ -163,7 +163,7 @@ void AudioSubChannel::render()
 
 		for (auto i = 0; i < m_num_sub_tracks; ++i)
 		{
-			if (!GlobalConfig::keep_temps())
+			if (!config.keep_temps())
 				remove(dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].outFile().c_str());
 		}
 	}
