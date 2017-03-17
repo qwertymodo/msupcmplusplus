@@ -96,7 +96,7 @@ static int start(sox_effect_t * effect)
         return SOX_EOF;
     }
 
-    bytes_per_sample = (effect->in_encoding->bits_per_sample - 1) / 8 + 1;
+    bytes_per_sample = (effect->in_signal.precision - 1) / 8 + 1;
     p->sampleMax = (1 << (bytes_per_sample * 8 - 1)) - 1;
     p->sampleMin = -p->sampleMax - 1;
 
@@ -191,7 +191,7 @@ static void setup_drain(sox_effect_t * effect)
     double power = 0.0;
     unsigned int channel = 0;
 
-    srcBytesPerSample = (effect->in_encoding->bits_per_sample - 1) / 8 + 1;
+    srcBytesPerSample = (effect->in_signal.precision - 1) / 8 + 1;
     destBytesPerSample = (effect->out_encoding->bits_per_sample - 1) / 8 + 1;
 
     if (p->maxPower < EPSILON)
