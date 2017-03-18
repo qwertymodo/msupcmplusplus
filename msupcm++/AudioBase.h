@@ -68,5 +68,6 @@ namespace msu
 		int m_pad_end;
 		double m_tempo;
 		double m_normalization;
+		char m_dither_type;
 	};
 }

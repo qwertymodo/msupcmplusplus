@@ -167,6 +167,7 @@ void AudioSubChannel::render()
 			sox->tempo(m_tempo);
 			sox->normalize(m_normalization);
 			sox->setLoop(m_trim_start + m_start_offset, m_loop);
+			sox->dither(m_dither_type);
 			sox->finalize();
 		}
 

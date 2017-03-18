@@ -10,7 +10,8 @@ AudioBase::AudioBase() :
 	m_trim_start(0), m_trim_end(0), m_start_offset(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
-	m_tempo(-1.0), m_normalization(0.0)
+	m_tempo(-1.0), m_normalization(0.0),
+	m_dither_type('n')
 {
 
 }
@@ -55,6 +56,7 @@ AudioBase& AudioBase::operator=(const AudioBase& a)
 	m_pad_end = a.m_pad_end;
 	m_tempo = a.m_tempo;
 	m_normalization = a.m_normalization;
+	m_dither_type = a.m_dither_type;
 	return *this;
 }
 
@@ -74,6 +76,7 @@ void AudioBase::clear()
 	m_pad_end = 0;
 	m_tempo = 1.0;
 	m_normalization = 0.0;
+	m_dither_type = 'n';
 }
 
 
@@ -99,6 +102,7 @@ void AudioBase::render()
 			sox->tempo(m_tempo);
 			sox->normalize(m_normalization);
 			sox->setLoop(m_trim_start + m_start_offset, m_loop);
+			sox->dither(m_dither_type);
 			sox->finalize();
 		}
 		else if (config.verbosity() > 0)

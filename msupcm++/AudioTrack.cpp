@@ -114,6 +114,9 @@ void AudioTrack::render()
 		std::cout << std::endl;
 	}
 
+	if (config.dither())
+		m_dither_type = 's';
+
 	assert(m_num_sub_tracks == 0 || m_num_sub_channels == 0);
 	if (m_num_sub_tracks)
 	{

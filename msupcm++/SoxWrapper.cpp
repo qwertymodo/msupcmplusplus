@@ -11,7 +11,10 @@ using namespace msu;
 SoxWrapper* SoxWrapperFactory::m_instance(0);
 
 SoxWrapper::SoxWrapper() :
-	m_initialized(false), m_finalized(false), m_temp_counter(0), m_loop(0)
+	m_initialized(false), m_finalized(false),
+	m_temp_counter(0), m_tempo(0.0),
+	m_loop(0), m_length(0),
+	m_input_rate(0), m_dither_type(' ')
 {
 	sox_init();
 	sox_get_globals()->verbosity = config.verbosity();
@@ -58,6 +61,7 @@ bool SoxWrapper::init(std::string in, std::string out)
 	m_tempo = 1.0;
 	m_loop = 0;
 	m_length = 0;
+	m_dither_type = 'n';
 
 	return m_initialized = true;
 }
@@ -374,16 +378,36 @@ bool SoxWrapper::normalize(double level)
 }
 
 
+bool SoxWrapper::dither(char type)
+{
+	if (!m_initialized || m_finalized)
+		return false;
+
+	if (std::string("Ssanp ").find(type) == std::string::npos)
+		return false;
+
+	m_dither_type = type;
+}
+
+
 bool SoxWrapper::finalize()
 {
-	if (config.dither())
+	if (m_dither_type != 'n')
 	{
 		char* dither_args[1];
 
-		dither_args[0] = new char[3]{ '-','s','\0' };
-		addEffect("dither", 1, (char**)dither_args);
+		if (m_dither_type == ' ')
+		{
+			addEffect("dither", 0, 0);
+		}
+		else
+		{
+			dither_args[0] = new char[3]{ '-',' ','\0' };
+			dither_args[0][1] = m_dither_type;
+			addEffect("dither", 1, (char**)dither_args);
 
-		delete dither_args[0];
+			delete dither_args[0];
+		}
 	}
 
 	addOutput(m_output);
