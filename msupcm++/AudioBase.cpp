@@ -83,7 +83,7 @@ void AudioBase::render()
 	{
 		SoxWrapper* sox = SoxWrapperFactory::getInstance();
 
-		if (m_trim_start > m_loop)
+		if (m_loop && m_trim_start > m_loop)
 		{
 			m_start_offset = m_trim_start - m_loop;
 			m_trim_start = m_loop;
