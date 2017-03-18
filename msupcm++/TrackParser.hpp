@@ -166,6 +166,10 @@ namespace msu {
 			for (auto i = j["sub_tracks"].begin(); i != j["sub_tracks"].end(); ++i)
 			{
 				AudioSubTrack s = *i;
+
+				if (s.inFile().empty())
+					s.inFile() = a.inFile();
+
 				a.addSubTrack(&s);
 			}
 		}
@@ -195,6 +199,10 @@ namespace msu {
 			for (auto i = j["sub_channels"].begin(); i != j["sub_channels"].end(); ++i)
 			{
 				AudioSubChannel s = *i;
+
+				if (s.inFile().empty())
+					s.inFile() = a.inFile();
+
 				a.addSubChannel(&s);
 			}
 		}
