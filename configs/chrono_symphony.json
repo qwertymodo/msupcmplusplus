@@ -110,11 +110,20 @@
       "track_number": 14,
       "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\09 - Robo_s Theme.flac",
       "title": "Robo's Theme",
-      "trim_end": 3561836,
-      "loop": 685086,
-      "#alternate_loop": "Shorter loop without soft section, a bit rough",
-      "#trim_end": 1389307,
-      "#cross_fade": 66950
+      "use_option": 1,
+      "options": [
+        {
+          "option": 1,
+          "trim_end": 3561836,
+          "loop": 685086
+        },
+        {
+          "option": 2,
+          "title": "Robo's Theme (Short Version)",
+          "trim_end": 1389307,
+          "cross_fade": 66950
+        }
+      ]      
     },
     {
       "track_number": 15,
@@ -271,15 +280,22 @@
       "track_number": 42,
       "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\19 - Frog_s Theme.flac",
       "title": "Frog's Theme",
-      "trim_start": 794213,
-      "trim_end": 2205100,
-      "loop": 794213,
-      "cross_fade": 20000,
-      "#alternate_loop": "Includes the intro not played in the original OST",
-      "#trim_start": 0,
-      "#trim_end": 2294471,
-      "#loop": 177633,
-      "#cross_fade": 0
+      "use_option": 1,
+      "options": [
+        {
+          "option": 1,
+          "trim_start": 794213,
+          "trim_end": 2205100,
+          "loop": 794213,
+          "cross_fade": 20000
+        },
+        {
+          "option": 2,
+          "title": "Frog's Theme (With Optional Intro)",
+          "trim_end": 2294471,
+          "loop": 177633
+        }
+      ]
     },
     {
       "track_number": 43,
