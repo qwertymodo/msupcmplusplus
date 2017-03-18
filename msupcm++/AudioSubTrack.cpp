@@ -127,11 +127,13 @@ void AudioSubTrack::render()
 		for (auto i = 0; i < m_num_sub_channels; ++i)
 		{
 			AudioSubChannel* p = &dynamic_cast<AudioSubChannel*>(m_sub_channels)[i];
+			size_t loop = p->loop();
+			p->loop() = p->trimStart();
 			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_sch").append(std::to_string(i)).append(".wav");
 			p->render();
 			if (!m_loop)
 			{
-				if (size_t loop = p->loop())
+				if (loop)
 				{
 					m_loop = ((loop - p->trimStart()) * 44100.0 / sox->inputRate() / sox->tempo());
 				}
@@ -140,6 +142,12 @@ void AudioSubTrack::render()
 
 		if (sox->init(dynamic_cast<AudioSubChannel*>(m_sub_channels)[0].outFile(), m_outfile))
 		{
+			if (m_trim_start > m_loop)
+			{
+				m_start_offset = m_trim_start - m_loop;
+				m_trim_start = m_loop;
+			}
+
 			for (auto i = 1; i < m_num_sub_channels; ++i)
 			{
 				sox->addInput(dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile());
@@ -152,7 +160,7 @@ void AudioSubTrack::render()
 			sox->pad(m_pad_start, m_pad_end);
 			sox->tempo(m_tempo);
 			sox->normalize(m_normalization);
-			sox->setLoop(m_loop - m_trim_start);
+			sox->setLoop(m_trim_start + m_start_offset, m_loop);
 			sox->finalize();
 		}
 

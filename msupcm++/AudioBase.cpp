@@ -7,7 +7,7 @@ using namespace msu;
 
 AudioBase::AudioBase() :
 	m_infile(""), m_outfile(""),
-	m_trim_start(0), m_trim_end(0), m_loop(0),
+	m_trim_start(0), m_trim_end(0), m_start_offset(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
 	m_tempo(-1.0), m_normalization(0.0)
@@ -46,6 +46,7 @@ AudioBase& AudioBase::operator=(const AudioBase& a)
 	m_outfile = a.m_outfile;
 	m_trim_start = a.m_trim_start;
 	m_trim_end = a.m_trim_end;
+	m_start_offset = a.m_start_offset;
 	m_loop = a.m_loop;
 	m_fade_in = a.m_fade_in;
 	m_fade_out = a.m_fade_out;
@@ -64,6 +65,7 @@ void AudioBase::clear()
 	m_outfile.clear();
 	m_trim_start = 0;
 	m_trim_end = 0;
+	m_start_offset = 0;
 	m_loop = 0;
 	m_fade_in = 0;
 	m_fade_out = 0;
@@ -81,6 +83,12 @@ void AudioBase::render()
 	{
 		SoxWrapper* sox = SoxWrapperFactory::getInstance();
 
+		if (m_trim_start > m_loop)
+		{
+			m_start_offset = m_trim_start - m_loop;
+			m_trim_start = m_loop;
+		}
+
 		if(sox->init(m_infile, m_outfile))
 		{
 			if (sox->crossFade(m_loop, m_trim_end, m_cross_fade))
@@ -90,7 +98,7 @@ void AudioBase::render()
 			sox->pad(m_pad_start, m_pad_end);
 			sox->tempo(m_tempo);
 			sox->normalize(m_normalization);
-			sox->setLoop(m_loop - m_trim_start);
+			sox->setLoop(m_trim_start + m_start_offset, m_loop);
 			sox->finalize();
 		}
 		else if (config.verbosity() > 0)

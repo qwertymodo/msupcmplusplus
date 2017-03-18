@@ -60,6 +60,7 @@ namespace msu
 		int m_loop;
 		int m_trim_start;
 		int m_trim_end;
+		int m_start_offset;
 		int m_fade_in;
 		int m_fade_out;
 		int m_cross_fade;

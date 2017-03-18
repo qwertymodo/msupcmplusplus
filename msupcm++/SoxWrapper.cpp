@@ -258,9 +258,44 @@ bool SoxWrapper::tempo(double tempo)
 }
 
 
-bool SoxWrapper::setLoop(size_t loop)
+bool SoxWrapper::setLoop(size_t start, size_t loop)
 {
-	m_loop = loop;
+	if (loop == 0)
+		return false;
+
+	std::string temp1, temp2, temp3;
+	std::string final_output = m_output;
+
+	if (start > loop)
+	{
+		m_output = temp1 = getTempFile("wav");
+
+		finalize();
+
+		// Hacky workaround to keep temp1 for 2 separate passes
+		bool keep_temps = config.keep_temps();
+		config.keep_temps() = true;
+
+		init(temp1, temp2 = getTempFile("wav"));
+		trim(0, (start - loop) * 44100.0 / m_input_rate);
+		finalize();
+
+		config.keep_temps() = keep_temps;
+
+		init(temp1, temp3 = getTempFile("wav"));
+		trim((start - loop) * 44100.0 / m_input_rate);
+		finalize();
+
+		init(temp3, final_output);
+		addInput(temp2);
+		combine_method = sox_concatenate;
+
+		m_loop = 0;
+	}
+	else
+	{
+		m_loop = loop - start;
+	}
 
 	return true;
 }
