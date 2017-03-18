@@ -145,6 +145,24 @@ namespace msu {
 	}
 
 
+	class Option {
+	public:
+		Option() {}
+		const int& option() const { return m_option; }
+		int& option() { return m_option; }
+
+	private:
+		int m_option;
+	};
+
+
+	void from_json(const json& j, Option& o)
+	{
+		if (j.find("option") != j.end())
+			o.option() = j["option"].get<int>();
+	}
+
+
 	void from_json(const json& j, AudioSubChannel& a)
 	{
 		from_json(j, (AudioBase&)(a));
@@ -155,6 +173,20 @@ namespace msu {
 			{
 				AudioSubTrack s = *i;
 				a.addSubTrack(&s);
+			}
+		}
+
+		if (j.find("use_option") != j.end() && j.find("options") != j.end())
+		{
+			int opt = j["use_option"].get<int>();
+
+			for (auto i = j["options"].begin(); i != j["options"].end(); ++i)
+			{
+				if (Option(*i).option() == opt)
+				{
+					from_json(*i, a);
+					break;
+				}
 			}
 		}
 	}
@@ -170,6 +202,20 @@ namespace msu {
 			{
 				AudioSubChannel s = *i;
 				a.addSubChannel(&s);
+			}
+		}
+
+		if (j.find("use_option") != j.end() && j.find("options") != j.end())
+		{
+			int opt = j["use_option"].get<int>();
+
+			for (auto i = j["options"].begin(); i != j["options"].end(); ++i)
+			{
+				if (Option(*i).option() == opt)
+				{
+					from_json(*i, a);
+					break;
+				}
 			}
 		}
 	}
@@ -198,6 +244,20 @@ namespace msu {
 
 		if (a.outFile().empty())
 			a.outFile() = config.output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
+
+		if (j.find("use_option") != j.end() && j.find("options") != j.end())
+		{
+			int opt = j["use_option"].get<int>();
+
+			for (auto i = j["options"].begin(); i != j["options"].end(); ++i)
+			{
+				if (Option(*i).option() == opt)
+				{
+					from_json(*i, a);
+					break;
+				}
+			}
+		}
 	}
 
 
