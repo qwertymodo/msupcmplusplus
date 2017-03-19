@@ -157,9 +157,9 @@ void AudioSubTrack::render()
 				m_trim_end = 0;
 			sox->trim(m_trim_start, m_trim_end);
 			sox->fade(m_fade_in, m_fade_out);
+			sox->normalize(m_normalization);
 			sox->pad(m_pad_start, m_pad_end);
 			sox->tempo(m_tempo);
-			sox->normalize(m_normalization);
 			sox->setLoop(m_trim_start + m_start_offset, m_loop);
 			sox->dither(m_dither_type);
 			sox->finalize();
