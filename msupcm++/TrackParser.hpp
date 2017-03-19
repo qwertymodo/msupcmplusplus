@@ -247,7 +247,7 @@ namespace msu {
 		if (a.outFile().empty())
 			a.outFile() = config.output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
 
-		if (a.normalization() = 0.0)
+		if (a.normalization() == 0.0)
 			a.normalization() = config.normalization();
 
 		if (j.find("use_option") != j.end() && j.find("options") != j.end())
