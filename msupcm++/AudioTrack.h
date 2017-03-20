@@ -16,8 +16,8 @@ namespace msu
 	{
 	public:
 		AudioTrack();
-		AudioTrack(const char *in);
-		AudioTrack(const char *in, const char *out);
+		AudioTrack(std::wstring in);
+		AudioTrack(std::wstring in, std::wstring out);
 		AudioTrack(const AudioTrack& a);
 		~AudioTrack();
 
@@ -33,11 +33,11 @@ namespace msu
 		int trackNumber() const;
 		int& trackNumber();
 
-		const std::string& title() const;
-		std::string& title();
+		const std::wstring& title() const;
+		std::wstring& title();
 
 	protected:
 		int m_track_number;
-		std::string m_title;
+		std::wstring m_title;
 	};
 }

@@ -6,6 +6,7 @@ extern "C" {
 
 #include "sox.h"
 #include "util.h"
+#include "unicode_support.h"
 #include <sys/timeb.h>
 #include <sys/types.h>
 #include <time.h>

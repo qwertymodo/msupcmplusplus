@@ -7,7 +7,7 @@ namespace msu
 	class AudioTrackListBuilder
 	{
 	public:
-		AudioTrackListBuilder(std::string config = "tracks.json");
+		AudioTrackListBuilder(std::wstring config = L"tracks.json");
 
 		const AudioTrackList& get() const;
 		AudioTrackList& get();

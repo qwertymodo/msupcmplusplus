@@ -13,14 +13,14 @@ AudioTrack::AudioTrack(): AudioBase()
 }
 
 
-AudioTrack::AudioTrack(const char *in): AudioBase(in)
+AudioTrack::AudioTrack(std::wstring in): AudioBase(in)
 {
 	m_track_number = 0;
 	m_title.clear();
 }
 
 
-AudioTrack::AudioTrack(const char *in, const char *out): AudioBase(in, out)
+AudioTrack::AudioTrack(std::wstring in, std::wstring out): AudioBase(in, out)
 {
 	m_track_number = 0;
 	m_title.clear();
@@ -106,12 +106,12 @@ void AudioTrack::render()
 {
 	if (config.verbosity() > 0 && (!inFile().empty() || m_num_sub_channels > 0 || m_num_sub_tracks > 0))
 	{
-		std::cout << "Track " << m_track_number;
+		std::wcout << L"Track " << m_track_number;
 
 		if (!m_title.empty())
-			std::cout << ": " << m_title;
+			std::wcout << L": " << m_title;
 
-		std::cout << std::endl;
+		std::wcout << std::endl;
 	}
 
 	if (config.dither())
@@ -145,13 +145,13 @@ int& AudioTrack::trackNumber()
 }
 
 
-const std::string& AudioTrack::title() const
+const std::wstring& AudioTrack::title() const
 {
 	return m_title;
 }
 
 
-std::string& AudioTrack::title()
+std::wstring& AudioTrack::title()
 {
 	return m_title;
 }

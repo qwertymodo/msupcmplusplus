@@ -13,14 +13,14 @@ AudioSubChannel::AudioSubChannel() :
 }
 
 
-AudioSubChannel::AudioSubChannel(const char *in) : AudioBase(in)
+AudioSubChannel::AudioSubChannel(std::wstring in) : AudioBase(in)
 {
 	m_sub_tracks = 0;
 	m_num_sub_tracks = 0;
 }
 
 
-AudioSubChannel::AudioSubChannel(const char *in, const char *out) : AudioBase(in, out)
+AudioSubChannel::AudioSubChannel(std::wstring in, std::wstring out) : AudioBase(in, out)
 {
 	m_sub_tracks = 0;
 	m_num_sub_tracks = 0;
@@ -133,7 +133,7 @@ void AudioSubChannel::render()
 			if (p->trimStart() > p->loop())
 				p->loop() = p->trimStart();
 
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(".")).append("_str").append(std::to_string(i)).append(".wav");
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(L".")).append(L"_str").append(std::to_wstring(i)).append(L".wav");
 			p->render();
 			if (!m_loop)
 			{
@@ -176,7 +176,7 @@ void AudioSubChannel::render()
 		for (auto i = 0; i < m_num_sub_tracks; ++i)
 		{
 			if (!config.keep_temps())
-				remove(dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].outFile().c_str());
+				_wremove(dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i].outFile().c_str());
 		}
 	}
 	else

@@ -2,11 +2,11 @@
 
 using namespace msu;
 
-std::string GlobalConfig::m_game = "";
-std::string GlobalConfig::m_pack = "";
-std::string GlobalConfig::m_artist = "";
-std::string GlobalConfig::m_url = "";
-std::string GlobalConfig::m_output_prefix = "";
+std::wstring GlobalConfig::m_game = L"";
+std::wstring GlobalConfig::m_pack = L"";
+std::wstring GlobalConfig::m_artist = L"";
+std::wstring GlobalConfig::m_url = L"";
+std::wstring GlobalConfig::m_output_prefix = L"";
 double GlobalConfig::m_normalization = 0.0;
 bool GlobalConfig::m_dither = true;
 unsigned int GlobalConfig::m_verbosity = 1;
@@ -14,31 +14,31 @@ bool GlobalConfig::m_keep_temps = false;
 int GlobalConfig::m_first_track = -1;
 int GlobalConfig::m_last_track = -1;
 
-std::string& GlobalConfig::game()
+std::wstring& GlobalConfig::game()
 {
 	return m_game;
 }
 
 
-std::string& GlobalConfig::pack()
+std::wstring& GlobalConfig::pack()
 {
 	return m_pack;
 }
 
 
-std::string& GlobalConfig::artist()
+std::wstring& GlobalConfig::artist()
 {
 	return m_artist;
 }
 
 
-std::string& GlobalConfig::url()
+std::wstring& GlobalConfig::url()
 {
 	return m_url;
 }
 
 
-std::string& GlobalConfig::output_prefix()
+std::wstring& GlobalConfig::output_prefix()
 {
 	return m_output_prefix;
 }

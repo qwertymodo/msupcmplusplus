@@ -14,8 +14,8 @@ namespace msu
 	{
 	public:
 		AudioSubChannel();
-		AudioSubChannel(const char *in);
-		AudioSubChannel(const char *in, const char *out);
+		AudioSubChannel(std::wstring in);
+		AudioSubChannel(std::wstring in, std::wstring out);
 		AudioSubChannel(const AudioSubChannel& a);
 		~AudioSubChannel();
 

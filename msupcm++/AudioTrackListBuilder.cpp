@@ -7,7 +7,7 @@
 
 using namespace msu;
 
-AudioTrackListBuilder::AudioTrackListBuilder(std::string config)
+AudioTrackListBuilder::AudioTrackListBuilder(std::wstring config)
 {
 	std::ifstream ifs(config);
 	if (ifs.is_open())
@@ -19,7 +19,7 @@ AudioTrackListBuilder::AudioTrackListBuilder(std::string config)
 		}
 		catch (const std::exception& e)
 		{
-			std::cout << e.what() << std::endl;
+			std::wcout << e.what() << std::endl;
 			exit(1);
 		}
 

@@ -7,8 +7,8 @@ namespace msu
 	{
 	public:
 		AudioBase();
-		AudioBase(const char *in);
-		AudioBase(const char *in, const char *out);
+		AudioBase(std::wstring in);
+		AudioBase(std::wstring in, std::wstring out);
 		AudioBase(const AudioBase& a);
 		~AudioBase();
 
@@ -18,11 +18,11 @@ namespace msu
 
 		virtual void render();
 
-		const std::string& inFile() const;
-		std::string& inFile();
+		const std::wstring& inFile() const;
+		std::wstring& inFile();
 
-		const std::string& outFile() const;
-		std::string& outFile();
+		const std::wstring& outFile() const;
+		std::wstring& outFile();
 
 		int loop() const;
 		int& loop();
@@ -55,8 +55,8 @@ namespace msu
 		double& normalization();
 
 	protected:
-		std::string m_infile;
-		std::string m_outfile;
+		std::wstring m_infile;
+		std::wstring m_outfile;
 		int m_loop;
 		int m_trim_start;
 		int m_trim_end;

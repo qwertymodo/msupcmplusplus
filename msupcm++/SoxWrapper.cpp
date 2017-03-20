@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#define TEMP_FILE_PREFIX "__sox_wrapper_temp__"
+#define TEMP_FILE_PREFIX L"__sox_wrapper_temp__"
 
 using namespace msu;
 
@@ -28,7 +28,7 @@ SoxWrapper::~SoxWrapper()
 		cleanup();
 }
 
-bool SoxWrapper::init(std::string in, std::string out)
+bool SoxWrapper::init(std::wstring in, std::wstring out)
 {
 	if (!clear())
 		return m_initialized = false;
@@ -67,17 +67,17 @@ bool SoxWrapper::init(std::string in, std::string out)
 }
 
 
-bool SoxWrapper::addInput(std::string name)
+bool SoxWrapper::addInput(std::wstring name)
 {
 	file_t opts;
 
 	// Check if file exists
-	struct stat file;
-	if (!stat(name.c_str(), &file) == 0)
+	struct _stat file;
+	if (!lsx_stat(wchar_to_utf8.to_bytes(name).c_str(), &file) == 0)
 		return false;
 
 	init_file(&opts);
-	add_file(&opts, name.c_str());
+	add_file(&opts, wchar_to_utf8.to_bytes(name).c_str());
 	++input_count;
 	return true;
 }
@@ -267,12 +267,12 @@ bool SoxWrapper::setLoop(size_t start, size_t loop)
 	if (loop == 0)
 		return false;
 
-	std::string temp1, temp2, temp3;
-	std::string final_output = m_output;
+	std::wstring temp1, temp2, temp3;
+	std::wstring final_output = m_output;
 
 	if (start > loop)
 	{
-		m_output = temp1 = getTempFile("wav");
+		m_output = temp1 = getTempFile(L"wav");
 
 		finalize();
 
@@ -280,13 +280,13 @@ bool SoxWrapper::setLoop(size_t start, size_t loop)
 		bool keep_temps = config.keep_temps();
 		config.keep_temps() = true;
 
-		init(temp1, temp2 = getTempFile("wav"));
+		init(temp1, temp2 = getTempFile(L"wav"));
 		trim(0, (start - loop) * 44100.0 / m_input_rate);
 		finalize();
 
 		config.keep_temps() = keep_temps;
 
-		init(temp1, temp3 = getTempFile("wav"));
+		init(temp1, temp3 = getTempFile(L"wav"));
 		trim((start - loop) * 44100.0 / m_input_rate);
 		finalize();
 
@@ -310,9 +310,9 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	if (length <= 0)
 		return false;
 
-	std::string temp1, temp2, temp3;
-	std::string final_output = m_output;
-	m_output = temp1 = getTempFile("wav");
+	std::wstring temp1, temp2, temp3;
+	std::wstring final_output = m_output;
+	m_output = temp1 = getTempFile(L"wav");
 	sox_rate_t input_rate = m_input_rate;
 
 	finalize();
@@ -333,14 +333,14 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	bool keep_temps = config.keep_temps();
 	config.keep_temps() = true;
 
-	init(temp1, temp2 = getTempFile("wav"));
+	init(temp1, temp2 = getTempFile(L"wav"));
 	trim(0, end);
 	fade(0, length * ratio);
 	finalize();
 
 	config.keep_temps() = keep_temps;
 
-	init(temp1, temp3 = getTempFile("wav"));
+	init(temp1, temp3 = getTempFile(L"wav"));
 	trim(loop > length ? loop - length : 0, loop);
 	fade(loop > length ? length : loop);
 	pad(loop > length ? end - length : end - loop);
@@ -566,9 +566,9 @@ bool SoxWrapper::clear()
 
 		if (!config.keep_temps())
 		{
-			if (strlen(files[i]->filename) > strlen(TEMP_FILE_PREFIX) &&
-				strncmp(files[i]->filename, TEMP_FILE_PREFIX,
-				strlen(TEMP_FILE_PREFIX)) == 0)
+			if (strlen(files[i]->filename) > wcslen(TEMP_FILE_PREFIX) &&
+				strncmp(files[i]->filename, wchar_to_utf8.to_bytes(TEMP_FILE_PREFIX).c_str(),
+				wcslen(TEMP_FILE_PREFIX)) == 0)
 				remove(files[i]->filename);
 		}
 
@@ -622,12 +622,12 @@ sox_rate_t SoxWrapper::inputRate()
 }
 
 
-bool SoxWrapper::addOutput(std::string name)
+bool SoxWrapper::addOutput(std::wstring name)
 {
 	file_t opts;
 	init_file(&opts);
 
-	add_file(&opts, name.c_str());
+	add_file(&opts, wchar_to_utf8.to_bytes(name).c_str());
 
 	return true;
 }
@@ -676,7 +676,7 @@ bool SoxWrapper::addEffect(std::string name, int argc, char** argv)
 }
 
 
-std::string SoxWrapper::getTempFile(std::string ext)
+std::wstring SoxWrapper::getTempFile(std::wstring ext)
 {
-	return std::string(TEMP_FILE_PREFIX).append(std::to_string(m_temp_counter++)).append(".").append(ext);
+	return std::wstring(TEMP_FILE_PREFIX).append(std::to_wstring(m_temp_counter++)).append(L".").append(ext);
 }

@@ -6,11 +6,11 @@ namespace msu
 	static class GlobalConfig
 	{
 	public:
-		static std::string& game();
-		static std::string& pack();
-		static std::string& artist();
-		static std::string& url();
-		static std::string& output_prefix();
+		static std::wstring& game();
+		static std::wstring& pack();
+		static std::wstring& artist();
+		static std::wstring& url();
+		static std::wstring& output_prefix();
 		static double& normalization();
 		static bool& dither();
 		static unsigned int& verbosity();
@@ -19,11 +19,11 @@ namespace msu
 		static int& last_track();
 
 	private:
-		static std::string m_game;
-		static std::string m_pack;
-		static std::string m_artist;
-		static std::string m_url;
-		static std::string m_output_prefix;
+		static std::wstring m_game;
+		static std::wstring m_pack;
+		static std::wstring m_artist;
+		static std::wstring m_url;
+		static std::wstring m_output_prefix;
 		static double m_normalization;
 		static bool m_dither;
 		static unsigned int m_verbosity;

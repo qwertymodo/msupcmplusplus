@@ -6,7 +6,7 @@
 using namespace msu;
 
 AudioBase::AudioBase() :
-	m_infile(""), m_outfile(""),
+	m_infile(L""), m_outfile(L""),
 	m_trim_start(0), m_trim_end(0), m_start_offset(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
@@ -17,13 +17,13 @@ AudioBase::AudioBase() :
 }
 
 
-AudioBase::AudioBase(const char *in): AudioBase()
+AudioBase::AudioBase(std::wstring in): AudioBase()
 {
 	m_infile = in;
 }
 
 
-AudioBase::AudioBase(const char *in, const char *out) : AudioBase()
+AudioBase::AudioBase(std::wstring in, std::wstring out) : AudioBase()
 {
 	m_infile = in;
 	m_outfile = out;
@@ -107,31 +107,31 @@ void AudioBase::render()
 		}
 		else if (config.verbosity() > 0)
 		{
-			std::cout << "Error opening input file " << m_infile << std::endl;
+			std::wcout << L"Error opening input file " << m_infile << std::endl;
 		}
 	}
 }
 
 
-const std::string& AudioBase::inFile() const
+const std::wstring& AudioBase::inFile() const
 {
 	return m_infile;
 }
 
 
-std::string& AudioBase::inFile()
+std::wstring& AudioBase::inFile()
 {
 	return m_infile;
 }
 
 
-const std::string& AudioBase::outFile() const
+const std::wstring& AudioBase::outFile() const
 {
 	return m_outfile;
 }
 
 
-std::string& AudioBase::outFile()
+std::wstring& AudioBase::outFile()
 {
 	return m_outfile;
 }

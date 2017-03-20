@@ -1,5 +1,6 @@
 #pragma once
 #include "sox_main.h"
+#include <codecvt>
 #include <string>
 
 namespace msu
@@ -10,8 +11,8 @@ namespace msu
 		SoxWrapper();
 		~SoxWrapper();
 
-		bool init(std::string in, std::string out);
-		bool addInput(std::string name);
+		bool init(std::wstring in, std::wstring out);
+		bool addInput(std::wstring name);
 		bool setCombine(sox_combine_method method);
 		bool trim(size_t start, size_t end = 0);
 		bool fade(size_t in, size_t out = 0, char type = 't');
@@ -29,9 +30,9 @@ namespace msu
 		sox_rate_t inputRate();
 
 	private:
-		bool addOutput(std::string name);
+		bool addOutput(std::wstring name);
 		bool addEffect(std::string name, int argc, char** argv);
-		std::string getTempFile(std::string ext);
+		std::wstring getTempFile(std::wstring ext);
 
 		bool m_initialized;
 		bool m_finalized;
@@ -42,7 +43,8 @@ namespace msu
 		sox_rate_t m_input_rate;
 		char m_dither_type;
 
-		std::string m_output;
+		std::wstring m_output;
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> wchar_to_utf8;
 	};
 
 	class SoxWrapperFactory

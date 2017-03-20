@@ -14,8 +14,8 @@ namespace msu
 	{
 	public:
 		AudioSubTrack();
-		AudioSubTrack(const char *in);
-		AudioSubTrack(const char *in, const char *out);
+		AudioSubTrack(std::wstring in);
+		AudioSubTrack(std::wstring in, std::wstring out);
 		AudioSubTrack(const AudioSubTrack& a);
 		~AudioSubTrack();
 

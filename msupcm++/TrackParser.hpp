@@ -2,11 +2,16 @@
 #include "json.hpp"
 #include "AudioTrackList.h"
 #include "GlobalConfig.h"
+#include <codecvt>
+#include <string>
 #include <vector>
 
 using nlohmann::json;
 
 namespace msu {
+
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> wchar_to_utf8;
+
 	void to_json(json& j, const AudioBase& a)
 	{
 		j = json{
@@ -102,10 +107,10 @@ namespace msu {
 	void from_json(const json& j, AudioBase& a)
 	{
 		if (j.find("file") != j.end())
-			a.inFile() = j["file"].get<std::string>();
+			a.inFile() = wchar_to_utf8.from_bytes(j["file"].get<std::string>());
 
 		if (j.find("output") != j.end())
-			a.outFile() = j["output"].get<std::string>();
+			a.outFile() = wchar_to_utf8.from_bytes(j["output"].get<std::string>());
 
 		if (j.find("trim_start") != j.end())
 			a.trimStart() = j["trim_start"].get<int>();
@@ -242,10 +247,10 @@ namespace msu {
 			a.trackNumber() = j["track_number"].get<int>();
 
 		if (j.find("title") != j.end())
-			a.title() = j["title"].get<std::string>();
+			a.title() = wchar_to_utf8.from_bytes(j["title"].get<std::string>());
 
 		if (a.outFile().empty())
-			a.outFile() = config.output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
+			a.outFile() = config.output_prefix() + L"-" + std::to_wstring(a.trackNumber()) + L".pcm";
 
 		if (a.normalization() == 0.0)
 			a.normalization() = config.normalization();
@@ -269,24 +274,24 @@ namespace msu {
 	void from_json(const json& j, AudioTrackList& a)
 	{
 		if (j.find("game") != j.end())
-			config.game() = j["game"].get<std::string>();
+			config.game() = wchar_to_utf8.from_bytes(j["game"].get<std::string>());
 
 		if (j.find("pack") != j.end())
-			config.pack() = j["pack"].get<std::string>();
+			config.pack() = wchar_to_utf8.from_bytes(j["pack"].get<std::string>());
 
 		if (j.find("artist") != j.end())
-			config.artist() = j["artist"].get<std::string>();
+			config.artist() = wchar_to_utf8.from_bytes(j["artist"].get<std::string>());
 
 		if (j.find("url") != j.end())
-			config.url() = j["url"].get<std::string>();
+			config.url() = wchar_to_utf8.from_bytes(j["url"].get<std::string>());
 
 		if (j.find("output_prefix") != j.end())
 		{
-			config.output_prefix() = j["output_prefix"].get<std::string>();
+			config.output_prefix() = wchar_to_utf8.from_bytes(j["output_prefix"].get<std::string>());
 		}
 		else
 		{
-			config.output_prefix() = "track";
+			config.output_prefix() = L"track";
 		}
 
 		if (j.find("normalization") != j.end())

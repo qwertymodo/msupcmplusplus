@@ -33,6 +33,7 @@
 
 #include <windows.h>
 #include <io.h>
+#include <fcntl.h>
 
 static UINT g_old_output_cp = ((UINT)-1);
 
@@ -85,7 +86,6 @@ void lsx_init_commandline_arguments(int *argc, char ***argv)
 {
 	int i, nArgs;
 	LPWSTR *szArglist;
-	size_t sz;
 
 	szArglist = CommandLineToArgvW(GetCommandLineW(), &nArgs);
 
@@ -95,12 +95,8 @@ void lsx_init_commandline_arguments(int *argc, char ***argv)
 		exit(-1);
 	}
 
-	*argc = nArgs - 1;
-	*argv = (char**) malloc(sizeof(char*) * (*argc));
-	
-	szArglist[1] = malloc(sizeof(wchar_t) * 4);
-
-	mbstowcs_s(&sz, szArglist[1], 4, "sox", 3);
+	*argv = (char**) malloc(sizeof(char*) * nArgs);
+	*argc = nArgs;
 
 	if(NULL == *argv)
 	{
@@ -108,9 +104,9 @@ void lsx_init_commandline_arguments(int *argc, char ***argv)
 		exit(-1);
 	}
 	
-	for(i = 0; i < (*argc); i++)
+	for(i = 0; i < nArgs; i++)
 	{
-		(*argv)[i] = utf16_to_utf8(szArglist[i + 1]);
+		(*argv)[i] = utf16_to_utf8(szArglist[i]);
 		if(NULL == (*argv)[i])
 		{
 			fprintf(stderr, "\nFATAL: utf16_to_utf8 failed\n\n");
@@ -191,6 +187,7 @@ void lsx_init_console(void)
 {
 	g_old_output_cp = GetConsoleOutputCP();
 	SetConsoleOutputCP(CP_UTF8);
+	_setmode(_fileno(stdout), _O_U16TEXT);
 }
 
 void lsx_uninit_console(void)
