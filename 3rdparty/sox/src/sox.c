@@ -24,6 +24,7 @@
 #include "soxconfig.h"
 #include "sox.h"
 #include "util.h"
+#include "unicode_support.h"
 
 #include <ctype.h>
 #include <errno.h>
@@ -238,10 +239,10 @@ static void cleanup(void)
   if (file_count) {
     if (ofile->ft) {
       if (!success && ofile->ft->io_type == lsx_io_file) {   /* If we failed part way through */
-        struct stat st;                  /* writing a normal file, remove it. */
-        if (!stat(ofile->ft->filename, &st) &&
+        struct _stat st;                  /* writing a normal file, remove it. */
+        if (!lsx_stat(ofile->ft->filename, &st) &&
             (st.st_mode & S_IFMT) == S_IFREG)
-          unlink(ofile->ft->filename);
+          lsx_unlink(ofile->ft->filename);
       }
       sox_close(ofile->ft); /* Assume we can unlink a file before closing it. */
     }
@@ -905,7 +906,7 @@ static char * * strtoargv(char * s, int * argc)
 
 static void read_user_effects(char const *filename)
 {
-    FILE *file = fopen(filename, "r");
+    FILE *file = lsx_fopen(filename, "r");
     const size_t buffer_size_step = 1024;
     size_t buffer_size = buffer_size_step;
     char *s = lsx_malloc(buffer_size); /* buffer for one input line */
@@ -2136,7 +2137,7 @@ static void read_comment_file(sox_comments_t * comments, char const * const file
   int c;
   size_t text_length = 100;
   char * text = lsx_malloc(text_length + 1);
-  FILE * file = fopen(filename, "r");
+  FILE * file = lsx_fopen(filename, "r");
 
   if (file == NULL) {
     lsx_fail("Cannot open comment file `%s'", filename);

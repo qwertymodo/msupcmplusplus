@@ -133,6 +133,9 @@
     <ClInclude Include="..\src\sox_main.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\unicode_support.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\alsa.c">
@@ -606,6 +609,9 @@
     <ClCompile Include="..\src\sox.c" />
     <ClCompile Include="..\src\nongnunormalize.c">
       <Filter>Effect Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\unicode_support.c">
+      <Filter>Shared Sources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

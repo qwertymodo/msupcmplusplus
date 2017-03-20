@@ -19,6 +19,7 @@
  */
 
 #include "sox_i.h"
+#include "unicode_support.h"
 
 #include <assert.h>
 #include <ctype.h>
@@ -401,7 +402,7 @@ static FILE * xfopen(char const * identifier, char const * mode, lsx_io_type * i
 #endif
     return f;
   }
-  return fopen(identifier, mode);
+  return lsx_fopen(identifier, mode);
 }
 
 /* Hack to rewind pipes (a small amount).
@@ -853,8 +854,8 @@ static sox_format_t * open_write(
       ft->fp = stdout;
     }
     else {
-      struct stat st;
-      if (!stat(path, &st) && (st.st_mode & S_IFMT) == S_IFREG &&
+      struct _stat st;
+      if (!lsx_stat(path, &st) && (st.st_mode & S_IFMT) == S_IFREG &&
           (overwrite_permitted && !overwrite_permitted(path))) {
         lsx_fail("permission to overwrite `%s' denied", path);
         goto error;
@@ -864,7 +865,7 @@ static sox_format_t * open_write(
         buffer? fmemopen(buffer, buffer_size, "w+b") :
         buffer_ptr? open_memstream(buffer_ptr, buffer_size_ptr) :
 #endif
-        fopen(path, "w+b");
+        lsx_fopen(path, "w+b");
       if (ft->fp == NULL) {
         lsx_fail("can't open output file `%s': %s", path, strerror(errno));
         goto error;

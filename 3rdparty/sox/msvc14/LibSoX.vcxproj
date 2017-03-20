@@ -128,6 +128,7 @@
     <ClInclude Include="..\src\sox_main.h" />
     <ClInclude Include="..\src\sox_sample_test.h" />
     <ClInclude Include="..\src\soxomp.h" />
+    <ClInclude Include="..\src\unicode_support.h" />
     <ClInclude Include="..\src\util.h" />
     <ClInclude Include="..\src\vox.h" />
     <ClInclude Include="..\src\win32-ltdl.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="..\src\tempo.c" />
     <ClCompile Include="..\src\tremolo.c" />
     <ClCompile Include="..\src\trim.c" />
+    <ClCompile Include="..\src\unicode_support.c" />
     <ClCompile Include="..\src\upsample.c" />
     <ClCompile Include="..\src\vad.c" />
     <ClCompile Include="..\src\vol.c" />

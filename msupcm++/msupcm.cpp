@@ -1,6 +1,7 @@
 #include <iostream>
 #include "AudioTrackListBuilder.h"
 #include "sox_main.h"
+#include "unicode_support.h"
 
 #define VERSION_NUMBER 0.31
 
@@ -54,9 +55,19 @@ int main(int argc, char * argv[])
 	default:
 		if (std::string(argv[1]).compare("-s") == 0)
 		{
-			argv[1] = new char[4]{ 's','o','x','\0' };
+			int sox_argc;
+			char** sox_argv;
+			int exit_code;
 
-			exit(soxmain(--argc, ++argv));
+			lsx_init_console();
+			lsx_init_commandline_arguments(&sox_argc, &sox_argv);
+
+			exit_code = soxmain(sox_argc, sox_argv);
+
+			lsx_uninit_console();
+			lsx_free_commandline_arguments(&sox_argc, &sox_argv);
+
+			return exit_code;
 		}
 
 		usage();

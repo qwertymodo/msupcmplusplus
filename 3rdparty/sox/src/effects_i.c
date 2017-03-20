@@ -20,6 +20,7 @@
 
 #define LSX_EFF_ALIAS
 #include "sox_i.h"
+#include "unicode_support.h"
 #include <string.h>
 #include <ctype.h>
 

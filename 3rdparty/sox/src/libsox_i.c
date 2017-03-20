@@ -20,6 +20,7 @@
 
 
 #include "sox_i.h"
+#include "unicode_support.h"
 
 #ifdef HAVE_IO_H
   #include <io.h>
@@ -48,8 +49,8 @@
 #ifdef WIN32
 static int check_dir(char * buf, size_t buflen, char const * name)
 {
-  struct stat st;
-  if (!name || stat(name, &st) || (st.st_mode & S_IFMT) != S_IFDIR)
+  struct _stat st;
+  if (!name || lsx_stat(name, &st) || (st.st_mode & S_IFMT) != S_IFDIR)
   {
     return 0;
   }
@@ -102,7 +103,7 @@ FILE * lsx_tmpfile(void)
     fildes = mkstemp(name);
 #ifdef HAVE_UNISTD_H
     lsx_debug(FAKE_MKSTEMP "mkstemp, name=%s (unlinked)", name);
-    unlink(name);
+    lsx_unlink(name);
 #else
     lsx_debug(FAKE_MKSTEMP "mkstemp, name=%s (O_TEMPORARY)", name);
 #endif
