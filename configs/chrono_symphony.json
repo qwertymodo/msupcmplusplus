@@ -1,542 +1,542 @@
 {
-  "game": "Chrono Trigger",
-  "pack": "Chrono Trigger Symphony",
-  "artist": "The Blake Robinson Synthetic Orchestra",
-  "url": "http:\/\/www.thechronosymphony.com/",
-  "normalization": -18,
-  "output_prefix": "chrono_msu",
-  "tracks": [
-    {
-      "track_number": 1,
-      "title": "Green Memories",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\05 - Green Memories.flac",
-      "trim_end": 5096390,
-      "loop": 2685709,
-      "cross_fade": 140000,
-      "normalization": -20
-    },
-    {
-      "track_number": 2,
-      "title": "Yearnings of the Wind",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\09 - Yearnings of the Wind.flac",
-      "trim_end": 4174096,
-      "loop": 64749,
-      "normalization": -15
-    },
-    {
-      "track_number": 3,
-      "title": "Corridor of Time",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\04 - Corridor of Time.flac",
-      "trim_end": 3848910,
-      "loop": 385145
-    },
-    {
-      "track_number": 4,
-      "title": "Rhythm of Earth, Wind, and Sky",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\20 - Rhythm of Earth_ Wind_ and Sky.flac",
-      "trim_end": 2600865,
-      "loop": 131653
-    },
-    {
-      "track_number": 5,
-      "title": "A Desolate World",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\01 - A Desolate World.flac",
-      "trim_start": 341097,
-      "trim_end": 3417364,
-      "loop": 690894,
-      "cross_fade": 150000,
-      "normalization": -15
-    },
-    {
-      "track_number": 6,
-      "title": "Guardia's Millennial Fair",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\06 - Guardia_s Millennial Fair.flac",
-      "trim_end": 4534628,
-      "loop": 423
-    },
-    {
-      "track_number": 7,
-      "title": "Crono & Marle - A Distant Promise",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\09 - Crono _ Marle - A Distant Promise.flac",
-      "trim_end": 3638250,
-      "fade_out": 100000
-    },
-    {
-      "track_number": 8,
-      "title": "Secret Of The Forest",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\11 - Secret Of The Forest.flac",
-      "trim_end": 5929707,
-      "loop": 2664,
-      "normalization": -15
-    },
-    {
-      "track_number": 9,
-      "title": "Zeal Palace",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\05 - Zeal Palace.flac",
-      "trim_end": 4969596,
-      "loop": 258441
-    },
-    {
-      "track_number": 10,
-      "title": "Derelict Factory",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\10 - Derelict Factory.flac",
-      "trim_start": 825943,
-      "trim_end": 3479848,
-      "loop": 1574451,
-      "fade_in": 50000
-    },
-    {
-      "track_number": 11,
-      "title": "Ayla's Theme",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\19 - Ayla_s Theme.flac",
-      "trim_end": 1601106,
-      "loop": 124313
-    },
-    {
-      "track_number": 12,
-      "title": "Guardia Castle - Pride & Glory",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\13 - Guardia Castle - Pride _ Glory.flac",
-      "trim_end": 4587663,
-      "loop": 353288
-    },
-    {
-      "track_number": 13,
-      "title": "Lavos' Theme (Without B Section)",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\05 - Lavos_ Theme.flac",
-      "trim_end": 2556644,
-      "loop": 792643
-    },
-    {
-      "track_number": 14,
-      "title": "Robo's Theme",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\09 - Robo_s Theme.flac",
-      "use_option": 1,
-      "options": [
-        {
-          "option": 1,
-          "trim_end": 3561836,
-          "loop": 685086
-        },
-        {
-          "option": 2,
-          "title": "Robo's Theme (Short Version)",
-          "trim_end": 1389307,
-          "cross_fade": 66950
-        }
-      ]      
-    },
-    {
-      "track_number": 15,
-      "title": "Morning Glow",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\03 - Morning Glow.flac",
-      "trim_start": 835546,
-      "trim_end": 2517249,
-      "fade_out": 150000
-    },
-    {
-      "track_number": 16,
-      "title": "The Cathedral",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\15 - The Cathedral.flac",
-      "trim_end": 2516786,
-      "loop": 315223,
-      "cross_fade": 185000,
-      "normalization": -15
-    },
-    {
-      "track_number": 19,
-      "title": "The Epoch - Wings of Time",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\10 - The Epoch - Wings of Time.flac",
-      "trim_end": 3907898,
-      "loop": 259
-    },
-    {
-      "track_number": 20,
-      "title": "Schala's Theme",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\06 - Schala_s Theme.flac",
-      "trim_end": 6615625,
-      "loop": 3970227
-    },
-    {
-      "track_number": 21,
-      "title": "Jolly Ol' Spekkio",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\14 - Jolly Ol_ Spekkio.flac",
-      "trim_start": 1141300,
-      "trim_end": 4263131,
-      "loop": 2034955
-    },
-    {
-      "track_number": 22,
-      "title": "Critical Moment",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\23 - Critical Moment.flac",
-      "trim_end": 3642163,
-      "loop": 1222506
-    },
-    {
-      "track_number": 23,
-      "title": "The Trial",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\21 - The Trial.flac",
-      "trim_end": 4257833,
-      "loop": 24223
-    },
-    {
-      "track_number": 24,
-      "title": "The Chrono Trigger Symphony",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
-      "trim_start": 112187,
-      "trim_end": 3343988,
-      "loop": 2041381
-    },
-    {
-      "track_number": 27,
-      "title": "Fanfare 1",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\20 - Fanfare 1.flac",
-      "trim_end": 2339722,
-      "loop": 246539
-    },
-    {
-      "track_number": 28,
-      "title": "Fanfare 2",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\12 - Fanfare 2.flac",
-      "trim_end": 264600,
-      "fade_out": 50000
-    },
-    {
-      "track_number": 29,
-      "title": "Depths of the Night",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\03 - Depths of the Night.flac",
-      "trim_end": 3479770,
-      "loop": 200693
-    },
-    {
-      "track_number": 30,
-      "title": "Peaceful Days",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\04 - Peaceful Days.flac",
-      "trim_start": 625504,
-      "trim_end": 3011254,
-      "loop": 1660318
-    },
-    {
-      "track_number": 31,
-      "title": "Strange Occurences",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\08 - Strange Occurences.flac",
-      "trim_start": 276634,
-      "trim_end": 3423035,
-      "loop": 459531
-    },
-    {
-      "track_number": 35,
-      "title": "The Hidden Truth",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\22 - The Hidden Truth.flac",
-      "trim_end": 1679324,
-      "loop": 973732
-    },
-    {
-      "track_number": 36,
-      "title": "A Prayer for the Wayfarer",
-      "#file": "Chrono Trigger Symphony Vol 1 (FLAC)\\16 - A Prayer for the Wayfarer.flac",
-      "trim_start": 1402638,
-      "trim_end": 1918400,
-      "fade_out": 50000
-    },
-    {
-      "track_number": 37,
-      "title": "Huh",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\14 - Huh.flac",
-      "trim_start": 1264395,
-      "trim_end": 1455000,
-      "fade_in": 10000,
-      "fade_out": 50000
-    },
-    {
-      "track_number": 38,
-      "title": "The Last Day of the World",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\06 - The Last Day of the World.flac",
-      "trim_start": 1770159,
-      "trim_end": 4774970,
-      "loop": 1858152
-    },
-    {
-      "track_number": 39,
-      "title": "Johnny of the Robo Gang",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\07 - Johnny of the Robo Gang.flac",
-      "trim_end": 4178734,
-      "loop": 297954
-    },
-    {
-      "track_number": 40,
-      "title": "Magus Confronted",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\24 - Magus Confronted.flac",
-      "trim_end": 6160495,
-      "loop": 3620131
-    },
-    {
-      "track_number": 41,
-      "title": "Boss Battle 1",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\18 - Boss Battle 1.flac",
-      "trim_end": 3463545,
-      "loop": 358898
-    },
-    {
-      "track_number": 42,
-      "title": "Frog's Theme",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\19 - Frog_s Theme.flac",
-      "use_option": 1,
-      "options": [
-        {
-          "option": 1,
-          "trim_start": 794213,
-          "trim_end": 2205100,
-          "loop": 794213,
-          "cross_fade": 20000
-        },
-        {
-          "option": 2,
-          "title": "Frog's Theme (With Optional Intro)",
-          "trim_end": 2294471,
-          "loop": 177633
-        }
-      ]
-    },
-    {
-      "track_number": 43,
-      "title": "Good Night",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\10 - Good Night.flac",
-      "trim_start": 1558485,
-      "trim_end": 1810475,
-      "fade_out": 75000
-    },
-    {
-      "track_number": 44,
-      "title": "Bike Chase",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\08 - Bike Chase.flac",
-      "trim_end": 3292750,
-      "loop": 1510188
-    },
-    {
-      "track_number": 45,
-      "title": "Those Without the Will to Live",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\04 - Those Without the Will to Live.flac",
-      "trim_end": 4693333,
-      "loop": 435852
-    },
-    {
-      "track_number": 46,
-      "title": "Mystery from the Past",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\02 - Mystery from the Past.flac",
-      "trim_end": 165176,
-      "fade_out": 15000
-    },
-    {
-      "track_number": 47,
-      "title": "Creeping through the Sewers",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\16 - Creeping through the Sewers.flac",
-      "trim_end": 3539734,
-      "loop": 264837
-    },
-    {
-      "track_number": 48,
-      "title": "A Premonition",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\01 - A Premonition.flac",
-      "trim_start": 1133998,
-      "fade_in": 500,
-      "normalization": -15
-    },
-    {
-      "track_number": 49,
-      "title": "Ocean Palace",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\08 - Ocean Palace.flac",
-      "trim_end": 3932123,
-      "loop": 184533
-    },
-    {
-      "track_number": 50,
-      "title": "The Final Battle",
-      "sub_tracks": [
-        {
-          "file": "LavosScream.wav"
-        },
-        {
-          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\14 - The Final Battle.flac",
-          "trim_start": 507704,
-          "trim_end": 5032299,
-          "loop": 1494774
-        }
-      ]
-    },
-    {
-      "track_number": 51,
-      "title": "Site 16",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\03 - Site 16.flac",
-      "trim_start": 1345216,
-      "trim_end": 3253019,
-      "loop": 1431370,
-      "fade_in": 36000
-    },
-    {
-      "track_number": 54,
-      "title": "Burn! Bobonga! Burn!",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\21 - Burn_ Bobonga_ Burn_.flac",
-      "trim_end": 2293560,
-      "loop": 176449
-    },
-    {
-      "track_number": 56,
-      "title": "Primeval Mountain",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\18 - Primeval Mountain.flac",
-      "trim_end": 4789300,
-      "loop": 846763
-    },
-    {
-      "track_number": 57,
-      "title": "World Revolution",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\13 - World Revolution.flac",
-      "trim_end": 5804915,
-      "loop": 1093521
-    },
-    {
-      "track_number": 59,
-      "title": "Sealed Door",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\07 - Sealed Door.flac",
-      "trim_start": 340484,
-      "trim_end": 4927667,
-      "loop": 1671052
-    },
-    {
-      "track_number": 60,
-      "title": "Light of Silence",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\17 - Light of Silence.flac",
-      "trim_end": 3392583,
-      "loop": 506044
-    },
-    {
-      "track_number": 61,
-      "title": "Fanfare 3",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\15 - Fanfare 3.flac",
-      "trim_end": 198450,
-      "fade_out": 50000
-    },
-    {
-      "track_number": 62,
-      "title": "At the End of Time",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\13 - At the End of Time.flac",
-      "trim_end": 4128661,
-      "loop": 1270978
-    },
-    {
-      "track_number": 63,
-      "title": "Outskirts of Time",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\17 - Outskirts of Time.flac",
-      "trim_end": 11576400,
-      "loop": 100000
-    },
-    {
-      "track_number": 64,
-      "title": "Strains of Insanity",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\23 - Strains of Insanity.flac",
-      "trim_end": 1857382,
-      "loop": 940081,
-      "cross_fade": 30000
-    },
-    {
-      "track_number": 66,
-      "title": "Gato's Song",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\07 - Gato_s Song.flac",
-      "trim_start": 1352207,
-      "trim_end": 3260370,
-      "loop": 1355224,
-      "fade_in": 1500
-    },
-    {
-      "track_number": 68,
-      "title": "Black Omen",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\11 - Black Omen.flac",
-      "trim_end": 3571918,
-      "loop": 467653,
-      "cross_fade": 100000
-    },
-    {
-      "track_number": 69,
-      "title": "Battle",
-      "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\12 - Battle.flac",
-      "trim_end": 3669826,
-      "loop": 1412381
-    },
-    {
-      "track_number": 70,
-      "title": "Tyrano Lair",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\02 - Tyrano Lair.flac",
-      "trim_end": 5505921,
-      "loop": 1856310
-    },
-    {
-      "track_number": 72,
-      "title": "The Fiendlord's Keep",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\22 - The Fiendlord_s Keep.flac",
-      "trim_start": 725000,
-      "trim_end": 1870000,
-      "fade_out": 50000,
-      "pad_end": 110000
-    },
-    {
-      "track_number": 73,
-      "title": "Festival of Stars",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\15 - Festival of Stars.flac",
-      "trim_end": 4938675,
-      "loop": 1851339
-    },
-    {
-      "track_number": 77,
-      "title": "Epilogue - To My Dear Friends",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\16 - Epilogue - To My Dear Friends.flac",
-      "trim_end": 4518787,
-      "loop": 4048388
-    },
-    {
-      "track_number": 78,
-      "title": "Boss Battle 2",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\17 - Boss Battle 2.flac",
-      "trim_end": 3413221,
-      "loop": 675782
-    },
-    {
-      "track_number": 80,
-      "title": "Determination",
-      "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\12 - Determination.flac",
-      "trim_end": 2327411,
-      "loop": 1024772
-    },
-    {
-      "track_number": 84,
-      "title": "The Chrono Trigger Symphony (Attract Mode)",
-      "normalization": -15,
-      "sub_tracks": [
-        {
+    "game": "Chrono Trigger",
+    "pack": "Chrono Trigger Symphony",
+    "artist": "The Blake Robinson Synthetic Orchestra",
+    "url": "http:\/\/www.thechronosymphony.com/",
+    "normalization": -18,
+    "output_prefix": "chrono_msu",
+    "tracks": [
+      {
+          "track_number": 1,
+          "title": "Green Memories",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\05 - Green Memories.flac",
+          "trim_end": 5096390,
+          "loop": 2685709,
+          "cross_fade": 140000,
+          "normalization": -20
+      },
+      {
+          "track_number": 2,
+          "title": "Yearnings of the Wind",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\09 - Yearnings of the Wind.flac",
+          "trim_end": 4174096,
+          "loop": 64749,
+          "normalization": -15
+      },
+      {
+          "track_number": 3,
+          "title": "Corridor of Time",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\04 - Corridor of Time.flac",
+          "trim_end": 3848910,
+          "loop": 385145
+      },
+      {
+          "track_number": 4,
+          "title": "Rhythm of Earth, Wind, and Sky",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\20 - Rhythm of Earth_ Wind_ and Sky.flac",
+          "trim_end": 2600865,
+          "loop": 131653
+      },
+      {
+          "track_number": 5,
+          "title": "A Desolate World",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\01 - A Desolate World.flac",
+          "trim_start": 341097,
+          "trim_end": 3417364,
+          "loop": 690894,
+          "cross_fade": 150000,
+          "normalization": -15
+      },
+      {
+          "track_number": 6,
+          "title": "Guardia's Millennial Fair",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\06 - Guardia_s Millennial Fair.flac",
+          "trim_end": 4534628,
+          "loop": 423
+      },
+      {
+          "track_number": 7,
+          "title": "Crono & Marle - A Distant Promise",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\09 - Crono _ Marle - A Distant Promise.flac",
+          "trim_end": 3638250,
+          "fade_out": 100000
+      },
+      {
+          "track_number": 8,
+          "title": "Secret Of The Forest",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\11 - Secret Of The Forest.flac",
+          "trim_end": 5929707,
+          "loop": 2664,
+          "normalization": -15
+      },
+      {
+          "track_number": 9,
+          "title": "Zeal Palace",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\05 - Zeal Palace.flac",
+          "trim_end": 4969596,
+          "loop": 258441
+      },
+      {
+          "track_number": 10,
+          "title": "Derelict Factory",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\10 - Derelict Factory.flac",
+          "trim_start": 825943,
+          "trim_end": 3479848,
+          "loop": 1574451,
+          "fade_in": 50000
+      },
+      {
+          "track_number": 11,
+          "title": "Ayla's Theme",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\19 - Ayla_s Theme.flac",
+          "trim_end": 1601106,
+          "loop": 124313
+      },
+      {
+          "track_number": 12,
+          "title": "Guardia Castle - Pride & Glory",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\13 - Guardia Castle - Pride _ Glory.flac",
+          "trim_end": 4587663,
+          "loop": 353288
+      },
+      {
+          "track_number": 13,
+          "title": "Lavos' Theme (Without B Section)",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\05 - Lavos_ Theme.flac",
+          "trim_end": 2556644,
+          "loop": 792643
+      },
+      {
+          "track_number": 14,
+          "title": "Robo's Theme",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\09 - Robo_s Theme.flac",
+          "use_option": 1,
+          "options": [
+              {
+                  "option": 1,
+                  "trim_end": 3561836,
+                  "loop": 685086
+              },
+              {
+                  "option": 2,
+                  "title": "Robo's Theme (Short Version)",
+                  "trim_end": 1389307,
+                  "cross_fade": 66950
+              }
+          ]      
+      },
+      {
+          "track_number": 15,
+          "title": "Morning Glow",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\03 - Morning Glow.flac",
+          "trim_start": 835546,
+          "trim_end": 2517249,
+          "fade_out": 150000
+      },
+      {
+          "track_number": 16,
+          "title": "The Cathedral",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\15 - The Cathedral.flac",
+          "trim_end": 2516786,
+          "loop": 315223,
+          "cross_fade": 185000,
+          "normalization": -15
+      },
+      {
+          "track_number": 19,
+          "title": "The Epoch - Wings of Time",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\10 - The Epoch - Wings of Time.flac",
+          "trim_end": 3907898,
+          "loop": 259
+      },
+      {
+          "track_number": 20,
+          "title": "Schala's Theme",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\06 - Schala_s Theme.flac",
+          "trim_end": 6615625,
+          "loop": 3970227
+      },
+      {
+          "track_number": 21,
+          "title": "Jolly Ol' Spekkio",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\14 - Jolly Ol_ Spekkio.flac",
+          "trim_start": 1141300,
+          "trim_end": 4263131,
+          "loop": 2034955
+      },
+      {
+          "track_number": 22,
+          "title": "Critical Moment",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\23 - Critical Moment.flac",
+          "trim_end": 3642163,
+          "loop": 1222506
+      },
+      {
+          "track_number": 23,
+          "title": "The Trial",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\21 - The Trial.flac",
+          "trim_end": 4257833,
+          "loop": 24223
+      },
+      {
+          "track_number": 24,
+          "title": "The Chrono Trigger Symphony",
           "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
           "trim_start": 112187,
-          "trim_end": 2041381
-        },
-        {
-          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
-          "trim_start": 2041381,
-          "trim_end": 3343988
-        },
-        {
-          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
-          "trim_start": 2041381,
-          "trim_end": 3343988
-        },
-        {
-          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
-          "trim_start": 3343988
-        }
-      ]
-    },
-    {
-      "track_number": 85,
-      "title": "Lavos' Theme (With B Section)",
-      "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\05 - Lavos_ Theme.flac",
-      "trim_end": 6882119,
-      "loop": 792643
-    }
-  ]
+          "trim_end": 3343988,
+          "loop": 2041381
+      },
+      {
+          "track_number": 27,
+          "title": "Fanfare 1",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\20 - Fanfare 1.flac",
+          "trim_end": 2339722,
+          "loop": 246539
+      },
+      {
+          "track_number": 28,
+          "title": "Fanfare 2",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\12 - Fanfare 2.flac",
+          "trim_end": 264600,
+          "fade_out": 50000
+      },
+      {
+          "track_number": 29,
+          "title": "Depths of the Night",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\03 - Depths of the Night.flac",
+          "trim_end": 3479770,
+          "loop": 200693
+      },
+      {
+          "track_number": 30,
+          "title": "Peaceful Days",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\04 - Peaceful Days.flac",
+          "trim_start": 625504,
+          "trim_end": 3011254,
+          "loop": 1660318
+      },
+      {
+          "track_number": 31,
+          "title": "Strange Occurences",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\08 - Strange Occurences.flac",
+          "trim_start": 276634,
+          "trim_end": 3423035,
+          "loop": 459531
+      },
+      {
+          "track_number": 35,
+          "title": "The Hidden Truth",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\22 - The Hidden Truth.flac",
+          "trim_end": 1679324,
+          "loop": 973732
+      },
+      {
+          "track_number": 36,
+          "title": "A Prayer for the Wayfarer",
+          "#file": "Chrono Trigger Symphony Vol 1 (FLAC)\\16 - A Prayer for the Wayfarer.flac",
+          "trim_start": 1402638,
+          "trim_end": 1918400,
+          "fade_out": 50000
+      },
+      {
+          "track_number": 37,
+          "title": "Huh",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\14 - Huh.flac",
+          "trim_start": 1264395,
+          "trim_end": 1455000,
+          "fade_in": 10000,
+          "fade_out": 50000
+      },
+      {
+          "track_number": 38,
+          "title": "The Last Day of the World",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\06 - The Last Day of the World.flac",
+          "trim_start": 1770159,
+          "trim_end": 4774970,
+          "loop": 1858152
+      },
+      {
+          "track_number": 39,
+          "title": "Johnny of the Robo Gang",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\07 - Johnny of the Robo Gang.flac",
+          "trim_end": 4178734,
+          "loop": 297954
+      },
+      {
+          "track_number": 40,
+          "title": "Magus Confronted",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\24 - Magus Confronted.flac",
+          "trim_end": 6160495,
+          "loop": 3620131
+      },
+      {
+          "track_number": 41,
+          "title": "Boss Battle 1",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\18 - Boss Battle 1.flac",
+          "trim_end": 3463545,
+          "loop": 358898
+      },
+      {
+          "track_number": 42,
+          "title": "Frog's Theme",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\19 - Frog_s Theme.flac",
+          "use_option": 1,
+          "options": [
+              {
+                  "option": 1,
+                  "trim_start": 794213,
+                  "trim_end": 2205100,
+                  "loop": 794213,
+                  "cross_fade": 20000
+              },
+              {
+                  "option": 2,
+                  "title": "Frog's Theme (With Optional Intro)",
+                  "trim_end": 2294471,
+                  "loop": 177633
+              }
+          ]
+      },
+      {
+          "track_number": 43,
+          "title": "Good Night",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\10 - Good Night.flac",
+          "trim_start": 1558485,
+          "trim_end": 1810475,
+          "fade_out": 75000
+      },
+      {
+          "track_number": 44,
+          "title": "Bike Chase",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\08 - Bike Chase.flac",
+          "trim_end": 3292750,
+          "loop": 1510188
+      },
+      {
+          "track_number": 45,
+          "title": "Those Without the Will to Live",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\04 - Those Without the Will to Live.flac",
+          "trim_end": 4693333,
+          "loop": 435852
+      },
+      {
+          "track_number": 46,
+          "title": "Mystery from the Past",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\02 - Mystery from the Past.flac",
+          "trim_end": 165176,
+          "fade_out": 15000
+      },
+      {
+          "track_number": 47,
+          "title": "Creeping through the Sewers",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\16 - Creeping through the Sewers.flac",
+          "trim_end": 3539734,
+          "loop": 264837
+      },
+      {
+          "track_number": 48,
+          "title": "A Premonition",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\01 - A Premonition.flac",
+          "trim_start": 1133998,
+          "fade_in": 500,
+          "normalization": -15
+      },
+      {
+          "track_number": 49,
+          "title": "Ocean Palace",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\08 - Ocean Palace.flac",
+          "trim_end": 3932123,
+          "loop": 184533
+      },
+      {
+          "track_number": 50,
+          "title": "The Final Battle",
+          "sub_tracks": [
+              {
+                  "file": "LavosScream.wav"
+              },
+              {
+                  "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\14 - The Final Battle.flac",
+                  "trim_start": 507704,
+                  "trim_end": 5032299,
+                  "loop": 1494774
+              }
+          ]
+      },
+      {
+          "track_number": 51,
+          "title": "Site 16",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\03 - Site 16.flac",
+          "trim_start": 1345216,
+          "trim_end": 3253019,
+          "loop": 1431370,
+          "fade_in": 36000
+      },
+      {
+          "track_number": 54,
+          "title": "Burn! Bobonga! Burn!",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\21 - Burn_ Bobonga_ Burn_.flac",
+          "trim_end": 2293560,
+          "loop": 176449
+      },
+      {
+          "track_number": 56,
+          "title": "Primeval Mountain",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\18 - Primeval Mountain.flac",
+          "trim_end": 4789300,
+          "loop": 846763
+      },
+      {
+          "track_number": 57,
+          "title": "World Revolution",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\13 - World Revolution.flac",
+          "trim_end": 5804915,
+          "loop": 1093521
+      },
+      {
+          "track_number": 59,
+          "title": "Sealed Door",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\07 - Sealed Door.flac",
+          "trim_start": 340484,
+          "trim_end": 4927667,
+          "loop": 1671052
+      },
+      {
+          "track_number": 60,
+          "title": "Light of Silence",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\17 - Light of Silence.flac",
+          "trim_end": 3392583,
+          "loop": 506044
+      },
+      {
+          "track_number": 61,
+          "title": "Fanfare 3",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\15 - Fanfare 3.flac",
+          "trim_end": 198450,
+          "fade_out": 50000
+      },
+      {
+          "track_number": 62,
+          "title": "At the End of Time",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\13 - At the End of Time.flac",
+          "trim_end": 4128661,
+          "loop": 1270978
+      },
+      {
+          "track_number": 63,
+          "title": "Outskirts of Time",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\17 - Outskirts of Time.flac",
+          "trim_end": 11576400,
+          "loop": 100000
+      },
+      {
+          "track_number": 64,
+          "title": "Strains of Insanity",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\23 - Strains of Insanity.flac",
+          "trim_end": 1857382,
+          "loop": 940081,
+          "cross_fade": 30000
+      },
+      {
+          "track_number": 66,
+          "title": "Gato's Song",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\07 - Gato_s Song.flac",
+          "trim_start": 1352207,
+          "trim_end": 3260370,
+          "loop": 1355224,
+          "fade_in": 1500
+      },
+      {
+          "track_number": 68,
+          "title": "Black Omen",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\11 - Black Omen.flac",
+          "trim_end": 3571918,
+          "loop": 467653,
+          "cross_fade": 100000
+      },
+      {
+          "track_number": 69,
+          "title": "Battle",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\12 - Battle.flac",
+          "trim_end": 3669826,
+          "loop": 1412381
+      },
+      {
+          "track_number": 70,
+          "title": "Tyrano Lair",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\02 - Tyrano Lair.flac",
+          "trim_end": 5505921,
+          "loop": 1856310
+      },
+      {
+          "track_number": 72,
+          "title": "The Fiendlord's Keep",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\22 - The Fiendlord_s Keep.flac",
+          "trim_start": 725000,
+          "trim_end": 1870000,
+          "fade_out": 50000,
+          "pad_end": 110000
+      },
+      {
+          "track_number": 73,
+          "title": "Festival of Stars",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\15 - Festival of Stars.flac",
+          "trim_end": 4938675,
+          "loop": 1851339
+      },
+      {
+          "track_number": 77,
+          "title": "Epilogue - To My Dear Friends",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\16 - Epilogue - To My Dear Friends.flac",
+          "trim_end": 4518787,
+          "loop": 4048388
+      },
+      {
+          "track_number": 78,
+          "title": "Boss Battle 2",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\17 - Boss Battle 2.flac",
+          "trim_end": 3413221,
+          "loop": 675782
+      },
+      {
+          "track_number": 80,
+          "title": "Determination",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\12 - Determination.flac",
+          "trim_end": 2327411,
+          "loop": 1024772
+      },
+      {
+          "track_number": 84,
+          "title": "The Chrono Trigger Symphony (Attract Mode)",
+          "normalization": -15,
+          "sub_tracks": [
+              {
+                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
+                  "trim_start": 112187,
+                  "trim_end": 2041381
+              },
+              {
+                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
+                  "trim_start": 2041381,
+                  "trim_end": 3343988
+              },
+              {
+                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
+                  "trim_start": 2041381,
+                  "trim_end": 3343988
+              },
+              {
+                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
+                  "trim_start": 3343988
+              }
+          ]
+      },
+      {
+          "track_number": 85,
+          "title": "Lavos' Theme (With B Section)",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\05 - Lavos_ Theme.flac",
+          "trim_end": 6882119,
+          "loop": 792643
+      }
+    ]
 }
