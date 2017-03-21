@@ -508,25 +508,22 @@
       {
           "track_number": 84,
           "title": "The Chrono Trigger Symphony (Attract Mode)",
+          "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
           "normalization": -15,
           "sub_tracks": [
               {
-                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
                   "trim_start": 112187,
                   "trim_end": 2041381
               },
               {
-                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
                   "trim_start": 2041381,
                   "trim_end": 3343988
               },
               {
-                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
                   "trim_start": 2041381,
                   "trim_end": 3343988
               },
               {
-                  "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
                   "trim_start": 3343988
               }
           ]
