@@ -7,7 +7,7 @@
 #include "AudioTrackListBuilder.h"
 #include "sox_main.h"
 
-#define VERSION_NUMBER 0.31
+#define VERSION_NUMBER 0.4
 
 using namespace msu;
 
