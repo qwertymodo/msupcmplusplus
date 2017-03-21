@@ -537,56 +537,6 @@
       "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\05 - Lavos_ Theme.flac",
       "trim_end": 6882119,
       "loop": 792643
-    },
-    {
-      "track_number": 100,
-      "file": "100 - Opening.flac",
-      "title": "(FMV) Opening"
-    },
-    {
-      "track_number": 101,
-      "file": "101 - Meet Robo.flac",
-      "title": "(FMV) Meet Robo"
-    },
-    {
-      "track_number": 102,
-      "file": "102 - Ayla Saves The Day.flac",
-      "title": "(FMV) Ayla Saves The Day"
-    },
-    {
-      "track_number": 103,
-      "file": "103 - Frog Uses The Masamune.flac",
-      "title": "(FMV) Frog Uses The Masamune"
-    },
-    {
-      "track_number": 104,
-      "file": "104 - Frog Challenges Magus.flac",
-      "title": "(FMV) Frog Challenges Magus"
-    },
-    {
-      "track_number": 105,
-      "file": "105 - Dino Fight.flac",
-      "title": "(FMV) Dino Fight"
-    },
-    {
-      "track_number": 106,
-      "file": "106 - Wings of Time.flac",
-      "title": "(FMV) Wings of Time"
-    },
-    {
-      "track_number": 107,
-      "file": "107 - Chrono Falls.flac",
-      "title": "(FMV) Chrono Falls"
-    },
-    {
-      "track_number": 108,
-      "file": "108 - Ending.flac",
-      "title": "(FMV) Ending"
-    },
-    {
-      "track_number": 109,
-      "file": "109 - The Fall of Guardia.flac",
-      "title": "(FMV) The Fall of Guardia"
     }
   ]
 }

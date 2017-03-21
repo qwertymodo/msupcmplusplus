@@ -21,32 +21,11 @@
             "loop": 254178
         },
         {
-            "track_number": 3,
-            "title": "Time of Falling Rain (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 04 Time of Falling Rain.flac",
-            "trim_end": 1889338,
-            "loop": 914430
-        },
-        {
-            "track_number": 4,
-            "title": "The Silly Pink Rabbit (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 17 The Silly Pink Rabbit.flac",
-            "trim_end": 1263928,
-            "loop": 65136
-        },
-        {
             "track_number": 5,
             "title": "Forest of Mystery",
             "file": "Lost Woods.flac",
             "trim_end": 1327515,
             "loop": 60
-        },
-        {
-            "track_number": 6,
-            "title": "Seal of Seven Maidens (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 03 Seal of Seven Maidens.flac",
-            "trim_end": 3086262,
-            "loop": 814177
         },
         {
             "track_number": 7,
@@ -79,22 +58,9 @@
         {
             "track_number": 12,
             "title": "Soldiers of Kakariko Village",
-            "use_option": 1,
-            "options": [
-                {
-                    "option": 1,
-                    "file": "Crisis at the Sanctuary.flac",
-                    "trim_end": 288621,
-                    "loop": 92116
-                },
-                {
-                    "option": 2,
-                    "title": "Soldiers of Kakariko Village (Dracula9AntiChapel)",
-                    "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 12 Soldiers of Kakariko Village.flac",
-                    "trim_end": 2195524,
-                    "loop": 516865
-                }
-            ]
+            "file": "Crisis at the Sanctuary.flac",
+            "trim_end": 288621,
+            "loop": 92116
         },
         {
             "track_number": 13,
@@ -120,22 +86,9 @@
         {
             "track_number": 17,
             "title": "Lost Ancient Ruins",
-            "use_option": 1,
-            "options": [
-                {
-                    "option": 1,
-                    "file": "Hyrulian Dungeons.flac",
-                    "trim_end": 3943903,
-                    "loop": 1718438
-                },
-                {
-                    "option": 2,
-                    "title": "Lost Ancient Ruins (Sound and Drama)",
-                    "file": "103 - Sanctuary Dungeon.mp3",
-                    "trim_end": 5435755,
-                    "loop": 2297502
-                }
-            ]
+            "file": "Hyrulian Dungeons.flac",
+            "trim_end": 3943903,
+            "loop": 1718438
         },
         {
             "track_number": 18,
@@ -147,20 +100,9 @@
         {
             "track_number": 19,
             "title": "Great Victory!",
-            "use_option": 2,
-            "options": [
-                {
-                    "option": 1,
-                    "file": "Hyrulian Boss Defeated!.flac",
-                    "trim_end": 128800,
-                    "fade_out": 15000
-                },
-                {
-                    "option": 2,
-                    "title": "Great Victory!  (Dracula9AntiChapel)",
-                    "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 16 Great Victory!.flac"
-                }
-            ]
+            "file": "Hyrulian Boss Defeated!.flac",
+            "trim_end": 128800,
+            "fade_out": 15000
         },
         {
             "track_number": 20,
@@ -177,13 +119,6 @@
             "loop": 661643
         },
         {
-            "track_number": 22,
-            "title": "Dungeon of Shadows (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 23 Dungeon of Shadows.flac",
-            "trim_end": 2832237,
-            "loop": 392977
-        },
-        {
             "track_number": 23,
             "title": "Fortune Teller",
             "file": "Fortune Teller's House.flac",
@@ -198,20 +133,6 @@
             "loop": 49067
         },
         {
-            "track_number": 25,
-            "title": "Princess Zelda's Rescue (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 06 Princess Zelda's Rescue.flac",
-            "trim_end": 4412632,
-            "loop": 365633
-        },
-        {
-            "track_number": 26,
-            "title": "Meeting the Maidens (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 24 Meeting the Maidens.flac",
-            "trim_end": 3070605,
-            "loop": 374856
-        },
-        {
             "track_number": 27,
             "title": "The Goddess Appears",
             "file": "Fairy's Fountain.flac",
@@ -219,62 +140,9 @@
             "loop": 254803
         },
         {
-            "track_number": 28,
-            "title": "Priest of the Dark Order (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 20 Priest of the Dark Order.flac",
-            "trim_end": 2893782,
-            "loop": 92737
-        },
-        {
-            "track_number": 29,
-            "title": "Release of Ganon (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 26 Release of Ganon.flac"
-        },
-        {
-            "track_number": 30,
-            "title": "Ganon's Message (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 27 Ganon's Message.flac",
-            "trim_end": 3025706,
-            "loop": 1630707
-        },
-        {
-            "track_number": 31,
-            "title": "The Prince of Darkness",
-            "use_option": 1,
-            "options": [
-                {
-                    "option": 1,
-                    "title": "The Prince of Darkness (Dracula9AntiChapel)",
-                    "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 28 The Prince of Darkness.flac",
-                    "trim_end": 5423476,
-                    "loop": 971477
-                },
-                {
-                    "option": 2,
-                    "title": "The Prince of Darkness (Wind Waker OST)",
-                    "file": "The_Legend_of_Zelda_-_The_Wind_Waker_-_04_-_Phantom_Ganon.mp3",
-                    "trim_end": 3014227,
-                    "loop": 542108
-                }
-            ]
-        },
-        {
-            "track_number": 32,
-            "title": "Power of the Gods (Dracula9AntiChapel)",
-            "file": "Dracula9AntiChapel - The Legend of Zelda- A Link to the Past Arranged Soundtrack - 29 Power of the Gods.flac",
-            "trim_end": 2197733,
-            "loop": 356255
-        },
-        {
             "track_number": 33,
             "title": "Epilogue - Beautiful Hyrule",
             "file": "Staff Roll.flac"
-        },
-        {
-            "track_number": 34,
-            "title": "Staff Roll (Zelda ReOrchestrated)",
-            "file": "End_Credits.mp3",
-            "normalization": -15
         }
     ]
 }
