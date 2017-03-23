@@ -1,0 +1,231 @@
+{
+    "game": "Mega Man X",
+    "pack": "Mega Man X Guitar Playthrough",
+    "artist": "Krzysztof Słowikowski",
+    "url": "http:\/\/www.mediafire.com\/?gb61j7qiwkadu2w",
+    "normalization": -21,
+    "output_prefix": "mmx_msu",
+    "tracks": [
+        {
+            "track_number": 1,
+            "title": "Opening Stage",
+            "file": "03 - Opening Stage.wav",
+            "trim_end": 2131156,
+            "loop": 83170
+        },
+        {
+            "track_number": 2,
+            "title": "Sting Chameleon",
+            "file": "16 - Sting Chameleon.wav",
+            "trim_end": 1657338,
+            "loop": 31062
+        },
+        {
+            "track_number": 3,
+            "title": "Launch Octopus",
+            "file": "14 - Launch Octopus.wav",
+            "trim_end": 2343136,
+            "loop": 39033
+        },
+        {
+            "track_number": 4,
+            "title": "Armored Armadillo",
+            "file": "13 - Armored Armadillo.wav",
+            "trim_end": 2584829,
+            "loop": 42292
+        },
+        {
+            "track_number": 5,
+            "title": "Flame Mammoth",
+            "file": "10 - Flame Mammoth.wav",
+            "trim_end": 3316882,
+            "loop": 803438
+        },
+        {
+            "track_number": 6,
+            "title": "Boomer Kuwanger",
+            "file": "15 - Boomer Kuwanger.wav",
+            "trim_end": 3301981,
+            "loop": 383580
+        },
+        {
+            "track_number": 7,
+            "title": "Chill Penguin",
+            "file": "11 - Chill Penguin.wav",
+            "trim_end": 2422248,
+            "loop": 858824
+        },
+        {
+            "track_number": 8,
+            "title": "Spark Mandrill",
+            "file": "12 - Spark Mandrill.wav",
+            "trim_end": 2516190,
+            "loop": 142988
+        },
+        {
+            "track_number": 9,
+            "title": "Storm Eagle",
+            "file": "17 - Storm Eagle.wav",
+            "trim_end": 1803764,
+            "loop": 312928
+        },
+        {
+            "track_number": 10,
+            "title": "Sigma Stage 1",
+            "file": "23 - Sigma Stage 1.wav",
+            "trim_end": 3684187,
+            "loop": 1305869
+        },
+        {
+            "track_number": 11,
+            "title": "Sigma Stage 2",
+            "file": "24 - Sigma Stage 2.wav",
+            "trim_end": 3116507,
+            "loop": 166680
+        },
+        {
+            "track_number": 12,
+            "title": "Sigma Stage 3",
+            "file": "25 - Sigma Stage 3.wav",
+            "trim_end": 2588753,
+            "loop": 376698
+        },
+        {
+            "track_number": 13,
+            "title": "Sigma Stage 4",
+            "file": "26 - Sigma Stage 4.wav",
+            "trim_end": 1118965,
+            "loop": 241100
+        },
+        {
+            "track_number": 14,
+            "title": "Boss",
+            "file": "19 - Boss.wav",
+            "trim_end": 1535918,
+            "loop": 180626
+        },
+        {
+            "track_number": 15,
+            "title": "Title",
+            "file": "01 - Title.wav"
+        },
+        {
+            "track_number": 16,
+            "title": "Stage Select (Mavericks)",
+            "file": "08 - Stage Select (Mavericks).wav",
+            "trim_end": 1253424,
+            "loop": 147504
+        },
+        {
+            "track_number": 17,
+            "title": "Stage Clear",
+            "file": "20 - Stage Clear.wav"
+        },
+        {
+            "track_number": 18,
+            "title": "Stage Start",
+            "file": "09 - Stage Start.wav"
+        },
+        {
+            "track_number": 19,
+            "title": "Vile (intro)",
+            "file": "04 - Vile (intro).wav",
+            "trim_end": 498474,
+            "loop": 104688
+        },
+        {
+            "track_number": 20,
+            "title": "Vile",
+            "file": "05 - Vile.wav",
+            "trim_end": 1324164,
+            "loop": 7565
+        },
+        {
+            "track_number": 21,
+            "title": "Zero",
+            "file": "06 - Zero.wav",
+            "trim_end": 961360,
+            "loop": 325918
+        },
+        {
+            "track_number": 22,
+            "title": "Variable X",
+            "file": "07 - Variable X.wav",
+            "trim_end": 1663196,
+            "loop": 346318
+        },
+        {
+            "track_number": 23,
+            "title": "Get a Weapon",
+            "file": "21 - Get a Weapon.wav",
+            "trim_end": 836214,
+            "loop": 507127
+        },
+        {
+            "track_number": 24,
+            "title": "Password",
+            "file": "02 - Password.wav",
+            "trim_end": 1765666,
+            "loop": 8786
+        },
+        {
+            "track_number": 25,
+            "title": "Stage Select (Σ)",
+            "file": "22 - Stage Select (Σ).wav",
+            "trim_end": 869688,
+            "loop": 101869
+        },
+        {
+            "track_number": 26,
+            "title": "Sigma Battle 1",
+            "file": "27 - Sigma Battle 1.wav",
+            "trim_end": 1630499,
+            "loop": 4209
+        },
+        {
+            "track_number": 27,
+            "title": "Sigma Battle 2",
+            "file": "29 - Sigma Battle 2.wav",
+            "trim_end": 2539865,
+            "loop": 5161
+        },
+        {
+            "track_number": 28,
+            "title": "Ending",
+            "file": "31 - Ending.wav"
+        },
+        {
+            "track_number": 29,
+            "title": "Cast Roll",
+            "file": "32 - Cast Roll.wav",
+            "trim_end": 3047658,
+            "loop": 835746
+        },
+        {
+            "track_number": 30,
+            "title": "Boss (Intro)",
+            "file": "18 - Boss (Intro).wav",
+            "trim_end": 499677,
+            "loop": 170595
+        },
+        {
+            "track_number": 31,
+            "title": "Sigma Rebirth",
+            "file": "28 - Sigma Rebirth.wav"
+        },
+        {
+            "track_number": 32,
+            "title": "Staff Roll",
+            "file": "33 - Staff Roll.wav",
+            "trim_end": 2292169,
+            "loop": 36689
+        },
+        {
+            "track_number": 33,
+            "title": "Dr Light",
+            "file": "30 - Dr Light.wav",
+            "trim_end": 799964,
+            "loop": 92447
+        }
+    ]
+}
