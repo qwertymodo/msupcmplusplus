@@ -15,6 +15,7 @@
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
+#ifdef HAVE_PNG
 #ifdef NDEBUG /* Enable assert always. */
 #undef NDEBUG /* Must undef above assert.h or other that might include it. */
 #endif
@@ -696,3 +697,4 @@ sox_effect_handler_t const * lsx_spectrogram_effect_fn(void)
   handler.usage = lsx_usage_lines(&usage, lines, array_length(lines));
   return &handler;
 }
+#endif
