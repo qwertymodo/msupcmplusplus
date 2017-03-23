@@ -1,7 +1,0 @@
-I suck at submodules.  I've tried.  They hate me, I hate them, this is how we're doing things.
-
-flac        git@tags/1.3.1
-json        git@a1354184ceadb72669cecbb83ece091180fb74ab
-libmad      libmad-0.15.1b.tar.gz
-libogg      git@tagsv1.2.2
-libvorbis   git@tags/v1.3.2

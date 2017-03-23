@@ -1,0 +1,12 @@
+[submodule "3rdparty/flac"]
+	path = 3rdparty/flac
+	url = https://github.com/xiph/flac.git
+[submodule "3rdparty/libogg"]
+	path = 3rdparty/libogg
+	url = https://github.com/xiph/ogg.git
+[submodule "3rdparty/libvorbis"]
+	path = 3rdparty/libvorbis
+	url = https://github.com/xiph/vorbis.git
+[submodule "3rdparty/json"]
+	path = 3rdparty/json
+	url = https://github.com/nlohmann/json.git
