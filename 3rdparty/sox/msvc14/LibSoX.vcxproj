@@ -348,38 +348,14 @@
     <ProjectReference Include="LibFlac.vcxproj">
       <Project>{38203d05-af71-4ff2-a183-a7d9cb8d2ae0}</Project>
     </ProjectReference>
-    <ProjectReference Include="LibGsm.vcxproj">
-      <Project>{bee9f57c-384e-4c99-87eb-629bf45c8a89}</Project>
-    </ProjectReference>
-    <ProjectReference Include="LibId3Tag.vcxproj">
-      <Project>{40ea92b6-38aa-4e67-894d-92c37c946402}</Project>
-    </ProjectReference>
-    <ProjectReference Include="LibLpc10.vcxproj">
-      <Project>{c588ff17-fb2f-48d9-bb99-40b6d52b9b85}</Project>
-    </ProjectReference>
     <ProjectReference Include="LibMad.vcxproj">
       <Project>{b7a8ad9a-0d07-4453-b2de-feabd9546263}</Project>
-    </ProjectReference>
-    <ProjectReference Include="LibMp3Lame.vcxproj">
-      <Project>{4dfd6fd1-96f1-434a-ac69-01783b876354}</Project>
     </ProjectReference>
     <ProjectReference Include="LibOgg.vcxproj">
       <Project>{c5c229ac-316d-42cb-9ca3-329619618972}</Project>
     </ProjectReference>
-    <ProjectReference Include="LibPng.vcxproj">
-      <Project>{46e7ac9d-3e96-4b34-b493-501bc277d6f9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="LibSpeex.vcxproj">
-      <Project>{60902b83-8b26-4dbd-b635-4cecf5f4744c}</Project>
-    </ProjectReference>
     <ProjectReference Include="LibVorbis.vcxproj">
       <Project>{524a24cd-0973-4733-8eb9-f419dc6f9997}</Project>
-    </ProjectReference>
-    <ProjectReference Include="LibWavPack.vcxproj">
-      <Project>{7461cc57-b1cb-4766-b357-f51587449474}</Project>
-    </ProjectReference>
-    <ProjectReference Include="LibZLib.vcxproj">
-      <Project>{90d19fcf-8560-4396-a250-ddf74d1b0e36}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

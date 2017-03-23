@@ -2,12 +2,6 @@ I suck at submodules.  I've tried.  They hate me, I hate them, this is how we're
 
 flac        git@tags/1.3.1
 json        git@a1354184ceadb72669cecbb83ece091180fb74ab
-lame        lame-3.98.4.tar.gz
-libid3tag   libid3tag-0.15.1b.tar.gz
 libmad      libmad-0.15.1b.tar.gz
 libogg      git@tagsv1.2.2
-libpng      libpng-1.5.1.tar.gz
-libsndfile  libsndfile-1.0.25.tar.gz
 libvorbis   git@tags/v1.3.2
-wavpack     git@tags/4.60.1
-zlib        git@v1.2.5
