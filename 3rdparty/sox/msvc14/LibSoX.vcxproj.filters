@@ -130,6 +130,9 @@
     <ClInclude Include="SoX\soxconfig.h">
       <Filter>Config Headers</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\sox_main.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
     <ClInclude Include="..\src\unicode_support.h">
       <Filter>Headers</Filter>
     </ClInclude>
@@ -603,6 +606,7 @@
     <ClCompile Include="..\src\msupcm-fmt.c">
       <Filter>Format Sources</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\sox.c" />
     <ClCompile Include="..\src\nongnunormalize.c">
       <Filter>Effect Sources</Filter>
     </ClCompile>

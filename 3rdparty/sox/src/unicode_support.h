@@ -30,6 +30,10 @@
 #ifndef UNICODE_SUPPORT_H_INCLUDED
 #define UNICODE_SUPPORT_H_INCLUDED
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -43,4 +47,7 @@ int lsx_unlink(const char *path_utf8);
 void lsx_init_console(void);
 void lsx_uninit_console(void);
 
+#ifdef __cplusplus
+}
+#endif // __cplusplus
 #endif

@@ -33,6 +33,7 @@
 
 #include <windows.h>
 #include <io.h>
+#include <fcntl.h>
 
 static UINT g_old_output_cp = ((UINT)-1);
 
@@ -186,6 +187,7 @@ void lsx_init_console(void)
 {
 	g_old_output_cp = GetConsoleOutputCP();
 	SetConsoleOutputCP(CP_UTF8);
+	_setmode(_fileno(stdout), _O_U16TEXT);
 }
 
 void lsx_uninit_console(void)
