@@ -387,6 +387,7 @@ bool SoxWrapper::dither(char type)
 		return false;
 
 	m_dither_type = type;
+	return true;
 }
 
 
