@@ -63,6 +63,15 @@ bool SoxWrapper::init(std::wstring in, std::wstring out)
 	m_length = 0;
 	m_dither_type = 'n';
 
+	char* args[2];
+
+	args[0] = new char[3]{ '-','h','\0' };
+	args[1] = new char[3]{ '-','1','\0' };
+	addEffect("gain", 2, (char**)args);
+
+	delete args[0];
+	delete args[1];
+
 	return m_initialized = true;
 }
 
