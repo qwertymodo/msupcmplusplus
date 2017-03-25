@@ -13,12 +13,12 @@ namespace msu
 
 		bool init(std::wstring in, std::wstring out);
 		bool addInput(std::wstring name);
-		bool setCombine(sox_combine_method method);
+		bool combine(sox_combine_method method);
 		bool trim(size_t start, size_t end = 0);
 		bool fade(size_t in, size_t out = 0, char type = 't');
 		bool pad(size_t start, size_t end = 0);
 		bool tempo(double tempo);
-		bool setLoop(size_t start, size_t loop);
+		bool loop(size_t start, size_t loop);
 		bool crossFade(size_t loop, size_t end, size_t length, double ratio = 0.5);
 		bool normalize(double level);
 		bool compress();

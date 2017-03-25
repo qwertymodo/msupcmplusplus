@@ -92,7 +92,7 @@ bool SoxWrapper::addInput(std::wstring name)
 }
 
 
-bool SoxWrapper::setCombine(sox_combine_method method)
+bool SoxWrapper::combine(sox_combine_method method)
 {
 	combine_method = method;
 	return true;
@@ -271,7 +271,7 @@ bool SoxWrapper::tempo(double tempo)
 }
 
 
-bool SoxWrapper::setLoop(size_t start, size_t loop)
+bool SoxWrapper::loop(size_t start, size_t loop)
 {
 	if (loop == 0)
 		return false;
