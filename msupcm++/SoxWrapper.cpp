@@ -14,7 +14,7 @@ SoxWrapper::SoxWrapper() :
 	m_initialized(false), m_finalized(false),
 	m_temp_counter(0), m_tempo(0.0),
 	m_loop(0), m_length(0),
-	m_input_rate(0), m_dither_type(' ')
+	m_input_rate(0)
 {
 	sox_init();
 	sox_get_globals()->verbosity = config.verbosity();
@@ -61,16 +61,7 @@ bool SoxWrapper::init(std::wstring in, std::wstring out)
 	m_tempo = 1.0;
 	m_loop = 0;
 	m_length = 0;
-	m_dither_type = 'n';
-
-	char* args[2];
-
-	args[0] = new char[3]{ '-','h','\0' };
-	args[1] = new char[3]{ '-','1','\0' };
-	addEffect("gain", 2, (char**)args);
-
-	delete args[0];
-	delete args[1];
+	is_guarded = sox_true;
 
 	return m_initialized = true;
 }
@@ -405,34 +396,30 @@ bool SoxWrapper::dither(char type)
 	if (!m_initialized || m_finalized)
 		return false;
 
-	if (std::string("Ssanp ").find(type) == std::string::npos)
+	if (std::string("Ssap ").find(type) == std::string::npos)
 		return false;
 
-	m_dither_type = type;
+	char* dither_args[1];
+
+	if (type == ' ')
+	{
+		addEffect("dither", 0, 0);
+	}
+	else
+	{
+		dither_args[0] = new char[3]{ '-',' ','\0' };
+		dither_args[0][1] = type;
+		addEffect("dither", 1, (char**)dither_args);
+
+		delete dither_args[0];
+	}
+
 	return true;
 }
 
 
 bool SoxWrapper::finalize()
 {
-	if (m_dither_type != 'n')
-	{
-		char* dither_args[1];
-
-		if (m_dither_type == ' ')
-		{
-			addEffect("dither", 0, 0);
-		}
-		else
-		{
-			dither_args[0] = new char[3]{ '-',' ','\0' };
-			dither_args[0][1] = m_dither_type;
-			addEffect("dither", 1, (char**)dither_args);
-
-			delete dither_args[0];
-		}
-	}
-
 	addOutput(m_output);
 
 	sox_format_handler_t const * handler =

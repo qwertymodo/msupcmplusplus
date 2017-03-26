@@ -42,7 +42,6 @@ namespace msu
 		size_t m_loop;
 		size_t m_length;
 		sox_rate_t m_input_rate;
-		char m_dither_type;
 
 		std::wstring m_output;
 		std::wstring_convert<std::codecvt_utf8<wchar_t>> wchar_to_utf8;
