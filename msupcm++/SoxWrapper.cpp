@@ -383,7 +383,7 @@ bool SoxWrapper::compress()
 	char* args[5];
 	args[0] = new char[6] {'0', '.', '3', ',', '1', '\0'};
 	args[1] = new char[14] {'6', ':', '-', '7', '0', ',', '-', '6', '0', ',', '-', '2', '0', '\0'};
-	args[2] = new char[3] {'-', '9', '\0'};
+	args[2] = new char[4] {'-', '1', '2', '\0'};
 	args[3] = new char[4] {'-', '9', '0', '\0'};
 	args[4] = new char[4] {'0', '.', '2', '\0'};
 	addEffect("compand", 5, (char**)args);
