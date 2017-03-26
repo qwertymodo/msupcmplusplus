@@ -276,7 +276,7 @@ static int stop(sox_effect_t * effect)
 sox_effect_handler_t const * lsx_nongnunormalize_effect_fn(void)
 {
     static sox_effect_handler_t handler = {
-        "nongnunormalize", NULL, SOX_EFF_GAIN,
+        "nongnunormalize", NULL, SOX_EFF_NULL,
         create, start, flow, drain, stop, NULL, sizeof(priv_t) };
     static char const * lines[] = {
         "gain-dB\t normalize the volume to the target amplitude in dB",
