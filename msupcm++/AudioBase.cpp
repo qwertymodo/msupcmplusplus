@@ -10,7 +10,7 @@ AudioBase::AudioBase() :
 	m_trim_start(0), m_trim_end(0), m_start_offset(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
-	m_tempo(-1.0), m_normalization(0.0),
+	m_tempo(-1.0), m_normalization(0.0), m_compress(false),
 	m_dither_type('n')
 {
 
@@ -56,6 +56,7 @@ AudioBase& AudioBase::operator=(const AudioBase& a)
 	m_pad_end = a.m_pad_end;
 	m_tempo = a.m_tempo;
 	m_normalization = a.m_normalization;
+	m_compress = a.m_compress;
 	m_dither_type = a.m_dither_type;
 	return *this;
 }
@@ -76,6 +77,7 @@ void AudioBase::clear()
 	m_pad_end = 0;
 	m_tempo = 1.0;
 	m_normalization = 0.0;
+	m_compress = false;
 	m_dither_type = 'n';
 }
 
@@ -94,11 +96,13 @@ void AudioBase::render()
 
 		if(sox->init(m_infile, m_outfile))
 		{
+			if (m_compress)
+				sox->compress();
 			if (sox->crossFade(m_loop, m_trim_end, m_cross_fade))
 				m_trim_end = 0;
 			sox->trim(m_trim_start, m_trim_end);
-			sox->fade(m_fade_in, m_fade_out);
 			sox->normalize(m_normalization);
+			sox->fade(m_fade_in, m_fade_out);
 			sox->pad(m_pad_start, m_pad_end);
 			sox->tempo(m_tempo);
 			sox->setLoop(m_trim_start + m_start_offset, m_loop);
@@ -253,4 +257,16 @@ double AudioBase::normalization() const
 double& AudioBase::normalization()
 {
 	return m_normalization;
+}
+
+
+bool AudioBase::compress() const
+{
+	return m_compress;
+}
+
+
+bool& AudioBase::compress()
+{
+	return m_compress;
 }

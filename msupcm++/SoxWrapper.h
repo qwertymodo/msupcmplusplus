@@ -21,6 +21,7 @@ namespace msu
 		bool setLoop(size_t start, size_t loop);
 		bool crossFade(size_t loop, size_t end, size_t length, double ratio = 0.5);
 		bool normalize(double level);
+		bool compress();
 		bool dither(char type = 's');
 		bool finalize();
 		bool clear();
