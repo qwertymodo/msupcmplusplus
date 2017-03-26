@@ -142,8 +142,8 @@ namespace msu {
 		if (j.find("normalization") != j.end())
 			a.normalization() = j["normalization"].get<double>();
 
-		if (j.find("compress") != j.end())
-			a.compress() = j["compress"].get<bool>();
+		if (j.find("compression") != j.end())
+			a.compression() = j["compression"].get<bool>();
 	}
 
 

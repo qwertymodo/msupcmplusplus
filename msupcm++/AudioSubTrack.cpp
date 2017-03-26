@@ -158,7 +158,7 @@ void AudioSubTrack::render()
 				sox->addInput(dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile());
 			}
 			sox->combine(sox_mix);
-			if (m_compress)
+			if (m_compression)
 				sox->compress();
 			if (sox->crossFade(m_loop, m_trim_end, m_cross_fade))
 				m_trim_end = 0;

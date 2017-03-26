@@ -54,8 +54,8 @@ namespace msu
 		double normalization() const;
 		double& normalization();
 
-		bool compress() const;
-		bool& compress();
+		bool compression() const;
+		bool& compression();
 
 	protected:
 		std::wstring m_infile;
@@ -71,7 +71,7 @@ namespace msu
 		int m_pad_end;
 		double m_tempo;
 		double m_normalization;
-		bool m_compress;
+		bool m_compression;
 		char m_dither_type;
 	};
 }
