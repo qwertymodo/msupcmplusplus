@@ -1,0 +1,266 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "id": "https://raw.githubusercontent.com/qwertymodo/msupcmplusplus/master/configs/schema",
+    "description": "Configuration file schema for msupcm++",
+    "type": "object",
+    "required": [ "tracks" ],
+    "properties": {
+        "game": {
+            "type": "string",
+            "description": "The SNES game this audio pack is intended for"
+        },
+        "pack": {
+            "type": "string",
+            "description": "The name of this audio pack"
+        },
+        "artist": {
+            "type": "string",
+            "description": "The original artist of the audio files used in this pack"
+        },
+        "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The location where the original audio files can be found"
+        },
+        "output_prefix": {
+            "type": "string",
+            "description": "The prefix used for the final output files, followed by the track number"
+        },
+        "normalization": {
+            "type": "number",
+            "description": "The default RMS normalization level, in dBFS, to be applied to the entire pack"
+        },
+        "dither": {
+            "type": "boolean",
+            "description": "Whether or not to apply audio dither to the final output"
+        },
+        "verbosity": {
+            "type": "integer",
+            "description": "Sets the verbosity level of the application during processing"
+        },
+        "keep_temps": {
+            "type": "boolean",
+            "description": "Whether or not to keep temporary files generated during processing"
+        },
+        "first_track": {
+            "type": "integer",
+            "description": "Any track number less than this will not be processed"
+        },
+        "last_track": {
+            "type": "integer",
+            "description": "Any track number greater than this will not be processed"
+        },
+        "tracks": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+                "$ref": "#/definitions/track"
+            },
+            "uniqueItems": true
+        }
+    },
+    "definitions": {
+        "track": {
+            "properties": {
+                "track_number": { "type": "integer" },
+                "title": { "type": "string" },
+                "sub_channels": {
+                    "type": "array",
+                    "description": "Files which will be mixed together to form the input to the parent track",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/sub_channel"
+                    },
+                    "uniqueItems": true
+                },
+                "sub_tracks": {
+                    "type": "array",
+                    "description": "Files which will be concatenated together to form the input to the parent track",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/sub_track"
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "required": [ "track_number" ],
+            "anyOf": [
+                { "required": [ "file" ] },
+                {
+                    "oneOf": [
+                        {
+                            "required": [ "sub_channels" ],
+                            "$ref": "#/definitions/sub_channel"
+                        },
+                        {
+                            "required": [ "sub_tracks" ],
+                            "$ref": "#/definitions/sub_channel"
+                        },
+                        {
+                            "not": {
+                                "anyOf": [
+                                    { "required": [ "sub_channels" ] },
+                                    { "required": [ "sub_tracks" ] }
+                                ]
+                            },
+                            "$ref": "#/definitions/track_base"
+                        }
+                    ]
+                },
+                {
+                    "allOf": [
+                        { "required": [ "options" ] },
+                        { "required": [ "use_option" ] }
+                    ]
+                }
+            ],
+            "allOf": [
+                { "$ref": "#/definitions/track_base" }
+            ],
+            "not":{
+                "allOf": [
+                    { "required": [ "sub_channels" ] },
+                    { "required": [ "sub_tracks" ] }
+                ]
+            }
+        },
+        "sub_track": {
+            "properties": {
+                "sub_channels": {
+                    "type": "array",
+                    "description": "Files which will be mixed together to form the input to the parent sub-track",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/sub_channel"
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "allOf": [
+                { "$ref": "#/definitions/track_base" }
+            ]
+        },
+        "sub_channel": {
+            "properties": {
+                "sub_tracks": {
+                    "type": "array",
+                    "description": "Files which will be concatenated together to form the input to the parent sub-channel",
+                    "minItems": 1,
+                    "items": {
+                        "$ref": "#/definitions/sub_track"
+                    },
+                    "uniqueItems": true
+                }
+            },
+            "allOf": [
+                { "$ref": "#/definitions/track_base" }
+            ]
+        },
+        "track_base": {
+            "properties": {
+                "file": {
+                    "type": "string",
+                    "description": "The file to be used as the input for this track/sub-track/sub-channel"
+                },
+                "output": {
+                    "type": "string",
+                    "description": "The final output filename, overrides output_prefix"
+                },
+                "loop": {
+                    "type": "integer",
+                    "description": "The loop point of the current track, relative to this track/sub-track/sub-channel, in samples"
+                },
+                "trim_start": {
+                    "type": "integer",
+                    "description": "Trim the start of the current track at the specified sample"
+                },
+                "trim_end": {
+                    "type": "integer",
+                    "description": "Trim the end of the current track at the specified sample"
+                },
+                "fade_in": {
+                    "type": "integer",
+                    "description": "Apply a fade in effect to the current track lasting a specified number of samples"
+                },
+                "fade_out": {
+                    "type": "integer",
+                    "description": "Apply a fade out effect to the current track lasting a specified number of samples"
+                },
+                "cross_fade": {
+                    "type": "integer",
+                    "description": "Apply a cross fade effect from the end of the current track to its loop point lasting a specified number of samples"
+                },
+                "pad_start": {
+                    "type": "integer",
+                    "description": "Pad the beginning of the current track with a specified number of silent samples"
+                },
+                "pad_end": {
+                    "type": "integer",
+                    "description": "Pad the end of the current track with a specified number of silent samples"
+                },
+                "tempo": {
+                    "type": "number",
+                    "description": "Alter the tempo of the current track by a specified ratio"
+                },
+                "normalization": {
+                    "type": "number",
+                    "description": "Normalize the current track to the specified RMS level, overrides the global normalization value"
+                },
+                "compression": {
+                    "type": "boolean",
+                    "description": "Apply dynamic range compression to the current track"
+                },
+                "use_option": { "type": "integer" },
+                "options": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                        "anyOf": [
+                            { "$ref": "#/definitions/track_option" },
+                            { "$ref": "#/definitions/sub_track_option" },
+                            { "$ref": "#/definitions/sub_channel_option" },
+                            { "$ref": "#/definitions/base_option" }
+                        ]
+                    },
+                    "uniqueItems": true
+                }
+            }
+        },
+        "track_option": {
+            "properties": {
+                "option": { "type": "integer" }
+            },
+            "required": [ "option" ],
+            "allOf": [
+                { "$ref": "#/definitions/track" }
+            ]
+        },
+        "sub_track_option": {
+            "properties": {
+                "option": { "type": "integer" }
+            },
+            "required": [ "option" ],
+            "allOf": [
+                { "$ref": "#/definitions/sub_track" }
+            ]
+        },
+        "sub_channel_option": {
+            "properties": {
+                "option": { "type": "integer" }
+            },
+            "required": [ "option" ],
+            "allOf": [
+                { "$ref": "#/definitions/sub_channel" }
+            ]
+        },
+        "base_option": {
+            "properties": {
+                "option": { "type": "integer" }
+            },
+            "required": [ "option" ],
+            "allOf": [
+                { "$ref": "#/definitions/track_base" }
+            ]
+        }
+    }
+}
