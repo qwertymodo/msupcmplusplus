@@ -2,7 +2,7 @@
     "$schema": "https://raw.githubusercontent.com/qwertymodo/msupcmplusplus/master/configs/schema#",
     "game": "The Legend of Zelda: A Link to the Past",
     "pack": "The Legend of Zelda: A Link Between Worlds OST",
-    "url": "http:\/\/forums.ffshrine.org\/showthread.php?t=172599",
+    "url": "http://forums.ffshrine.org/showthread.php?t=172599",
     "normalization": -21,
     "output_prefix": "alttp_msu",
     "sample_rate": 32728,
