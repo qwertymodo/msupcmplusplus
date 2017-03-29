@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/qwertymodo/msupcmplusplus/master/configs/schema#",
     "game": "Mega Man X",
     "pack": "Mega Man X Guitar Playthrough",
     "artist": "Krzysztof Słowikowski",

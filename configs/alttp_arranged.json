@@ -1,4 +1,5 @@
 {
+    "$schema": "https://raw.githubusercontent.com/qwertymodo/msupcmplusplus/master/configs/schema#",
     "game": "The Legend of Zelda: A Link to the Past",
     "pack": "The Legend of Zelda: A Link to the Past Arranged Soundtrack",
     "artist": "Dracula9AntiChapel",
