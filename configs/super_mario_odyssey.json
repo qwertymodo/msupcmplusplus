@@ -1,0 +1,69 @@
+{
+    "$schema": "https://raw.githubusercontent.com/qwertymodo/msupcmplusplus/master/configs/schema#",
+    "game": "Super Mario Odyssey",
+    "url": "http://bmf.rustedlogic.net/smw/smo_msu1.rar",
+    "normalization": -24,
+    "output_prefix": "smo_msu1",
+    "tracks": [
+        {
+            "track_number": 0,
+            "file": "smo_msu1-0.wav"
+        },
+        {
+            "track_number": 1,
+            "file": "smo_msu1-1.wav",
+            "use_option": 2,
+            "options": [
+                {
+                    "option": 1,
+                    "trim_start": 0
+                },
+                {
+                    "option": 2,
+                    "trim_end": 3824400,
+                    "loop": 606884
+                }
+            ]
+        },
+        {
+            "track_number": 3,
+            "file": "smo_msu1-3.wav",
+            "use_option": 2,
+            "options": [
+                {
+                    "option": 1,
+                    "loop": 0
+                },
+                {
+                    "option": 2,
+                    "trim_end": 331343,
+                    "loop": 585
+                }
+            ]
+        },
+        {
+            "track_number": 4,
+            "file": "smo_msu1-4.wav",
+            "trim_end": 2067252,
+            "loop": 82701
+        },
+        {
+            "track_number": 6,
+            "file": "smo_msu1-6.wav",
+            "sub_tracks": [
+                {
+                    "loop": 5701
+                },
+                {
+                    "trim_start": 174935,
+                    "trim_end": 186225
+                }
+            ]
+        },
+        {
+            "track_number": 7,
+            "file": "smo_msu1-7.wav",
+            "loop": 361442
+        }
+    ]
+}
