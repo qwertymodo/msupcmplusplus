@@ -95,10 +95,10 @@ static size_t read_samples(sox_format_t * ft, sox_sample_t *buf, size_t len)
 {
   priv_t * UNUSED msu = (priv_t *)ft->priv;
   size_t done;
-  unsigned char sample;
+  uint16_t sample;
 
   for (done = 0; done < len; done++) {
-    if (lsx_eof(ft) || lsx_readb(ft, &sample)) /* no more samples */
+    if (lsx_eof(ft) || lsx_readw(ft, &sample)) /* no more samples */
       break;
     switch (ft->encoding.bits_per_sample) {
     case 16:
