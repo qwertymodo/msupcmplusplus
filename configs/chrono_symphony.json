@@ -111,20 +111,8 @@
           "track_number": 14,
           "title": "Robo's Theme",
           "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\09 - Robo_s Theme.flac",
-          "use_option": 1,
-          "options": [
-              {
-                  "option": 1,
-                  "trim_end": 3561836,
-                  "loop": 685086
-              },
-              {
-                  "option": 2,
-                  "title": "Robo's Theme (Short Version)",
-                  "trim_end": 1389307,
-                  "cross_fade": 66950
-              }
-          ]      
+          "loop": 617959,
+          "trim_end": 2028840
       },
       {
           "track_number": 15,
