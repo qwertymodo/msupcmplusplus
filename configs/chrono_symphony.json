@@ -495,6 +495,20 @@
           "loop": 1024772
       },
       {
+          "track_number": 81,
+          "title": "Battle 2 (Unused)",
+          "file": "Chrono Trigger Symphony Vol 2 (FLAC)\\11 - Battle 2.flac",
+          "trim_end": 2211689,
+          "loop": 94200
+      },
+      {
+          "track_number": 82,
+          "title": "Singing Mountain (Unused)",
+          "file": "Chrono Trigger Symphony Vol 3 (FLAC)\\01 - Singing Mountain.flac",
+          "trim_end": 3700204,
+          "loop": 1215269
+      },
+      {
           "track_number": 84,
           "title": "The Chrono Trigger Symphony (Attract Mode)",
           "file": "Chrono Trigger Symphony Vol 1 (FLAC)\\02 - The Chrono Trigger Symphony.flac",
