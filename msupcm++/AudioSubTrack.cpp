@@ -140,7 +140,7 @@ void AudioSubTrack::render()
 			{
 				if (loop)
 				{
-					m_loop = ((loop - p->trimStart()) * 44100.0 / sox->inputRate() / sox->tempo());
+					m_loop = ((loop - p->trimStart() + p->padStart()) * 44100.0 / sox->inputRate() / sox->tempo());
 				}
 			}
 		}
