@@ -361,11 +361,16 @@ bool SoxWrapper::normalize(double level)
 	char* args[1];
 	bool ret;
 
+	uservolume = sox_false;
+
 	if (!m_initialized || m_finalized)
 		return false;
 
 	if (level == 0.0)
+	{
+		uservolume = sox_true;
 		return false;
+	}
 
 	args[0] = new char[32];
 
