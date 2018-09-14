@@ -854,7 +854,7 @@ static sox_format_t * open_write(
       ft->fp = stdout;
     }
     else {
-      struct _stat st;
+      struct stat st;
       if (!lsx_stat(path, &st) && (st.st_mode & S_IFMT) == S_IFREG &&
           (overwrite_permitted && !overwrite_permitted(path))) {
         lsx_fail("permission to overwrite `%s' denied", path);

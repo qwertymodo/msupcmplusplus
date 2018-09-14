@@ -72,8 +72,8 @@ libsox_la_SOURCES += \
 	echo.c echos.c effects.c effects.h effects_i.c effects_i_dsp.c \
 	fade.c fft4g.c fft4g.h fifo.h fir.c firfit.c flanger.c gain.c \
 	hilbert.c input.c ladspa.h ladspa.c loudness.c mcompand.c \
-	mcompand_xover.h noiseprof.c noisered.c \
-	noisered.h output.c overdrive.c pad.c phaser.c rate.c \
+	mcompand_xover.h noiseprof.c noisered.c noisered.h \
+	nongnunormalize.c output.c overdrive.c pad.c phaser.c rate.c \
 	rate_filters.h rate_half_fir.h rate_poly_fir0.h rate_poly_fir.h \
 	remix.c repeat.c reverb.c reverse.c silence.c sinc.c skeleff.c \
 	speed.c splice.c stat.c stats.c stretch.c swap.c \
@@ -118,7 +118,7 @@ endif
 libsox_la_SOURCES += raw-fmt.c s1-fmt.c s2-fmt.c s3-fmt.c \
   s4-fmt.c u1-fmt.c u2-fmt.c u3-fmt.c u4-fmt.c al-fmt.c la-fmt.c ul-fmt.c \
   lu-fmt.c 8svx.c aiff-fmt.c aifc-fmt.c au.c avr.c cdr.c cvsd-fmt.c \
-  dvms-fmt.c dat.c hcom.c htk.c maud.c prc.c sf.c smp.c \
+  dvms-fmt.c dat.c hcom.c htk.c maud.c msupcm-fmt.c prc.c sf.c smp.c \
   sounder.c soundtool.c sphere.c tx16w.c voc.c vox-fmt.c ima-fmt.c adpcm.c adpcm.h \
   ima_rw.c ima_rw.h wav.c wve.c xa.c nulfile.c f4-fmt.c f8-fmt.c gsrt.c
 

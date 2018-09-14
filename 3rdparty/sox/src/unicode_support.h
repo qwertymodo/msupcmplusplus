@@ -30,14 +30,14 @@
 #ifndef UNICODE_SUPPORT_H_INCLUDED
 #define UNICODE_SUPPORT_H_INCLUDED
 
+#ifdef _WIN32
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 #include <stdio.h>
 #include <sys/stat.h>
-
-#define WIN_UNICODE 1
 
 void lsx_init_commandline_arguments(int *argc, char ***argv);
 void lsx_free_commandline_arguments(int *argc, char ***argv);
@@ -50,4 +50,17 @@ void lsx_uninit_console(void);
 #ifdef __cplusplus
 }
 #endif // __cplusplus
+
+#else
+
+#define lsx_init_commandline_arguments(argc, argv);
+#define lsx_free_commandline_arguments(argc, argv);
+#define lsx_fopen fopen
+#define lsx_stat stat
+#define lsx_unlink unlink
+#define lsx_init_console(void);
+#define lsx_uninit_console(void);
+
+#endif // _WIN32
+
 #endif

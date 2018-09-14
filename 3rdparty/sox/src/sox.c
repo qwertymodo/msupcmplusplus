@@ -239,7 +239,7 @@ static void cleanup(void)
   if (file_count) {
     if (ofile->ft) {
       if (!success && ofile->ft->io_type == lsx_io_file) {   /* If we failed part way through */
-        struct _stat st;                  /* writing a normal file, remove it. */
+        struct stat st;                  /* writing a normal file, remove it. */
         if (!lsx_stat(ofile->ft->filename, &st) &&
             (st.st_mode & S_IFMT) == S_IFREG)
           lsx_unlink(ofile->ft->filename);
@@ -2849,7 +2849,7 @@ static sox_bool cmp_comment_text(char const * c1, char const * c2)
   return c1 && c2 && !strcasecmp(c1, c2);
 }
 
-static int sox_main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   size_t i;
   char mybase[6];
@@ -3051,21 +3051,4 @@ static int sox_main(int argc, char **argv)
   cleanup();
 
   return 0;
-}
-
-int main(int argc, char **argv)
-{
-	int sox_argc;
-	char **sox_argv;
-	int exit_code;
-
-	lsx_init_console();
-	lsx_init_commandline_arguments(&sox_argc, &sox_argv);
-
-	exit_code = sox_main(sox_argc, sox_argv);
-
-	lsx_uninit_console();
-	lsx_free_commandline_arguments(&sox_argc, &sox_argv);
-
-	return exit_code;
 }
