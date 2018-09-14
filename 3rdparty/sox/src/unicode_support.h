@@ -42,7 +42,7 @@ extern "C" {
 void lsx_init_commandline_arguments(int *argc, char ***argv);
 void lsx_free_commandline_arguments(int *argc, char ***argv);
 FILE *lsx_fopen(const char *filename_utf8, const char *mode_utf8);
-int lsx_stat(const char *path_utf8, struct _stat *buf);
+int lsx_stat(const char *path_utf8, struct stat *buf);
 int lsx_unlink(const char *path_utf8);
 void lsx_init_console(void);
 void lsx_uninit_console(void);

@@ -34,6 +34,7 @@
 #include <windows.h>
 #include <io.h>
 #include <fcntl.h>
+#include <sys/stat.h>
 
 static UINT g_old_output_cp = ((UINT)-1);
 
@@ -155,7 +156,7 @@ FILE *lsx_fopen(const char *filename_utf8, const char *mode_utf8)
 	return ret;
 }
 
-int lsx_stat(const char *path_utf8, struct _stat *buf)
+int lsx_stat(const char *path_utf8, struct stat *buf)
 {
 	int ret = -1;
 	
