@@ -48,6 +48,9 @@
     <ClCompile Include="..\3rdparty\sox\src\win32-glob.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="utf8.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioTrack.h">
@@ -84,6 +87,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdparty\sox\src\win32-glob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utf8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

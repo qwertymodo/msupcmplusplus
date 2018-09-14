@@ -1,6 +1,7 @@
 #include "AudioTrackListBuilder.h"
 #include "GlobalConfig.h"
 #include "TrackParser.hpp"
+#include "utf8.h"
 #include <exception>
 #include <fstream>
 #include <iostream>
@@ -9,7 +10,7 @@ using namespace msu;
 
 AudioTrackListBuilder::AudioTrackListBuilder(std::wstring config)
 {
-	std::ifstream ifs(config);
+	std::ifstream ifs(wchar_to_utf8(config.c_str()).c_str());
 	if (ifs.is_open())
 	{
 		json j;

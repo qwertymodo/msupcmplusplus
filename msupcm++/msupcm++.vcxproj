@@ -100,6 +100,7 @@
     <ClCompile Include="msupcm.cpp" />
     <ClCompile Include="sox_main.c" />
     <ClCompile Include="SoxWrapper.cpp" />
+    <ClCompile Include="utf8.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\3rdparty\json\src\json.hpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="SoxWrapper.h" />
     <ClInclude Include="sox_main.h" />
     <ClInclude Include="TrackParser.hpp" />
+    <ClInclude Include="utf8.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\3rdparty\sox\msvc14\LibSoX.vcxproj">
