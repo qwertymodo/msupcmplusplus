@@ -190,6 +190,7 @@
 
 #include <math.h>
 
+#ifndef __cplusplus
 #ifdef min
 #undef min
 #endif
@@ -199,6 +200,7 @@
 #undef max
 #endif
 #define max(a, b) ((a) >= (b) ? (a) : (b))
+#endif // __cplusplus
 
 #define range_limit(x, lower, upper) (min(max(x, lower), upper))
 

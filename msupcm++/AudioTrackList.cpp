@@ -37,7 +37,7 @@ void AudioTrackList::render()
 		std::wcout << std::endl;
 	}
 
-	for each (AudioTrack track in m_tracks)
+	for (AudioTrack track : m_tracks)
 	{
 		if ((track.trackNumber() >= config.first_track()) &&
 			(config.last_track() < 0 || track.trackNumber() <= config.last_track()))

@@ -10,7 +10,7 @@ using namespace msu;
 
 AudioTrackListBuilder::AudioTrackListBuilder(std::wstring config)
 {
-	std::ifstream ifs(wchar_to_utf8(config.c_str()).c_str());
+	std::ifstream ifs(utf8_to_wstring.to_bytes(config).c_str());
 	if (ifs.is_open())
 	{
 		json j;

@@ -2,6 +2,7 @@
 #include "AudioSubChannel.h"
 #include "GlobalConfig.h"
 #include "SoxWrapper.h"
+#include "utf8.h"
 
 using namespace msu;
 
@@ -176,7 +177,7 @@ void AudioSubTrack::render()
 		{
 			for (auto i = 0; i < m_num_sub_channels; ++i)
 			{
-				_wremove(dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile().c_str());
+				remove(utf8_to_wstring.to_bytes(dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile()).c_str());
 			}
 		}
 	}

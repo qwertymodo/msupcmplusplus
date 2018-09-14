@@ -74,7 +74,13 @@ int main(int argc, char * argv[])
 	default:
 		if (std::string(argv[1]).compare("-s") == 0)
 		{
+#ifdef _WIN32
 			wargv[1] = utf16_to_utf8(L"sox");
+#else
+			int len = strlen(utf8_to_wstring.to_bytes(L"sox").c_str());
+			wargv[1] = (char*) malloc(len + 1);
+			strncpy(wargv[1], utf8_to_wstring.to_bytes(L"sox").c_str(), len);
+#endif
 			--wargc;
 
 			exit_code = soxmain(wargc, wargv + 1);

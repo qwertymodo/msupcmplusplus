@@ -203,7 +203,7 @@ void init_file(file_t * f);
 sox_effect_handler_t const * input_combiner_effect_fn(void);
 sox_bool is_pseudo_effect(const char *s);
 #ifdef HAVE_TERMIOS_H
-int kbhit(void)
+int kbhit(void);
 #endif
 void open_output_file(void);
 int opt_index(int val);

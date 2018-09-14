@@ -1,8 +1,14 @@
 #include "SoxWrapper.h"
 #include "GlobalConfig.h"
+#include "utf8.h"
 #include "util.h"
 #include <stdio.h>
 #include <sys/stat.h>
+
+#ifdef __GNUC__
+#include <sys/time.h>
+#include <unistd.h>
+#endif
 
 #define TEMP_FILE_PREFIX L"__sox_wrapper_temp__"
 
@@ -72,12 +78,12 @@ bool SoxWrapper::addInput(std::wstring name)
 	file_t opts;
 
 	// Check if file exists
-	struct _stat file;
-	if (!lsx_stat(wchar_to_utf8.to_bytes(name).c_str(), &file) == 0)
+	struct stat file;
+	if (!lsx_stat(utf8_to_wstring.to_bytes(name).c_str(), &file) == 0)
 		return false;
 
 	init_file(&opts);
-	add_file(&opts, wchar_to_utf8.to_bytes(name).c_str());
+	add_file(&opts, utf8_to_wstring.to_bytes(name).c_str());
 	++input_count;
 	return true;
 }
@@ -582,7 +588,7 @@ bool SoxWrapper::clear()
 		if (!config.keep_temps())
 		{
 			if (strlen(files[i]->filename) > wcslen(TEMP_FILE_PREFIX) &&
-				strncmp(files[i]->filename, wchar_to_utf8.to_bytes(TEMP_FILE_PREFIX).c_str(),
+				strncmp(files[i]->filename, utf8_to_wstring.to_bytes(TEMP_FILE_PREFIX).c_str(),
 				wcslen(TEMP_FILE_PREFIX)) == 0)
 				remove(files[i]->filename);
 		}
@@ -642,7 +648,7 @@ bool SoxWrapper::addOutput(std::wstring name)
 	file_t opts;
 	init_file(&opts);
 
-	add_file(&opts, wchar_to_utf8.to_bytes(name).c_str());
+	add_file(&opts, utf8_to_wstring.to_bytes(name).c_str());
 
 	return true;
 }
