@@ -237,7 +237,7 @@ static int drain(sox_effect_t * effect, sox_sample_t * outputBuffer, size_t * ou
 
     *outputBufferSize -= *outputBufferSize % effect->in_signal.channels;
 
-    length = fread(outputBuffer, sizeof(*outputBufferSize), *outputBufferSize, p->tempFile);
+    length = fread(outputBuffer, sizeof(*outputBuffer), *outputBufferSize, p->tempFile);
     if (length != *outputBufferSize && !feof(p->tempFile))
     {
         result = SOX_EOF;

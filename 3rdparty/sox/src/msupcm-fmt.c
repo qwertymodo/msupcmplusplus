@@ -56,7 +56,7 @@ static int startread(sox_format_t * ft)
 	  return SOX_EOF;
   }
 
-  if (lsx_readdw(ft, &msu->loop_point) == SOX_EOF)
+  if (lsx_readdw(ft, (uint32_t*)&msu->loop_point) == SOX_EOF)
   {
 	  lsx_fail_errno(ft, SOX_EHDR, "Error reading loop point");
 	  return SOX_EOF;
@@ -185,7 +185,7 @@ static size_t write_samples(sox_format_t * ft, const sox_sample_t *buf, size_t l
     switch (ft->encoding.encoding) {
     SOX_SAMPLE_LOCALS;
     case SOX_ENCODING_SIGN2:
-      while (done < len && lsx_writew(ft, SOX_SAMPLE_TO_SIGNED_16BIT(*buf++, ft->clips)) == SOX_SUCCESS)
+      while (done < len && lsx_writew(ft, (unsigned)SOX_SAMPLE_TO_SIGNED_16BIT(*buf++, ft->clips)) == SOX_SUCCESS)
         ++done;
       break;
     default:
@@ -208,7 +208,7 @@ static int stopwrite(sox_format_t * ft)
   /* If file header needs fixing up, for example it needs the number
      of samples in a field, seek back and write them here. */
   lsx_seeki(ft, (off_t)(4), SEEK_SET);
-  lsx_writedw(ft, msu->loop_point);
+  lsx_writedw(ft, (unsigned)msu->loop_point);
 
   return SOX_SUCCESS;
 }
