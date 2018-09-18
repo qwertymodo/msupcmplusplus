@@ -1,5 +1,5 @@
 CC = gcc
-CCFLAGS = 
+CCFLAGS =
 
 CXX = g++
 CXXFLAGS = -std=gnu++11
@@ -7,17 +7,22 @@ CXXFLAGS = -std=gnu++11
 LD = g++
 
 INC = -I ../3rdparty/json/src -I ../3rdparty/sox/src
+LIBS = ../3rdparty/sox/src/.libs/libsox.a
 
 TARGET = msupcm
 
 SOURCES := $(wildcard *.cpp) sox_main.c
 OBJECTS := $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCES)))
-LIBS = -lgomp -lltdl -lmad -lmp3lame -lpulse-simple -lpulse -lvorbis -lvorbisenc -lvorbisfile -logg -lopus -lopusfile -lFLAC -lz
+LIBS += -lgomp -lltdl -lmad -lmp3lame -lpulse-simple -lpulse -lvorbis -lvorbisenc -lvorbisfile -logg -lopus -lopusfile -lFLAC -lz
 
-.PHONY: clean
+.PHONY: all
 
-clean:
-	rm *.o $(TARGET)
+all: $(TARGET)
+
+FORCE:
+
+clean: FORCE
+	rm -f *.o $(TARGET)
 
 .c.o:
 	$(CC) $(CCFLAGS) $(INC) -c $? -o $@
@@ -26,6 +31,4 @@ clean:
 	$(CXX) $(CXXFLAGS) $(INC) -c $? -o $@
 
 $(TARGET): $(OBJECTS)
-	$(LD) -o $(TARGET) $(OBJECTS) ../3rdparty/sox/src/.libs/libsox.a $(LIBS)
-
-all: $(TARGET)
+	$(LD) -o $(TARGET) $(OBJECTS) $(LIBS)

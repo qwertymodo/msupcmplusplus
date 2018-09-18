@@ -72,6 +72,9 @@
       <CallingConvention>Cdecl</CallingConvention>
       <DisableSpecificWarnings>4100;4125;4127;4295;4244;4706</DisableSpecificWarnings>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>IF EXIST "../src/soxconfig.h" (DEL "../src/soxconfig.h")</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -94,6 +97,9 @@
       <CallingConvention>Cdecl</CallingConvention>
       <DisableSpecificWarnings>4100;4125;4127;4295;4244;4706</DisableSpecificWarnings>
     </ClCompile>
+    <PreBuildEvent>
+      <Command>IF EXIST "../src/soxconfig.h" (DEL "../src/soxconfig.h")</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\src\adpcm.h" />
