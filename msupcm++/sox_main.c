@@ -248,8 +248,8 @@ void atexit_cleanup(void)
 
 char const * str_time(double seconds)
 {
-	char string[16][50];
-	int i;
+	static char string[16][50];
+	static int i;
 	int hours, mins = seconds / 60;
 	seconds -= mins * 60;
 	hours = mins / 60;
@@ -1204,7 +1204,7 @@ char const * vu(unsigned channel)
 char * headroom(void)
 {
 	if (min_headroom < MIN_HEADROOM) {
-		char buff[10];
+		static char buff[10];
 		unsigned h = (unsigned)(min_headroom * 10);
 		sprintf(buff, "Hd:%u.%u", h / 10, h % 10);
 		return buff;

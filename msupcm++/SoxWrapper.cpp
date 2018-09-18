@@ -57,7 +57,7 @@ bool SoxWrapper::init(std::wstring in, std::wstring out)
 	// so just handle these arrays manually in our code
 	//add_eff_chain();
 	user_effargs = new user_effargs_t*[1];
-	user_effargs[0] = new user_effargs_t;
+	user_effargs[0] = new user_effargs_t[1];
 
 	user_effargs_size = new size_t[1];
 	user_effargs_size[0] = 0;
@@ -134,8 +134,8 @@ bool SoxWrapper::trim(size_t start, size_t end)
 			ret = addEffect("trim", 1, (char**)args);
 		}
 
-		delete args[0];
-		delete args[1];
+		delete[] args[0];
+		delete[] args[1];
 
 		return ret;
 	}
@@ -188,10 +188,10 @@ bool SoxWrapper::fade(size_t in, size_t out, char type)
 			ret = addEffect("fade", 2, (char**)args);
 		}
 
-		delete args[0];
-		delete args[1];
-		delete args[2];
-		delete args[3];
+		delete[] args[0];
+		delete[] args[1];
+		delete[] args[2];
+		delete[] args[3];
 
 		return ret;
 	}
@@ -238,8 +238,8 @@ bool SoxWrapper::pad(size_t start, size_t end)
 			ret = addEffect("pad", 1, (char**)args);
 		}
 
-		delete args[0];
-		delete args[1];
+		delete[] args[0];
+		delete[] args[1];
 
 		return ret;
 	}
@@ -267,8 +267,8 @@ bool SoxWrapper::tempo(double tempo)
 	strncpy(args[1], std::to_string(tempo).c_str(), 32);
 	ret = addEffect("tempo", 2, (char**)args);
 
-	delete args[0];
-	delete args[1];
+	delete[] args[0];
+	delete[] args[1];
 
 	return ret;
 }
@@ -389,7 +389,7 @@ bool SoxWrapper::normalize(double level)
 	snprintf(args[0], 32, "%.2f", level);
 	ret = addEffect("nongnunormalize", 1, (char**)args);
 
-	delete args[0];
+	delete[] args[0];
 
 	return ret;
 }
@@ -428,7 +428,7 @@ bool SoxWrapper::dither(char type)
 		dither_args[0][1] = type;
 		addEffect("dither", 1, (char**)dither_args);
 
-		delete dither_args[0];
+		delete[] dither_args[0];
 	}
 
 	return true;
