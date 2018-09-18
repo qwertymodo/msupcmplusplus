@@ -1,6 +1,6 @@
 #include "utf8.h"
 
-std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> utf8_to_wstring;
+std::wstring_convert<std::codecvt_utf8<wchar_t>> utf8_to_wstring;
 
 #ifdef _WIN32
 #include <windows.h>

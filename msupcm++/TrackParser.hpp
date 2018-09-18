@@ -106,10 +106,10 @@ namespace msu {
 	void from_json(const json& j, AudioBase& a)
 	{
 		if (j.find("file") != j.end())
-			a.inFile() = utf8_to_wstring.from_bytes(j["file"].get<std::string>());
+			a.inFile() = utf8_to_wstring.from_bytes(j["file"].get<std::string>().c_str());
 
 		if (j.find("output") != j.end())
-			a.outFile() = utf8_to_wstring.from_bytes(j["output"].get<std::string>());
+			a.outFile() = utf8_to_wstring.from_bytes(j["output"].get<std::string>().c_str());
 
 		if (j.find("trim_start") != j.end())
 			a.trimStart() = j["trim_start"].get<int>();
@@ -249,7 +249,7 @@ namespace msu {
 			a.trackNumber() = j["track_number"].get<int>();
 
 		if (j.find("title") != j.end())
-			a.title() = utf8_to_wstring.from_bytes(j["title"].get<std::string>());
+			a.title() = utf8_to_wstring.from_bytes(j["title"].get<std::string>().c_str());
 
 		if (a.outFile().empty())
 			a.outFile() = config.output_prefix() + L"-" + std::to_wstring(a.trackNumber()) + L".pcm";
@@ -276,20 +276,20 @@ namespace msu {
 	void from_json(const json& j, AudioTrackList& a)
 	{
 		if (j.find("game") != j.end())
-			config.game() = utf8_to_wstring.from_bytes(j["game"].get<std::string>());
+			config.game() = utf8_to_wstring.from_bytes(j["game"].get<std::string>().c_str());
 
 		if (j.find("pack") != j.end())
-			config.pack() = utf8_to_wstring.from_bytes(j["pack"].get<std::string>());
+			config.pack() = utf8_to_wstring.from_bytes(j["pack"].get<std::string>().c_str());
 
 		if (j.find("artist") != j.end())
-			config.artist() = utf8_to_wstring.from_bytes(j["artist"].get<std::string>());
+			config.artist() = utf8_to_wstring.from_bytes(j["artist"].get<std::string>().c_str());
 
 		if (j.find("url") != j.end())
-			config.url() = utf8_to_wstring.from_bytes(j["url"].get<std::string>());
+			config.url() = utf8_to_wstring.from_bytes(j["url"].get<std::string>().c_str());
 
 		if (j.find("output_prefix") != j.end())
 		{
-			config.output_prefix() = utf8_to_wstring.from_bytes(j["output_prefix"].get<std::string>());
+			config.output_prefix() = utf8_to_wstring.from_bytes(j["output_prefix"].get<std::string>().c_str());
 		}
 		else
 		{

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <locale>
 #include <string>
 
 #include "AudioTrackListBuilder.h"
@@ -31,6 +32,8 @@ int main(int argc, char * argv[])
 #else
     wargv = argv;
     wargc = argc;
+
+	std::setlocale(LC_ALL, "");
 #endif
 
 	switch (argc)
