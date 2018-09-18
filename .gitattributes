@@ -61,3 +61,11 @@
 #*.PDF   diff=astextplain
 #*.rtf   diff=astextplain
 #*.RTF   diff=astextplain
+
+###############################################################################
+# ensure proper line endings for *nix-specific scripts
+#
+###############################################################################
+*.am eol=lf
+*.in eol=lf
+*.sh eol=lf
