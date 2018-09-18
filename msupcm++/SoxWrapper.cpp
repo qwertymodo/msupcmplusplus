@@ -2,6 +2,7 @@
 #include "GlobalConfig.h"
 #include "utf8.h"
 #include "util.h"
+#include <algorithm>
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -79,11 +80,16 @@ bool SoxWrapper::addInput(std::wstring name)
 
 	// Check if file exists
 	struct stat file;
-	if (!lsx_stat(utf8_to_wstring.to_bytes(name).c_str(), &file) == 0)
+
+	std::string fname = utf8_to_wstring.to_bytes(name);
+	std::replace(fname.begin(), fname.end(), '\\', '/');
+	int ret = lsx_stat(fname.c_str(), &file);
+
+	if (ret != 0)
 		return false;
 
 	init_file(&opts);
-	add_file(&opts, utf8_to_wstring.to_bytes(name).c_str());
+	add_file(&opts, fname.c_str());
 	++input_count;
 	return true;
 }
@@ -648,7 +654,10 @@ bool SoxWrapper::addOutput(std::wstring name)
 	file_t opts;
 	init_file(&opts);
 
-	add_file(&opts, utf8_to_wstring.to_bytes(name).c_str());
+	std::string fname = utf8_to_wstring.to_bytes(name);
+	std::replace(fname.begin(), fname.end(), '\\', '/');
+
+	add_file(&opts, fname.c_str());
 
 	return true;
 }
