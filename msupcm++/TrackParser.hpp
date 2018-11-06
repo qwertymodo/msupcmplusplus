@@ -26,6 +26,7 @@ namespace msu {
 			{ "pad_end", a.padEnd() },
 			{ "tempo", a.tempo() },
 			{ "normalization", a.normalization() },
+			{ "compression", a.compression() }
 		};
 	}
 
