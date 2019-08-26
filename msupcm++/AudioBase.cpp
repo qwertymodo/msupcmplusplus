@@ -1,7 +1,10 @@
 #include "AudioBase.h"
+#include "getopt.h"
 #include "GlobalConfig.h"
 #include "SoxWrapper.h"
+#include "utf8.h"
 #include <iostream>
+#include <fstream>
 
 using namespace msu;
 
@@ -27,6 +30,156 @@ AudioBase::AudioBase(std::wstring in, std::wstring out) : AudioBase()
 {
 	m_infile = in;
 	m_outfile = out;
+}
+
+
+AudioBase::AudioBase(int argc, char** argv): AudioBase()
+{
+    struct option_w longopts[] = {
+        { L"file",          required_argument,  NULL,   L'i' },
+        { L"output",        required_argument,  NULL,   L'o' },
+        { L"loop",          required_argument,  NULL,   L'l' },
+        { L"trim",          required_argument,  NULL,   L't' },
+        { L"fade",          required_argument,  NULL,   L'f' },
+        { L"crossfade",     required_argument,  NULL,   L'x' },
+        { L"pad",           required_argument,  NULL,   L'p' },
+        { L"tempo",         required_argument,  NULL,   L'm' },
+        { L"normalization", required_argument,  NULL,   L'n' },
+        { L"compression",   no_argument,        NULL,   L'c' },
+        { 0,                0,                  0,      0 }
+    };
+
+    wchar_t** _argv = new wchar_t*[argc + 1];
+    _argv[0] = L"AudioBase";
+    int _argc = 1;
+
+    for (auto i = 0; i < argc; ++i)
+    {
+        if (argv[i][0] == '[')
+        {
+            if (argv[i][strlen(argv[i]) - 1] != ']')
+            {
+                ++i;
+                for (int depth = 1; i < argc; ++i)
+                {
+                    if (argv[i][strlen(argv[i]) - 1] == ']')
+                        --depth;
+
+                    if (depth == 0)
+                        break;
+
+                    if (argv[i][0] == '[')
+                        ++depth;
+                }
+            }
+        }
+
+        else if (argv[i][0] == '(')
+        {
+            if (argv[i][strlen(argv[i]) - 1] != ')')
+            {
+                ++i;
+                for (int depth = 1; i < argc; ++i)
+                {
+                    if (argv[i][strlen(argv[i]) - 1] == ')')
+                        --depth;
+
+                    if (depth == 0)
+                        break;
+
+                    if (argv[i][0] == '(')
+                        ++depth;
+                }
+            }
+        }
+
+        else
+        {
+            std::wstring arg = std::wstring(utf8_to_wstring.from_bytes(argv[i]));
+            _argv[_argc] = new wchar_t[arg.length() + 1]{ 0 };
+            arg.copy(_argv[_argc++], arg.length());
+        }
+    }
+
+    wchar_t c = wchar_t(0);
+    int _optind = optind;
+    optind = 0;
+    while ((c = getopt_long_w(_argc, _argv, L"i:o:l:t:f:x:p:m:n:c", longopts, NULL)) != wchar_t(-1))
+    {
+        wchar_t* tok;
+        switch (c) {
+        case L'i':  // Input file name
+            m_infile = std::wstring(optarg_w);
+            break;
+
+        case L'o':  // Output file name
+            m_outfile = std::wstring(optarg_w);
+            break;
+
+        case L'l':  // Loop point
+            m_loop = wcstol(optarg_w, nullptr, 10);
+            break;
+
+        case L't':  // Trim
+            tok = wcstok(optarg_w, L":");
+            if (tok != L"")
+                m_trim_start = wcstol(tok, nullptr, 10);
+
+            tok = wcstok(nullptr, L":");
+            if (tok != nullptr && tok != L"")
+                m_trim_end = wcstol(tok, nullptr, 10);
+
+            break;
+
+        case L'f':  // Fade
+            tok = wcstok(optarg_w, L":");
+            if (tok != L"")
+                m_fade_in = wcstol(tok, nullptr, 10);
+
+            tok = wcstok(nullptr, L":");
+            if (tok != nullptr && tok != L"")
+                m_fade_out = wcstol(tok, nullptr, 10);
+
+            break;
+
+        case L'x':  // Cross-fade
+            m_cross_fade = wcstol(optarg_w, nullptr, 10);
+            break;
+
+        case L'p':  // Pad
+            tok = wcstok(optarg_w, L":");
+            if (tok != L"")
+                m_pad_start = wcstol(tok, nullptr, 10);
+
+            tok = wcstok(nullptr, L":");
+            if (tok != nullptr && tok != L"")
+                m_pad_end = wcstol(tok, nullptr, 10);
+
+            break;
+
+        case L'm':  // Tempo
+            m_tempo = wcstod(optarg_w, nullptr);
+            break;
+
+        case L'n':  // Normalization
+            m_normalization = wcstod(optarg_w, nullptr);
+            break;
+
+        case L'c':  // Compression
+            m_compression = true;
+            break;
+
+        case 0:
+        default:
+            break;
+        }
+    }
+
+    optind = _optind;
+
+    for (auto i = 1; i < _argc; ++i)
+        delete _argv[i];
+    delete[] _argv;
 }
 
 
@@ -87,6 +240,22 @@ void AudioBase::render()
 	if (!m_infile.empty())
 	{
 		SoxWrapper* sox = SoxWrapperFactory::getInstance();
+
+        // Read existing loop point from PCM inputs if one isn't explicitly specified
+        if (m_infile.substr(m_infile.length() - 4).compare(L".pcm") == 0 && m_loop == 0)
+        {
+            std::ifstream infile(m_infile, std::ios::in | std::ios::binary);
+            if (infile.is_open())
+            {
+                char signature[4];
+                infile.read(signature, 4);  // Verify file signature
+                if (strncmp(signature, "MSU1", 4) == 0)
+                {
+                    infile.read((char*)&m_loop, sizeof(m_loop));
+                }
+            }
+            infile.close();
+        }
 
 		if (m_loop && m_trim_start > m_loop)
 		{

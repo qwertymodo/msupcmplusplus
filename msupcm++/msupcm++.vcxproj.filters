@@ -51,6 +51,9 @@
     <ClCompile Include="utf8.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="getopt.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AudioTrack.h">
@@ -90,6 +93,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utf8.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="getopt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

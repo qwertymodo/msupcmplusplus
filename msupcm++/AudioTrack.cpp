@@ -27,6 +27,30 @@ AudioTrack::AudioTrack(std::wstring in, std::wstring out): AudioBase(in, out)
 }
 
 
+AudioTrack::AudioTrack(int argc, char** argv) : AudioBase()
+{
+    m_track_number = 0;
+    m_title.clear();
+
+    for (int i = 0; i < argc; ++i)
+    {
+        if (argv[i][0] == '[')
+        {
+            *this = AudioSubChannel(argc, argv);
+            return;
+        }
+
+        else if (argv[i][0] == '(')
+        {
+            *this = AudioSubTrack(argc, argv);
+            return;
+        }
+    }
+
+    *this = AudioBase(argc, argv);
+}
+
+
 AudioTrack::AudioTrack(const AudioTrack& a)
 {
 	m_track_number = 0;

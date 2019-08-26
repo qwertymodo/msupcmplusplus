@@ -4,7 +4,7 @@
 #include "SoxWrapper.h"
 #include "utf8.h"
 
-#include <cstdio>
+#include <fstream>
 
 using namespace msu;
 
@@ -27,6 +27,64 @@ AudioSubChannel::AudioSubChannel(std::wstring in, std::wstring out) : AudioBase(
 {
 	m_sub_tracks = 0;
 	m_num_sub_tracks = 0;
+}
+
+
+AudioSubChannel::AudioSubChannel(int argc, char** argv) : AudioBase(argc, argv),
+    m_sub_tracks(0), m_num_sub_tracks(0)
+{
+    wchar_t** _argv = new wchar_t*[argc + 1];
+    _argv[0] = L"AudioSubChannel";
+    int _argc = 1;
+
+    for (auto i = 0; i < argc; ++i)
+    {
+        if (argv[i][0] == '[')
+        {
+            int s_argc = 0;
+            char** s_argv = new char*[argc];
+            s_argv[s_argc] = new char[strlen(argv[i])]{ 0 };
+
+            if (argv[i][strlen(argv[i]) - 1] == ']')
+            {
+                strncpy(s_argv[s_argc++], argv[i] + 1, strlen(argv[i]) - 2);
+            }
+
+            else
+            {
+                strcpy(s_argv[s_argc++], argv[i++] + 1);
+                for (int depth = 1; i < argc; ++i)
+                {
+                    s_argv[s_argc] = new char[strlen(argv[i])]{ 0 };
+
+                    if (argv[i][strlen(argv[i]) - 1] == ']')
+                        --depth;
+
+                    if (depth == 0)
+                    {
+                        strncpy(s_argv[s_argc++], argv[i], strlen(argv[i]) - 1);
+                        break;
+                    }
+
+                    else
+                        strcpy(s_argv[s_argc++], argv[i]);
+
+                    if (argv[i][0] == '[')
+                        ++depth;
+                }
+            }
+
+            AudioSubTrack* track = new AudioSubTrack(s_argc, s_argv);
+            if (track->inFile().empty())
+                track->inFile() = inFile();
+
+            addSubTrack(track);
+        }
+    }
+
+    for (auto i = 1; i < _argc; ++i)
+        delete _argv[i];
+    delete[] _argv;
 }
 
 
@@ -132,6 +190,23 @@ void AudioSubChannel::render()
 		for (auto i = 0; i < m_num_sub_tracks; ++i)
 		{
 			AudioSubTrack* p = &dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i];
+            
+            // Read existing loop point from PCM inputs if one isn't explicitly specified
+            if (p->inFile().substr(p->inFile().length() - 4).compare(L".pcm") == 0 && p->loop() == 0)
+            {
+                std::ifstream infile(p->inFile(), std::ios::in | std::ios::binary);
+                if (infile.is_open())
+                {
+                    char signature[4];
+                    infile.read(signature, 4);  // Verify file signature
+                    if (strncmp(signature, "MSU1", 4) == 0)
+                    {
+                        infile.read((char*)&p->loop(), sizeof(p->loop()));
+                    }
+                }
+                infile.close();
+            }
+
 			size_t loop = p->loop();
 			if (p->trimStart() > p->loop())
 				p->loop() = p->trimStart();

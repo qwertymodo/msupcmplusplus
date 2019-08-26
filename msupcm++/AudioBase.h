@@ -9,6 +9,7 @@ namespace msu
 		AudioBase();
 		AudioBase(std::wstring in);
 		AudioBase(std::wstring in, std::wstring out);
+		AudioBase(int argc, char** argv);
 		AudioBase(const AudioBase& a);
 		~AudioBase();
 

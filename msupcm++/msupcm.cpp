@@ -24,7 +24,7 @@ int main(int argc, char * argv[])
 {
 	int wargc;
 	char** wargv;
-	int exit_code;
+	int exit_code = 0;
 
 #ifdef _WIN32
 	lsx_init_console();
@@ -36,33 +36,73 @@ int main(int argc, char * argv[])
 	std::setlocale(LC_ALL, "");
 #endif
 
+    AudioTrackList tracklist;
+
 	switch (argc)
 	{
 	case 1:
-		AudioTrackListBuilder(L"tracks.json").get().render();
-		exit_code = 0;
+    case 3:
+        tracklist = AudioTrackListBuilder(L"tracks.json").get();
+        if (argc > 2 && std::wstring(utf8_to_wstring.from_bytes(wargv[1])).compare(L"-k") == 0)
+        {
+            wchar_t* tok;
+            std::wstring arg = std::wstring(utf8_to_wstring.from_bytes(wargv[2]));
+
+            tok = wcstok(const_cast<wchar_t*>(arg.c_str()), L":");
+            if (tok != L"")
+            {
+                config.first_track() = wcstol(tok, nullptr, 10);
+
+                tok = wcstok(nullptr, L":");
+                if (tok != nullptr && tok != L"")
+                    config.last_track() = wcstol(tok, nullptr, 10);
+
+                else
+                    config.last_track() = config.first_track();
+            }
+        }
+        tracklist.render();
 		break;
 
 	case 2:
-		if (std::wstring(utf8_to_wstring.from_bytes(wargv[1])).compare(L"-v") == 0)
+    case 4:
+		if (std::wstring(utf8_to_wstring.from_bytes(wargv[argc-1])).compare(L"-v") == 0)
 		{
 			std::wcout << L"msupcm v" << VERSION_NUMBER << std::endl;
-			exit_code = 0;
 			break;
 		}
 
-		else if (std::wstring(utf8_to_wstring.from_bytes(wargv[1])).compare(L"?") == 0)
+		else if (std::wstring(utf8_to_wstring.from_bytes(wargv[argc-1])).compare(L"?") == 0)
 		{
 			usage();
-			exit_code = 0;
 			break;
 		}
 
-		else if (std::wstring(utf8_to_wstring.from_bytes(wargv[1])).find_last_of(L".") != std::wstring::npos  &&
-			std::wstring(utf8_to_wstring.from_bytes(wargv[1])).substr( \
-				std::wstring(utf8_to_wstring.from_bytes(wargv[1])).find_last_of(L".")).compare(L".json") == 0)
+		else if (std::wstring(utf8_to_wstring.from_bytes(wargv[argc-1])).find_last_of(L".") != std::wstring::npos  &&
+			std::wstring(utf8_to_wstring.from_bytes(wargv[argc-1])).substr( \
+				std::wstring(utf8_to_wstring.from_bytes(wargv[argc-1])).find_last_of(L".")).compare(L".json") == 0)
 		{
-			AudioTrackListBuilder(utf8_to_wstring.from_bytes(wargv[1])).get().render();
+            tracklist = AudioTrackListBuilder(utf8_to_wstring.from_bytes(wargv[argc-1])).get();
+            if (argc > 2 && std::wstring(utf8_to_wstring.from_bytes(wargv[1])).compare(L"-k") == 0)
+            {
+                wchar_t* tok;
+                std::wstring arg = std::wstring(utf8_to_wstring.from_bytes(wargv[2]));
+
+                tok = wcstok(const_cast<wchar_t*>(arg.c_str()), L":");
+                if (tok != L"")
+                {
+                    config.first_track() = wcstol(tok, nullptr, 10);
+
+                    tok = wcstok(nullptr, L":");
+                    if (tok != nullptr && tok != L"")
+                        config.last_track() = wcstol(tok, nullptr, 10);
+
+                    else
+                        config.last_track() = config.first_track();
+                }
+            }
+
+            tracklist.render();
 		}
 
 		else
@@ -90,9 +130,9 @@ int main(int argc, char * argv[])
 			break;
 		}
 
-		usage();
-		exit_code = 1;
-		break;
+        config.verbosity() = 0;
+        AudioTrack(wargc - 1, wargv + 1).render();
+        break;
 	}
 	
 #ifdef _WIN32

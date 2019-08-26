@@ -16,6 +16,7 @@ namespace msu
 		AudioSubChannel();
 		AudioSubChannel(std::wstring in);
 		AudioSubChannel(std::wstring in, std::wstring out);
+		AudioSubChannel(int argc, char** argv);
 		AudioSubChannel(const AudioSubChannel& a);
 		~AudioSubChannel();
 

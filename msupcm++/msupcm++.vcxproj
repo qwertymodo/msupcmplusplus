@@ -96,6 +96,7 @@
     <ClCompile Include="AudioTrack.cpp" />
     <ClCompile Include="AudioTrackList.cpp" />
     <ClCompile Include="AudioTrackListBuilder.cpp" />
+    <ClCompile Include="getopt.c" />
     <ClCompile Include="GlobalConfig.cpp" />
     <ClCompile Include="msupcm.cpp" />
     <ClCompile Include="sox_main.c" />
@@ -111,6 +112,7 @@
     <ClInclude Include="AudioTrack.h" />
     <ClInclude Include="AudioTrackList.h" />
     <ClInclude Include="AudioTrackListBuilder.h" />
+    <ClInclude Include="getopt.h" />
     <ClInclude Include="GlobalConfig.h" />
     <ClInclude Include="SoxWrapper.h" />
     <ClInclude Include="sox_main.h" />
