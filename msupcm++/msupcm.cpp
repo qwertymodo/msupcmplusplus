@@ -6,7 +6,7 @@
 #include "sox_main.h"
 #include "utf8.h"
 
-#define VERSION_NUMBER 0.6
+#define VERSION_NUMBER "1.0 RC1"
 
 using namespace msu;
 
