@@ -13,7 +13,7 @@ TARGET = msupcm
 
 SOURCES := $(wildcard *.cpp) sox_main.c
 OBJECTS := $(patsubst %.c,%.o,$(patsubst %.cpp,%.o,$(SOURCES)))
-LIBS += -lgomp -lltdl -lmad -lmp3lame -lpulse-simple -lpulse -lvorbis -lvorbisenc -lvorbisfile -logg -lopus -lopusfile -lFLAC -lz
+LIBS +=  -lsndio -lsndfile -lao -lasound -lgomp -lltdl -lmad -lmp3lame -lpulse-simple -lpulse -lvorbis -lvorbisenc -lvorbisfile -logg -lopus -lopusfile -lFLAC -lz
 
 .PHONY: all
 
