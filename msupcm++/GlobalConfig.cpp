@@ -2,11 +2,17 @@
 
 using namespace msu;
 
+#ifdef _WIN32
+#define __L L
+#else
+#define __L
+#endif
+
 std::wstring GlobalConfig::m_game = L"";
 std::wstring GlobalConfig::m_pack = L"";
 std::wstring GlobalConfig::m_artist = L"";
 std::wstring GlobalConfig::m_url = L"";
-std::wstring GlobalConfig::m_output_prefix = L"";
+std::fstring_t GlobalConfig::m_output_prefix = __L"";
 double GlobalConfig::m_normalization = 0.0;
 bool GlobalConfig::m_dither = true;
 unsigned int GlobalConfig::m_verbosity = 1;
@@ -38,7 +44,7 @@ std::wstring& GlobalConfig::url()
 }
 
 
-std::wstring& GlobalConfig::output_prefix()
+std::fstring_t& GlobalConfig::output_prefix()
 {
 	return m_output_prefix;
 }

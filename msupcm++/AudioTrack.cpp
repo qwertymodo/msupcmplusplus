@@ -13,14 +13,14 @@ AudioTrack::AudioTrack(): AudioBase()
 }
 
 
-AudioTrack::AudioTrack(std::wstring in): AudioBase(in)
+AudioTrack::AudioTrack(std::fstring_t in): AudioBase(in)
 {
 	m_track_number = 0;
 	m_title.clear();
 }
 
 
-AudioTrack::AudioTrack(std::wstring in, std::wstring out): AudioBase(in, out)
+AudioTrack::AudioTrack(std::fstring_t in, std::fstring_t out): AudioBase(in, out)
 {
 	m_track_number = 0;
 	m_title.clear();

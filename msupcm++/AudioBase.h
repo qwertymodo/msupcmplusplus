@@ -1,14 +1,20 @@
 #pragma once
 #include <string>
 
+#ifdef WIN32
+#define fstring_t wstring
+#else
+#define fstring_t string
+#endif
+
 namespace msu
 {
 	class AudioBase
 	{
 	public:
 		AudioBase();
-		AudioBase(std::wstring in);
-		AudioBase(std::wstring in, std::wstring out);
+		AudioBase(std::fstring_t in);
+		AudioBase(std::fstring_t in, std::fstring_t out);
 		AudioBase(int argc, char** argv);
 		AudioBase(const AudioBase& a);
 		~AudioBase();
@@ -19,11 +25,11 @@ namespace msu
 
 		virtual void render();
 
-		const std::wstring& inFile() const;
-		std::wstring& inFile();
+		const std::fstring_t& inFile() const;
+		std::fstring_t& inFile();
 
-		const std::wstring& outFile() const;
-		std::wstring& outFile();
+		const std::fstring_t& outFile() const;
+		std::fstring_t& outFile();
 
 		int loop() const;
 		int& loop();
@@ -59,8 +65,8 @@ namespace msu
 		bool& compression();
 
 	protected:
-		std::wstring m_infile;
-		std::wstring m_outfile;
+		std::fstring_t m_infile;
+		std::fstring_t m_outfile;
 		int m_loop;
 		int m_trim_start;
 		int m_trim_end;

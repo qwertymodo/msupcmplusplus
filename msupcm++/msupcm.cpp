@@ -46,14 +46,15 @@ int main(int argc, char * argv[])
         if (argc > 2 && std::wstring(utf8_to_wstring.from_bytes(wargv[1])).compare(L"-k") == 0)
         {
             wchar_t* tok;
+			wchar_t* wbuf;
             std::wstring arg = std::wstring(utf8_to_wstring.from_bytes(wargv[2]));
 
-            tok = wcstok(const_cast<wchar_t*>(arg.c_str()), L":");
+            tok = wcstok(const_cast<wchar_t*>(arg.c_str()), L":", &wbuf);
             if (tok != L"")
             {
                 config.first_track() = wcstol(tok, nullptr, 10);
 
-                tok = wcstok(nullptr, L":");
+                tok = wcstok(nullptr, L":", &wbuf);
                 if (tok != nullptr && tok != L"")
                     config.last_track() = wcstol(tok, nullptr, 10);
 
@@ -86,14 +87,15 @@ int main(int argc, char * argv[])
             if (argc > 2 && std::wstring(utf8_to_wstring.from_bytes(wargv[1])).compare(L"-k") == 0)
             {
                 wchar_t* tok;
+				wchar_t* wbuf;
                 std::wstring arg = std::wstring(utf8_to_wstring.from_bytes(wargv[2]));
 
-                tok = wcstok(const_cast<wchar_t*>(arg.c_str()), L":");
+                tok = wcstok(const_cast<wchar_t*>(arg.c_str()), L":", &wbuf);
                 if (tok != L"")
                 {
                     config.first_track() = wcstol(tok, nullptr, 10);
 
-                    tok = wcstok(nullptr, L":");
+                    tok = wcstok(nullptr, L":", &wbuf);
                     if (tok != nullptr && tok != L"")
                         config.last_track() = wcstol(tok, nullptr, 10);
 

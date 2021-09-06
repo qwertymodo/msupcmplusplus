@@ -1,6 +1,12 @@
 #pragma once
 #include <string>
 
+#ifdef WIN32
+#define fstring_t wstring
+#else
+#define fstring_t string
+#endif
+
 namespace msu
 {
 	static class GlobalConfig
@@ -10,7 +16,7 @@ namespace msu
 		static std::wstring& pack();
 		static std::wstring& artist();
 		static std::wstring& url();
-		static std::wstring& output_prefix();
+		static std::fstring_t& output_prefix();
 		static double& normalization();
 		static bool& dither();
 		static unsigned int& verbosity();
@@ -23,7 +29,7 @@ namespace msu
 		static std::wstring m_pack;
 		static std::wstring m_artist;
 		static std::wstring m_url;
-		static std::wstring m_output_prefix;
+		static std::fstring_t m_output_prefix;
 		static double m_normalization;
 		static bool m_dither;
 		static unsigned int m_verbosity;

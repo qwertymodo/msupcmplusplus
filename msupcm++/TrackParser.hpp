@@ -7,6 +7,12 @@
 #include <string>
 #include <vector>
 
+#ifdef WIN32
+#define __L L
+#else
+#define __L
+#endif
+
 using nlohmann::json;
 
 namespace msu {
@@ -107,10 +113,18 @@ namespace msu {
 	void from_json(const json& j, AudioBase& a)
 	{
 		if (j.find("file") != j.end())
+#ifdef WIN32
 			a.inFile() = utf8_to_wstring.from_bytes(j["file"].get<std::string>().c_str());
+#else
+			a.inFile() = j["file"].get<std::string>();
+#endif
 
 		if (j.find("output") != j.end())
+#ifdef WIN32
 			a.outFile() = utf8_to_wstring.from_bytes(j["output"].get<std::string>().c_str());
+#else
+			a.outFile() = j["output"].get<std::string>();
+#endif
 
 		if (j.find("trim_start") != j.end())
 			a.trimStart() = j["trim_start"].get<int>();
@@ -253,7 +267,11 @@ namespace msu {
 			a.title() = utf8_to_wstring.from_bytes(j["title"].get<std::string>().c_str());
 
 		if (a.outFile().empty())
+#ifdef WIN32
 			a.outFile() = config.output_prefix() + L"-" + std::to_wstring(a.trackNumber()) + L".pcm";
+#else
+			a.outFile() = config.output_prefix() + "-" + std::to_string(a.trackNumber()) + ".pcm";
+#endif
 
 		if (a.normalization() == 0.0)
 			a.normalization() = config.normalization();
@@ -290,11 +308,19 @@ namespace msu {
 
 		if (j.find("output_prefix") != j.end())
 		{
+#ifdef WIN32
 			config.output_prefix() = utf8_to_wstring.from_bytes(j["output_prefix"].get<std::string>().c_str());
+#else
+			config.output_prefix() = j["output_prefix"].get<std::string>();
+#endif
 		}
 		else
 		{
+#ifdef WIN32
 			config.output_prefix() = L"track";
+#else
+			config.output_prefix() = "track";
+#endif
 		}
 
 		if (j.find("normalization") != j.end())

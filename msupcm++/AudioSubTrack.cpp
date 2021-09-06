@@ -6,6 +6,12 @@
 
 #include <fstream>
 
+#ifdef WIN32
+#define __L L
+#else
+#define __L
+#endif
+
 using namespace msu;
 
 AudioSubTrack::AudioSubTrack() : AudioBase()
@@ -15,14 +21,14 @@ AudioSubTrack::AudioSubTrack() : AudioBase()
 }
 
 
-AudioSubTrack::AudioSubTrack(std::wstring in) : AudioBase(in)
+AudioSubTrack::AudioSubTrack(std::fstring_t in) : AudioBase(in)
 {
 	m_sub_channels = 0;
 	m_num_sub_channels = 0;
 }
 
 
-AudioSubTrack::AudioSubTrack(std::wstring in, std::wstring out) : AudioBase(in, out)
+AudioSubTrack::AudioSubTrack(std::fstring_t in, std::fstring_t out) : AudioBase(in, out)
 {
 	m_sub_channels = 0;
 	m_num_sub_channels = 0;
@@ -190,9 +196,13 @@ void AudioSubTrack::render()
 			AudioSubChannel* p = &dynamic_cast<AudioSubChannel*>(m_sub_channels)[i];
 
             // Read existing loop point from PCM inputs if one isn't explicitly specified
-            if (p->inFile().substr(p->inFile().length() - 4).compare(L".pcm") == 0 && p->loop() == 0)
+            if (p->inFile().substr(p->inFile().length() - 4).compare(__L".pcm") == 0 && p->loop() == 0)
             {
-                std::ifstream infile(p->inFile(), std::ios::in | std::ios::binary);
+#ifdef WIN32
+                std::ifstream infile(utf8_to_wstring.to_bytes(p->inFile()).c_str(), std::ios::in | std::ios::binary);
+#else
+                std::ifstream infile(p->inFile().c_str(), std::ios::in | std::ios::binary);
+#endif
                 if (infile.is_open())
                 {
                     char signature[4];
@@ -212,7 +222,11 @@ void AudioSubTrack::render()
 			if (m_loop && !p->loop())
 				p->loop() = m_loop + p->trimStart();
 
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(L".")).append(L"_sch").append(std::to_wstring(i)).append(L".wav");
+#ifdef WIN32
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(__L".")).append(__L"_sch").append(std::to_wstring(i)).append(__L".wav");
+#else
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(__L".")).append(__L"_sch").append(std::to_string(i)).append(__L".wav");
+#endif
 			p->render();
 			if (!m_loop)
 			{
@@ -254,7 +268,11 @@ void AudioSubTrack::render()
 		{
 			for (auto i = 0; i < m_num_sub_channels; ++i)
 			{
+#ifdef WIN32
 				remove(utf8_to_wstring.to_bytes(dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile()).c_str());
+#else
+				remove(dynamic_cast<AudioSubChannel*>(m_sub_channels)[i].outFile().c_str());
+#endif
 			}
 		}
 	}

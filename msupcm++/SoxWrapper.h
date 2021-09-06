@@ -3,6 +3,12 @@
 #include <codecvt>
 #include <string>
 
+#ifdef WIN32
+#define fstring_t wstring
+#else
+#define fstring_t string
+#endif
+
 namespace msu
 {
 	class SoxWrapper
@@ -11,8 +17,8 @@ namespace msu
 		SoxWrapper();
 		~SoxWrapper();
 
-		bool init(std::wstring in, std::wstring out);
-		bool addInput(std::wstring name);
+		bool init(std::fstring_t in, std::fstring_t out);
+		bool addInput(std::fstring_t name);
 		bool combine(sox_combine_method method);
 		bool trim(size_t start, size_t end = 0);
 		bool fade(size_t in, size_t out = 0, char type = 't');
@@ -31,9 +37,9 @@ namespace msu
 		sox_rate_t inputRate();
 
 	private:
-		bool addOutput(std::wstring name);
+		bool addOutput(std::fstring_t name);
 		bool addEffect(std::string name, int argc, char** argv);
-		std::wstring getTempFile(std::wstring ext);
+		std::fstring_t getTempFile(std::fstring_t ext);
 
 		bool m_initialized;
 		bool m_finalized;
@@ -43,7 +49,7 @@ namespace msu
 		size_t m_length;
 		sox_rate_t m_input_rate;
 
-		std::wstring m_output;
+		std::fstring_t m_output;
 	};
 
 	class SoxWrapperFactory
