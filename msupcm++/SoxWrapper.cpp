@@ -2,6 +2,8 @@
 #include "GlobalConfig.h"
 #include "utf8.h"
 #include "util.h"
+#undef min // #define'd min()/max() incompatible with std::min()/std::max()
+#undef max
 #include <algorithm>
 #include <stdio.h>
 #include <sys/stat.h>

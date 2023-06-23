@@ -23,6 +23,7 @@
 
 #include "soxconfig.h"
 #include "sox_main.h"
+#include "util.h" // re-include directly from sox to get #define'd min() and max()
 
 #include <ctype.h>
 #include <errno.h>

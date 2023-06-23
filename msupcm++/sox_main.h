@@ -6,6 +6,8 @@ extern "C" {
 
 #include "sox.h"
 #include "util.h"
+#undef min // #define'd min()/max() incompatible with std::min()/std::max()
+#undef max
 #include "unicode_support.h"
 #include <sys/timeb.h>
 #include <sys/types.h>
