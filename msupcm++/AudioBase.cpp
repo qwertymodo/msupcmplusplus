@@ -7,10 +7,11 @@
 
 #ifdef _WIN32
 #include "getopt.h"
-#define __L L
+#define CONCAT(x, y) x##y
+#define WSTR_L(x) CONCAT(L, x)
 #else
 #include <getopt.h>
-#define __L
+#define WSTR_L(x) x
 #define option_w option
 #define getopt_long_w getopt_long
 #define optarg_w optarg
@@ -23,7 +24,7 @@
 using namespace msu;
 
 AudioBase::AudioBase() :
-	m_infile(__L""), m_outfile(__L""),
+	m_infile(WSTR_L("")), m_outfile(WSTR_L("")),
 	m_trim_start(0), m_trim_end(0), m_start_offset(0), m_loop(0),
 	m_fade_in(0), m_fade_out(0), m_cross_fade(0),
 	m_pad_start(0), m_pad_end(0),
@@ -50,21 +51,21 @@ AudioBase::AudioBase(std::fstring_t in, std::fstring_t out) : AudioBase()
 AudioBase::AudioBase(int argc, char** argv): AudioBase()
 {
     struct option_w longopts[] = {
-        { __L"file",          required_argument,  NULL,   __L'i' },
-        { __L"output",        required_argument,  NULL,   __L'o' },
-        { __L"loop",          required_argument,  NULL,   __L'l' },
-        { __L"trim",          required_argument,  NULL,   __L't' },
-        { __L"fade",          required_argument,  NULL,   __L'f' },
-        { __L"crossfade",     required_argument,  NULL,   __L'x' },
-        { __L"pad",           required_argument,  NULL,   __L'p' },
-        { __L"tempo",         required_argument,  NULL,   __L'm' },
-        { __L"normalization", required_argument,  NULL,   __L'n' },
-        { __L"compression",   no_argument,        NULL,   __L'c' },
+        { WSTR_L("file"),          required_argument,  NULL,   WSTR_L('i') },
+        { WSTR_L("output"),        required_argument,  NULL,   WSTR_L('o') },
+        { WSTR_L("loop"),          required_argument,  NULL,   WSTR_L('l') },
+        { WSTR_L("trim"),          required_argument,  NULL,   WSTR_L('t') },
+        { WSTR_L("fade"),          required_argument,  NULL,   WSTR_L('f') },
+        { WSTR_L("crossfade"),     required_argument,  NULL,   WSTR_L('x') },
+        { WSTR_L("pad"),           required_argument,  NULL,   WSTR_L('p') },
+        { WSTR_L("tempo"),         required_argument,  NULL,   WSTR_L('m') },
+        { WSTR_L("normalization"), required_argument,  NULL,   WSTR_L('n') },
+        { WSTR_L("compression"),   no_argument,        NULL,   WSTR_L('c') },
         { 0,                0,                  0,      0 }
     };
 
     wchar_t** _argv = new wchar_t*[argc + 1];
-    _argv[0] = __L"AudioBase";
+    _argv[0] = WSTR_L("AudioBase");
     int _argc = 1;
 
     for (auto i = 0; i < argc; ++i)
@@ -122,7 +123,7 @@ AudioBase::AudioBase(int argc, char** argv): AudioBase()
     wchar_t c = wchar_t(0);
     int _optind = optind;
     optind = 0;
-    while ((c = getopt_long_w(_argc, _argv, __L"i:o:l:t:f:x:p:m:n:c", longopts, NULL)) != wchar_t(-1))
+    while ((c = getopt_long_w(_argc, _argv, WSTR_L("i:o:l:t:f:x:p:m:n:c"), longopts, NULL)) != wchar_t(-1))
     {
 #ifdef WIN32
         wchar_t* tok;
@@ -131,64 +132,64 @@ AudioBase::AudioBase(int argc, char** argv): AudioBase()
         char* tok;
 #endif
         switch (c) {
-        case __L'i':  // Input file name
+        case WSTR_L('i'):  // Input file name
             m_infile = std::fstring_t(optarg_w);
             break;
 
-        case __L'o':  // Output file name
+        case WSTR_L('o'):  // Output file name
             m_outfile = std::fstring_t(optarg_w);
             break;
 
-        case __L'l':  // Loop point
+        case WSTR_L('l'):  // Loop point
             m_loop = wcstol(optarg_w, nullptr, 10);
             break;
 
-        case __L't':  // Trim
-            tok = wcstok(optarg_w, __L":", &wbuf);
-            if (tok != __L"")
+        case WSTR_L('t'):  // Trim
+            tok = wcstok(optarg_w, WSTR_L(":"), &wbuf);
+            if (tok != WSTR_L(""))
                 m_trim_start = wcstol(tok, nullptr, 10);
 
-            tok = wcstok(nullptr, __L":", &wbuf);
-            if (tok != nullptr && tok != __L"")
+            tok = wcstok(nullptr, WSTR_L(":"), &wbuf);
+            if (tok != nullptr && tok != WSTR_L(""))
                 m_trim_end = wcstol(tok, nullptr, 10);
 
             break;
 
-        case __L'f':  // Fade
-            tok = wcstok(optarg_w, __L":", &wbuf);
-            if (tok != __L"")
+        case WSTR_L('f'):  // Fade
+            tok = wcstok(optarg_w, WSTR_L(":"), &wbuf);
+            if (tok != WSTR_L(""))
                 m_fade_in = wcstol(tok, nullptr, 10);
 
-            tok = wcstok(nullptr, __L":", &wbuf);
-            if (tok != nullptr && tok != __L"")
+            tok = wcstok(nullptr, WSTR_L(":"), &wbuf);
+            if (tok != nullptr && tok != WSTR_L(""))
                 m_fade_out = wcstol(tok, nullptr, 10);
 
             break;
 
-        case __L'x':  // Cross-fade
+        case WSTR_L('x'):  // Cross-fade
             m_cross_fade = wcstol(optarg_w, nullptr, 10);
             break;
 
-        case __L'p':  // Pad
-            tok = wcstok(optarg_w, __L":", &wbuf);
-            if (tok != __L"")
+        case WSTR_L('p'):  // Pad
+            tok = wcstok(optarg_w, WSTR_L(":"), &wbuf);
+            if (tok != WSTR_L(""))
                 m_pad_start = wcstol(tok, nullptr, 10);
 
-            tok = wcstok(nullptr, __L":", &wbuf);
-            if (tok != nullptr && tok != __L"")
+            tok = wcstok(nullptr, WSTR_L(":"), &wbuf);
+            if (tok != nullptr && tok != WSTR_L(""))
                 m_pad_end = wcstol(tok, nullptr, 10);
 
             break;
 
-        case __L'm':  // Tempo
+        case WSTR_L('m'):  // Tempo
             m_tempo = wcstod(optarg_w, nullptr);
             break;
 
-        case __L'n':  // Normalization
+        case WSTR_L('n'):  // Normalization
             m_normalization = wcstod(optarg_w, nullptr);
             break;
 
-        case __L'c':  // Compression
+        case WSTR_L('c'):  // Compression
             m_compression = true;
             break;
 
@@ -265,7 +266,7 @@ void AudioBase::render()
 		SoxWrapper* sox = SoxWrapperFactory::getInstance();
 
         // Read existing loop point from PCM inputs if one isn't explicitly specified
-        if (m_infile.substr(m_infile.length() - 4).compare(__L".pcm") == 0 && m_loop == 0)
+        if (m_infile.substr(m_infile.length() - 4).compare(WSTR_L(".pcm")) == 0 && m_loop == 0)
         {
 #ifdef WIN32
             std::ifstream infile(utf8_to_wstring.to_bytes(m_infile).c_str(), std::ios::in | std::ios::binary);
@@ -308,9 +309,9 @@ void AudioBase::render()
 		else if (config.verbosity() > 0)
 		{
 #ifdef WIN32
-			std::wcout << __L"Error opening input file " << m_infile << std::endl;
+			std::wcout << WSTR_L("Error opening input file ") << m_infile << std::endl;
 #else
-			std::cout << __L"Error opening input file " << m_infile << std::endl;
+			std::cout << WSTR_L("Error opening input file ") << m_infile << std::endl;
 #endif
 		}
 	}

@@ -2,17 +2,18 @@
 
 using namespace msu;
 
-#ifdef _WIN32
-#define __L L
+#ifdef WIN32
+#define CONCAT(x, y) x##y
+#define WSTR_L(x) CONCAT(L, x)
 #else
-#define __L
+#define WSTR_L(x) x
 #endif
 
 std::wstring GlobalConfig::m_game = L"";
 std::wstring GlobalConfig::m_pack = L"";
 std::wstring GlobalConfig::m_artist = L"";
 std::wstring GlobalConfig::m_url = L"";
-std::fstring_t GlobalConfig::m_output_prefix = __L"";
+std::fstring_t GlobalConfig::m_output_prefix = WSTR_L("");
 double GlobalConfig::m_normalization = 0.0;
 bool GlobalConfig::m_dither = true;
 unsigned int GlobalConfig::m_verbosity = 1;

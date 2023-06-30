@@ -7,9 +7,11 @@
 #include <fstream>
 
 #ifdef WIN32
-#define __L L
+#define CONCAT(x, y) x##y
+#define WSTR_L(x) CONCAT(L, x)
 #else
-#define __L
+#define WSTR_L(x) x
+#define wchar_t char
 #endif
 
 using namespace msu;
@@ -40,7 +42,7 @@ AudioSubChannel::AudioSubChannel(int argc, char** argv) : AudioBase(argc, argv),
     m_sub_tracks(0), m_num_sub_tracks(0)
 {
     wchar_t** _argv = new wchar_t*[argc + 1];
-    _argv[0] = L"AudioSubChannel";
+    _argv[0] = WSTR_L("AudioSubChannel");
     int _argc = 1;
 
     for (auto i = 0; i < argc; ++i)
@@ -80,11 +82,11 @@ AudioSubChannel::AudioSubChannel(int argc, char** argv) : AudioBase(argc, argv),
                 }
             }
 
-            AudioSubTrack* track = new AudioSubTrack(s_argc, s_argv);
-            if (track->inFile().empty())
-                track->inFile() = inFile();
+			AudioSubTrack* track = new AudioSubTrack(s_argc, s_argv);
+			if (track->inFile().empty())
+				track->inFile() = inFile();
 
-            addSubTrack(track);
+			addSubTrack(track);
         }
     }
 
@@ -198,7 +200,7 @@ void AudioSubChannel::render()
 			AudioSubTrack* p = &dynamic_cast<AudioSubTrack*>(m_sub_tracks)[i];
             
             // Read existing loop point from PCM inputs if one isn't explicitly specified
-            if (p->inFile().substr(p->inFile().length() - 4).compare(__L".pcm") == 0 && p->loop() == 0)
+            if (p->inFile().substr(p->inFile().length() - 4).compare(WSTR_L(".pcm")) == 0 && p->loop() == 0)
             {
 #ifdef WIN32
                 std::ifstream infile(utf8_to_wstring.to_bytes(p->inFile()).c_str(), std::ios::in | std::ios::binary);
@@ -222,9 +224,9 @@ void AudioSubChannel::render()
 				p->loop() = p->trimStart();
 
 #ifdef WIN32
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(__L".")).append(__L"_str").append(std::to_wstring(i)).append(__L".wav");
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(WSTR_L("."))).append(WSTR_L("_str")).append(std::to_wstring(i)).append(WSTR_L(".wav"));
 #else
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(__L".")).append(__L"_str").append(std::to_string(i)).append(__L".wav");
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(WSTR_L("."))).append(WSTR_L("_str")).append(std::to_string(i)).append(WSTR_L(".wav"));
 #endif
 			p->render();
 			if (!m_loop)
@@ -260,8 +262,8 @@ void AudioSubChannel::render()
 			sox->trim(m_trim_start, m_trim_end);
 			sox->normalize(m_normalization);
 			sox->fade(m_fade_in, m_fade_out);
-			sox->pad(m_pad_start, m_pad_end);
 			sox->tempo(m_tempo);
+			sox->pad(m_pad_start, m_pad_end);
 			sox->loop(m_trim_start + m_start_offset, m_loop + m_pad_start);
 			sox->dither(m_dither_type);
 			sox->finalize();

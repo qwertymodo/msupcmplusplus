@@ -7,9 +7,11 @@
 #include <fstream>
 
 #ifdef WIN32
-#define __L L
+#define CONCAT(x, y) x##y
+#define WSTR_L(x) CONCAT(L, x)
 #else
-#define __L
+#define WSTR_L(x) x
+#define wchar_t char
 #endif
 
 using namespace msu;
@@ -39,7 +41,7 @@ AudioSubTrack::AudioSubTrack(int argc, char** argv) : AudioBase(argc, argv),
     m_sub_channels(0), m_num_sub_channels(0)
 {
     wchar_t** _argv = new wchar_t*[argc + 1];
-    _argv[0] = L"AudioSubTrack";
+    _argv[0] = WSTR_L("AudioSubTrack");
     int _argc = 1;
 
     for (auto i = 0; i < argc; ++i)
@@ -196,7 +198,7 @@ void AudioSubTrack::render()
 			AudioSubChannel* p = &dynamic_cast<AudioSubChannel*>(m_sub_channels)[i];
 
             // Read existing loop point from PCM inputs if one isn't explicitly specified
-            if (p->inFile().substr(p->inFile().length() - 4).compare(__L".pcm") == 0 && p->loop() == 0)
+            if (p->inFile().substr(p->inFile().length() - 4).compare(WSTR_L(".pcm")) == 0 && p->loop() == 0)
             {
 #ifdef WIN32
                 std::ifstream infile(utf8_to_wstring.to_bytes(p->inFile()).c_str(), std::ios::in | std::ios::binary);
@@ -223,9 +225,9 @@ void AudioSubTrack::render()
 				p->loop() = m_loop + p->trimStart();
 
 #ifdef WIN32
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(__L".")).append(__L"_sch").append(std::to_wstring(i)).append(__L".wav");
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(WSTR_L("."))).append(WSTR_L("_sch")).append(std::to_wstring(i)).append(WSTR_L(".wav"));
 #else
-			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(__L".")).append(__L"_sch").append(std::to_string(i)).append(__L".wav");
+			p->outFile() = m_outfile.substr(0, m_outfile.find_last_of(WSTR_L("."))).append(WSTR_L("_sch")).append(std::to_string(i)).append(WSTR_L(".wav"));
 #endif
 			p->render();
 			if (!m_loop)

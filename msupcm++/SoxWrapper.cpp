@@ -6,15 +6,17 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#ifdef _WIN32
-#define __L L
+
+#ifdef WIN32
+#define CONCAT(x, y) x##y
+#define WSTR_L(x) CONCAT(L, x)
 #else
-#define __L
+#define WSTR_L(x) x
 #include <sys/time.h>
 #include <unistd.h>
 #endif
 
-#define TEMP_FILE_PREFIX __L"__sox_wrapper_temp__"
+#define TEMP_FILE_PREFIX WSTR_L("__sox_wrapper_temp__")
 
 using namespace msu;
 
@@ -291,7 +293,7 @@ bool SoxWrapper::loop(size_t start, size_t loop)
 
 	if (start > loop)
 	{
-		m_output = temp1 = getTempFile(__L"wav");
+		m_output = temp1 = getTempFile(WSTR_L("wav"));
 
 		finalize();
 
@@ -299,13 +301,13 @@ bool SoxWrapper::loop(size_t start, size_t loop)
 		bool keep_temps = config.keep_temps();
 		config.keep_temps() = true;
 
-		init(temp1, temp2 = getTempFile(__L"wav"));
+		init(temp1, temp2 = getTempFile(WSTR_L("wav")));
 		trim(0, (start - loop) * 44100.0 / m_input_rate);
 		finalize();
 
 		config.keep_temps() = keep_temps;
 
-		init(temp1, temp3 = getTempFile(__L"wav"));
+		init(temp1, temp3 = getTempFile(WSTR_L("wav")));
 		trim((start - loop) * 44100.0 / m_input_rate);
 		finalize();
 
@@ -331,7 +333,7 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 
 	std::fstring_t temp1, temp2, temp3;
 	std::fstring_t final_output = m_output;
-	m_output = temp1 = getTempFile(__L"wav");
+	m_output = temp1 = getTempFile(WSTR_L("wav"));
 	sox_rate_t input_rate = m_input_rate;
 
 	finalize();
@@ -352,14 +354,14 @@ bool SoxWrapper::crossFade(size_t loop, size_t end, size_t length, double ratio)
 	bool keep_temps = config.keep_temps();
 	config.keep_temps() = true;
 
-	init(temp1, temp2 = getTempFile(__L"wav"));
+	init(temp1, temp2 = getTempFile(WSTR_L("wav")));
 	trim(0, end);
 	fade(0, length * ratio);
 	finalize();
 
 	config.keep_temps() = keep_temps;
 
-	init(temp1, temp3 = getTempFile(__L"wav"));
+	init(temp1, temp3 = getTempFile(WSTR_L("wav")));
 	trim(loop > length ? loop - length : 0, loop);
 	fade(loop > length ? length : loop);
 	pad(loop > length ? end - length : end - loop);
@@ -727,7 +729,7 @@ bool SoxWrapper::addEffect(std::string name, int argc, char** argv)
 std::fstring_t SoxWrapper::getTempFile(std::fstring_t ext)
 {
 #ifdef WIN32
-	return std::wstring(TEMP_FILE_PREFIX).append(std::to_wstring(m_temp_counter++)).append(__L".").append(ext);
+	return std::wstring(TEMP_FILE_PREFIX).append(std::to_wstring(m_temp_counter++)).append(WSTR_L(".")).append(ext);
 #else
 	return std::string(TEMP_FILE_PREFIX).append(std::to_string(m_temp_counter++)).append(".").append(ext);
 #endif

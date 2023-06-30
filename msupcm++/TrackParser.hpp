@@ -7,12 +7,6 @@
 #include <string>
 #include <vector>
 
-#ifdef WIN32
-#define __L L
-#else
-#define __L
-#endif
-
 using nlohmann::json;
 
 namespace msu {
