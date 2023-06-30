@@ -81,11 +81,7 @@ AudioSubTrack::AudioSubTrack(int argc, char** argv) : AudioBase(argc, argv),
                 }
             }
 
-            AudioSubChannel* channel = new AudioSubChannel(s_argc, s_argv);
-            if (channel->inFile().empty())
-                channel->inFile() = inFile();
-
-            addSubChannel(channel);
+            addSubChannel(new AudioSubChannel(s_argc, s_argv));
         }
     }
 
@@ -196,6 +192,8 @@ void AudioSubTrack::render()
 		for (auto i = 0; i < m_num_sub_channels; ++i)
 		{
 			AudioSubChannel* p = &dynamic_cast<AudioSubChannel*>(m_sub_channels)[i];
+			if (p->inFile().empty())
+				p->inFile() = inFile();
 
             // Read existing loop point from PCM inputs if one isn't explicitly specified
             if (p->inFile().substr(p->inFile().length() - 4).compare(WSTR_L(".pcm")) == 0 && p->loop() == 0)
