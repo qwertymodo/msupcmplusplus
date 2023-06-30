@@ -2,19 +2,21 @@
 #include "GlobalConfig.h"
 #include "utf8.h"
 #include "util.h"
-#include <algorithm>
-#include <stdio.h>
-#include <sys/stat.h>
-
 
 #ifdef WIN32
 #define CONCAT(x, y) x##y
 #define WSTR_L(x) CONCAT(L, x)
 #else
+#undef min
+#undef max
 #define WSTR_L(x) x
 #include <sys/time.h>
 #include <unistd.h>
 #endif
+
+#include <algorithm>
+#include <stdio.h>
+#include <sys/stat.h>
 
 #define TEMP_FILE_PREFIX WSTR_L("__sox_wrapper_temp__")
 

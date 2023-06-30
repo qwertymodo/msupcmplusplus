@@ -6,6 +6,10 @@ extern "C" {
 
 #include "sox.h"
 #include "util.h"
+#ifndef WIN32
+#undef min
+#undef max
+#endif
 #include "unicode_support.h"
 #include <sys/timeb.h>
 #include <sys/types.h>

@@ -23,6 +23,7 @@
 
 #include "soxconfig.h"
 #include "sox_main.h"
+#include "util.h"
 
 #include <ctype.h>
 #include <errno.h>
