@@ -164,12 +164,6 @@ bool SoxWrapper::fade(size_t in, size_t out, char type)
 	if (std::string("qhtlp").find(type) == std::string::npos)
 		return false;
 
-	if (m_input_rate != 44100.0)
-	{
-		in = in * 44100.0 / m_input_rate;
-		out = out * 44100.0 / m_input_rate;
-	}
-
 	if (in > 0 || out > 0)
 	{
 		args[0] = new char[2] { type, '\0' };
@@ -216,12 +210,6 @@ bool SoxWrapper::pad(size_t start, size_t end)
 
 	if (!m_initialized || m_finalized)
 		return false;
-
-	if (m_input_rate != 44100.0)
-	{
-		start = start * 44100.0 / m_input_rate;
-		end = end * 44100.0 / m_input_rate;
-	}
 
 	if (start > 0 || end > 0)
 	{

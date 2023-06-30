@@ -300,8 +300,8 @@ void AudioBase::render()
 			sox->trim(m_trim_start, m_trim_end);
 			sox->normalize(m_normalization);
 			sox->fade(m_fade_in, m_fade_out);
-			sox->pad(m_pad_start, m_pad_end);
 			sox->tempo(m_tempo);
+			sox->pad(m_pad_start, m_pad_end);
 			sox->loop(m_trim_start + m_start_offset, m_loop + m_pad_start);
 			sox->dither(m_dither_type);
 			sox->finalize();
