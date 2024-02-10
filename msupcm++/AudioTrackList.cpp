@@ -37,12 +37,25 @@ void AudioTrackList::render()
 		std::wcout << std::endl;
 	}
 
-	for (AudioTrack track : m_tracks)
+	if (config.use_render_field())
 	{
-		if ((track.trackNumber() >= config.first_track()) &&
-			(config.last_track() < 0 || track.trackNumber() <= config.last_track()))
+		for (AudioTrack track : m_tracks)
 		{
-			track.render();
+			if (track.renderTrack())
+			{
+				track.render();
+			}
+		}
+	}
+	else
+	{
+		for (AudioTrack track : m_tracks)
+		{
+			if ((track.trackNumber() >= config.first_track()) &&
+				(config.last_track() < 0 || track.trackNumber() <= config.last_track()))
+			{
+				track.render();
+			}
 		}
 	}
 }

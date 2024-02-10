@@ -37,8 +37,12 @@ namespace msu
 		const std::wstring& title() const;
 		std::wstring& title();
 
+		bool renderTrack() const;
+		bool& renderTrack();
+
 	protected:
 		int m_track_number;
 		std::wstring m_title;
+		bool m_render_track;
 	};
 }

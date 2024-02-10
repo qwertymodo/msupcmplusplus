@@ -76,6 +76,7 @@ namespace msu {
 
 		j["track_number"] = a.trackNumber();
 		j["title"] = a.title();
+		j["render_track"] = a.renderTrack();
 	}
 
 
@@ -92,7 +93,8 @@ namespace msu {
 			{ "verbosity", config.verbosity() },
 			{ "keep_temps", config.keep_temps() },
 			{ "first_track", config.first_track() },
-			{ "last_track", config.last_track() }
+			{ "last_track", config.last_track() },
+			{ "use_render_field", config.use_render_field() }
 		};
 
 		for (auto i = a.tracks().begin(); i != a.tracks().end(); ++i)
@@ -260,6 +262,9 @@ namespace msu {
 		if (j.find("title") != j.end())
 			a.title() = utf8_to_wstring.from_bytes(j["title"].get<std::string>().c_str());
 
+		if (j.find("render_track") != j.end())
+			a.renderTrack() = j["render_track"].get<bool>();
+
 		if (a.outFile().empty())
 #ifdef WIN32
 			a.outFile() = config.output_prefix() + L"-" + std::to_wstring(a.trackNumber()) + L".pcm";
@@ -334,6 +339,9 @@ namespace msu {
 
 		if (j.find("last_track") != j.end())
 			config.last_track() = j["last_track"].get<int>();
+
+		if (j.find("use_render_field") != j.end())
+			config.use_render_field() = j["use_render_field"].get<bool>();
 
 		if (j.find("tracks") != j.end())
 		{
