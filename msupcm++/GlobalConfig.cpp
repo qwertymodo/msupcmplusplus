@@ -20,6 +20,7 @@ unsigned int GlobalConfig::m_verbosity = 2;
 bool GlobalConfig::m_keep_temps = false;
 int GlobalConfig::m_first_track = -1;
 int GlobalConfig::m_last_track = -1;
+bool GlobalConfig::m_use_render_track_field = false;
 
 std::wstring& GlobalConfig::game()
 {
@@ -85,4 +86,9 @@ int& GlobalConfig::first_track()
 int& GlobalConfig::last_track()
 {
 	return m_last_track;
+}
+
+bool& GlobalConfig::use_render_track_field()
+{
+	return m_use_render_track_field;
 }

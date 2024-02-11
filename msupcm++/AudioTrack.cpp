@@ -10,6 +10,7 @@ AudioTrack::AudioTrack(): AudioBase()
 {
 	m_track_number = 0;
 	m_title.clear();
+	m_render_track = false;
 }
 
 
@@ -17,6 +18,7 @@ AudioTrack::AudioTrack(std::fstring_t in): AudioBase(in)
 {
 	m_track_number = 0;
 	m_title.clear();
+	m_render_track = false;
 }
 
 
@@ -24,6 +26,7 @@ AudioTrack::AudioTrack(std::fstring_t in, std::fstring_t out): AudioBase(in, out
 {
 	m_track_number = 0;
 	m_title.clear();
+	m_render_track = false;
 }
 
 
@@ -31,6 +34,7 @@ AudioTrack::AudioTrack(int argc, char** argv) : AudioBase()
 {
     m_track_number = 0;
     m_title.clear();
+	m_render_track = false;
 
     for (int i = 0; i < argc; ++i)
     {
@@ -55,6 +59,7 @@ AudioTrack::AudioTrack(const AudioTrack& a)
 {
 	m_track_number = 0;
 	m_title.clear();
+	m_render_track = false;
 	*this = a;
 }
 
@@ -84,6 +89,7 @@ AudioTrack& AudioTrack::operator=(const AudioTrack& a)
 
 	m_track_number = a.m_track_number;
 	m_title = a.m_title;
+	m_render_track = a.m_render_track;
 
 	return *this;
 }
@@ -123,6 +129,7 @@ void AudioTrack::clear()
 
 	m_track_number = 0;
 	m_title.clear();
+	m_render_track = false;
 }
 
 
@@ -178,4 +185,14 @@ const std::wstring& AudioTrack::title() const
 std::wstring& AudioTrack::title()
 {
 	return m_title;
+}
+
+bool AudioTrack::renderTrack() const
+{
+	return m_render_track;
+}
+
+bool& msu::AudioTrack::renderTrack()
+{
+	return m_render_track;
 }
