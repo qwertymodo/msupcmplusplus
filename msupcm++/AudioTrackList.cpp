@@ -37,7 +37,7 @@ void AudioTrackList::render()
 		std::wcout << std::endl;
 	}
 
-	if (config.use_render_field())
+	if (config.use_render_track_field())
 	{
 		for (AudioTrack track : m_tracks)
 		{
