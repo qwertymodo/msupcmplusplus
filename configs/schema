@@ -80,7 +80,7 @@
                     "items": {
                         "$ref": "#/definitions/sub_track"
                     },
-                    "uniqueItems": true
+                    "uniqueItems": false
                 }
             },
             "required": [ "track_number" ],
@@ -149,7 +149,7 @@
                     "items": {
                         "$ref": "#/definitions/sub_track"
                     },
-                    "uniqueItems": true
+                    "uniqueItems": false
                 }
             },
             "allOf": [
