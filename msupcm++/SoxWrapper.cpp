@@ -240,6 +240,9 @@ bool SoxWrapper::pad(size_t start, size_t end)
 		delete[] args[0];
 		delete[] args[1];
 
+		if (m_loop)
+			m_loop += start;
+
 		return ret;
 	}
 
