@@ -50,6 +50,10 @@
             "type": "integer",
             "description": "Any track number greater than this will not be processed"
         },
+        "use_render_track_field":{
+            "type": "boolean",
+            "description": "Wether or not to only render tracks that have the field \"render_track\" set to true"
+        },
         "tracks": {
             "type": "array",
             "minItems": 1,
@@ -64,6 +68,7 @@
             "properties": {
                 "track_number": { "type": "integer" },
                 "title": { "type": "string" },
+                "render_track":{"type":"boolean"},
                 "sub_channels": {
                     "type": "array",
                     "description": "Files which will be mixed together to form the input to the parent track",

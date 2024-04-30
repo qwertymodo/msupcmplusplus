@@ -23,6 +23,7 @@ namespace msu
 		static bool& keep_temps();
 		static int& first_track();
 		static int& last_track();
+		static bool& use_render_track_field();
 
 	private:
 		static std::wstring m_game;
@@ -36,5 +37,6 @@ namespace msu
 		static bool m_keep_temps;
 		static int m_first_track;
 		static int m_last_track;
+		static bool m_use_render_track_field;
 	} config;
 }
